@@ -1,1 +1,115 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lovelink - Find Your Match</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:system-ui} .card{box-shadow:0 10px 30px rgba(0,0,0,.15)}</style>
+</head>
+<body class="bg-pink-50 min-h-screen">
+<div class="max-w-md mx-auto p-4">
+  <h1 class="text-3xl font-black text-center text-pink-600 py-4">❤️ Lovelink</h1>
+  <p class="text-center text-gray-500 -mt-3 mb-4">Find your match in Malawi & Beyond</p>
 
+  <!-- AUTH -->
+  <div id="authBox" class="bg-white rounded-2xl p-5 card">
+    <h2 class="font-bold text-lg mb-3">Welcome back / Join</h2>
+    <input id="email" placeholder="Email" class="w-full border rounded-xl p-3 mb-2">
+    <input id="password" type="password" placeholder="Password" class="w-full border rounded-xl p-3 mb-3">
+    <button id="loginBtn" class="w-full bg-pink-600 text-white rounded-xl p-3 font-bold mb-2">Login / Sign Up with Email</button>
+    <button id="googleBtn" class="w-full bg-white border rounded-xl p-3 font-bold">Continue with Google</button>
+    <p id="authMsg" class="text-sm text-center text-red-500 mt-2"></p>
+  </div>
+
+  <!-- PROFILE SETUP -->
+  <div id="profileBox" class="hidden bg-white rounded-2xl p-5 card">
+    <h2 class="font-bold text-lg mb-3">Create Your Profile</h2>
+    <input id="pName" placeholder="Your Name" class="w-full border rounded-xl p-3 mb-2">
+    <input id="pAge" type="number" placeholder="Age" class="w-full border rounded-xl p-3 mb-2">
+    <select id="pGender" class="w-full border rounded-xl p-3 mb-2"><option>Male</option><option>Female</option></select>
+    <input id="pCity" placeholder="City - e.g Blantyre, Lilongwe" class="w-full border rounded-xl p-3 mb-2">
+    <input id="pPhoto" placeholder="Photo Link (paste image URL)" class="w-full border rounded-xl p-3 mb-2">
+    <textarea id="pBio" placeholder="About you..." class="w-full border rounded-xl p-3 mb-3"></textarea>
+    <button id="saveProfile" class="w-full bg-pink-600 text-white rounded-xl p-3 font-bold">Save Profile & Start Matching</button>
+  </div>
+
+  <!-- DISCOVER -->
+  <div id="discoverBox" class="hidden">
+    <div class="flex justify-between items-center mb-3"><span id="myName" class="font-bold"></span><button id="logoutBtn" class="text-sm bg-white px-3 py-1 rounded-full border">Logout</button></div>
+    <div id="cards" class="space-y-4"></div>
+    <div id="matchesBox" class="mt-6 bg-white rounded-2xl p-4 card"><h3 class="font-bold mb-2">Your Matches 💘</h3><div id="matchesList" class="text-sm text-gray-500">No matches yet - start liking!</div></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCLOmH7GctXo_d7nVAmwWKhx8jWNRsrDds",
+  authDomain: "lovelink-global-45a0d.firebaseapp.com",
+  projectId: "lovelink-global-45a0d",
+  storageBucket: "lovelink-global-45a0d.firebasestorage.app",
+  messagingSenderId: "370199142205",
+  appId: "1:370199142205:web:9ba8060f6a2b9657d2ef54",
+  measurementId: "G-YEX930ME9E"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+const $ = id => document.getElementById(id);
+let currentUser = null;
+
+$("loginBtn").onclick = async () => {
+  try { await signInWithEmailAndPassword(auth, $("email").value, $("password").value); }
+  catch(e){ try{ await createUserWithEmailAndPassword(auth, $("email").value, $("password").value); }catch(err){ $("authMsg").innerText = err.message; } }
+};
+$("googleBtn").onclick = () => signInWithPopup(auth, provider);
+$("logoutBtn").onclick = () => signOut(auth);
+
+$("saveProfile").onclick = async () => {
+  await setDoc(doc(db, "users", currentUser.uid), {
+    name: $("pName").value, age: $("pAge").value, gender: $("pGender").value,
+    city: $("pCity").value, photo: $("pPhoto").value || "https://i.pravatar.cc/400?img=12",
+    bio: $("pBio").value, uid: currentUser.uid, createdAt: Date.now()
+  });
+  loadDiscover();
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ $("authBox").classList.remove("hidden"); $("profileBox").classList.add("hidden"); $("discoverBox").classList.add("hidden"); return; }
+  currentUser = user;
+  $("authBox").classList.add("hidden");
+  const snap = await getDoc(doc(db, "users", user.uid));
+  if(!snap.exists()){ $("profileBox").classList.remove("hidden"); }
+  else { loadDiscover(); }
+});
+
+async function loadDiscover(){
+  $("profileBox").classList.add("hidden"); $("discoverBox").classList.remove("hidden");
+  const snap = await getDoc(doc(db, "users", currentUser.uid));
+  $("myName").innerText = "Hi, " + snap.data().name + " 👋";
+  const all = await getDocs(collection(db, "users"));
+  const cards = $("cards"); cards.innerHTML = "";
+  all.forEach(d => {
+    const u = d.data(); if(u.uid === currentUser.uid) return;
+    const div = document.createElement("div");
+    div.className = "bg-white rounded-2xl overflow-hidden card";
+    div.innerHTML = `<img src="${u.photo}" class="w-full h-72 object-cover"><div class="p-4"><h3 class="font-bold text-xl">${u.name}, ${u.age}</h3><p class="text-gray-500 text-sm">${u.city} • ${u.gender}</p><p class="mt-2 text-sm">${u.bio||""}</p><div class="flex gap-2 mt-4"><button class="flex-1 bg-gray-100 rounded-xl p-3 font-bold" onclick="this.parentElement.parentElement.parentElement.remove()">✖ Pass</button><button class="flex-1 bg-pink-600 text-white rounded-xl p-3 font-bold likeBtn">❤️ Like</button></div></div>`;
+    div.querySelector(".likeBtn").onclick = async () => {
+      await addDoc(collection(db, "likes"), { from: currentUser.uid, to: u.uid, fromName: snap.data().name, toName: u.name, createdAt: Date.now() });
+      alert("You liked " + u.name + "! If they like you back, it's a Match 💘");
+      div.remove();
+    };
+    cards.appendChild(div);
+  });
+  if(!cards.innerHTML) cards.innerHTML = "<p class='text-center text-gray-500 bg-white p-4 rounded-2xl'>No people yet. Invite friends to join Lovelink!</p>";
+}
+</script>
+</body>
+  </html>
