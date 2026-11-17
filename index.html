@@ -8,6 +8,8 @@ html
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#e91e63">
 <meta name="mobile-web-app-capable" content="yes">
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f0f2f5;padding-bottom:80px}
@@ -45,7 +47,6 @@ body{background:#f0f2f5;padding-bottom:80px}
 .match-item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer}
 .match-item img{width:52px;height:52px;border-radius:50%;object-fit:cover}
 .chat-btn{background:#e91e63;color:white;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;margin-left:auto}
-/* BOTTOM NAVIGATOR - BACK NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:8px 0 12px;box-shadow:0 -2px 10px rgba(0,0,0,0.1);z-index:100;border-top:1px solid #eee}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:11px;color:#888;flex:1;text-align:center}
 .nav-item.active{color:#e91e63;font-weight:bold}
@@ -115,14 +116,14 @@ body{background:#f0f2f5;padding-bottom:80px}
 </div>
 
 <div id="mainView" style="display:none">
-<div class="topbar"><div style="display:flex;gap:10px;align-items:center"><div class="back-btn" onclick="goBack()" title="Back">‹</div><h1>❤️ Lovelink</h1></div><div class="topbar-icons"><div class="icon" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">3</span></div><div class="icon" onclick="showNotifs()">💬<span class="badge" id="msgBadge">2</span></div><div class="icon" onclick="openMenu()">☰</div><img class="avatar" id="myAvatar" onclick="openMenu()"></div></div>
+<div class="topbar"><div style="display:flex;gap:10px;align-items:center"><div class="back-btn" onclick="goBack()">‹</div><h1>❤️ Lovelink</h1></div><div class="topbar-icons"><div class="icon" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">3</span></div><div class="icon" onclick="showNotifs()">💬<span class="badge" id="msgBadge">2</span></div><div class="icon" onclick="openMenu()">☰</div><img class="avatar" id="myAvatar" onclick="openMenu()"></div></div>
 <div class="online-bar"><span><span class="online-dot"></span> <b id="onlineCountMain">7,800</b> Online Now</span><span id="liveViewers">🔥 1,240 viewing your profile</span></div>
 <div class="apk-banner" id="apkBannerMain"><div><b>📲 Install Lovelink App</b><br><small>Make it an App on your phone</small></div><button onclick="installApp()">Install 📲</button></div>
 <div class="hero"><h2 id="welcomeText">Hi 👋</h2><p id="myCityText"></p><p id="boostStatus" style="font-size:12px;margin-top:5px"></p></div>
 <div class="box" style="background:#FFF8E1;border:2px solid #FFB300"><h3>🔥 Boost Your Profile</h3><p style="font-size:13px">With Boost, your profile will be seen by 100 people per day, not just 5.</p><button class="btn btn-gold" onclick="showBoost()">Boost Now - MK2,000 / Week 🔥</button><button class="btn btn-dark" onclick="showBoost()">Gold - MK5,000 / Month 👑</button></div>
 <div id="profileCard"></div>
 <div class="matches"><h3>Your Matches 💕 - Chat is FREE</h3><div id="matchesList"></div></div>
-<div id="adminPanel"><h3>👑 ADMIN - Money & Accounts</h3><div style="background:#E8F5E9;padding:12px;border-radius:12px;margin-bottom:10px"><b id="adminStats"></b></div><div id="adminList"></div><button class="btn btn-dark" onclick="closeAdmin()">Close Admin</button></div>
+<div id="adminPanel"><h3>👑 ADMIN - All New Users from Firebase</h3><div style="background:#E8F5E9;padding:12px;border-radius:12px;margin-bottom:10px"><b id="adminStats"></b><div id="firebaseCount" style="margin-top:8px;font-size:14px;color:#1877F2;font-weight:bold">Loading Firebase users...</div></div><div id="firebaseUsersList"></div><h4 style="margin-top:15px">Fake + Local Users</h4><div id="adminList"></div><button class="btn btn-dark" onclick="closeAdmin()">Close Admin</button></div>
 <div style="text-align:center;color:#999;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:15px" onclick="showAdminLogin()">Admin Login 👑</div>
 </div>
 
@@ -154,7 +155,6 @@ body{background:#f0f2f5;padding-bottom:80px}
 </div>
 </div>
 
-<!-- BOTTOM NAVIGATOR - BACK NAV -->
 <div class="bottom-nav" id="bottomNav">
 <div class="nav-item" onclick="goBack()"><span>‹</span>Back</div>
 <div class="nav-item active" id="navHome" onclick="goHome()"><span>🏠</span>Home</div>
@@ -173,7 +173,41 @@ body{background:#f0f2f5;padding-bottom:80px}
 <div id="adminLogin"><div class="pay-box"><h2>👑 Admin Login</h2><input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0"><button style="background:#111;color:white" onclick="checkAdmin()">Login</button><button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button></div></div>
 
 <script>
-// FAKE ACCOUNTS - WHITE NAMES + WHITE PHOTOS - MATCHING
+// FIREBASE YANU - LOVELINK-52EC0
+const firebaseConfig = {
+  apiKey: "AIzaSyC4P2geQB0ffo1okwk_oSKhXjA5ljiCN0Y",
+  authDomain: "lovelink-52ec0.firebaseapp.com",
+  databaseURL: "https://lovelink-52ec0-default-rtdb.firebaseio.com",
+  projectId: "lovelink-52ec0",
+  storageBucket: "lovelink-52ec0.firebasestorage.app",
+  messagingSenderId: "1060407416462",
+  appId: "1:1060407416462:web:980f42e2dba66b44fb5bdf",
+  measurementId: "G-B28HK5BXW6"
+};
+let db=null;
+try{ firebase.initializeApp(firebaseConfig); db = firebase.database(); }catch(e){ console.log("Firebase error", e); }
+function saveUserToFirebase(user){
+  if(!db) return;
+  try{
+    let key = user.name.replace(/[^a-zA-Z0-9]/g,'_') + "_" + Date.now();
+    db.ref('users/' + key).set({ name: user.name, age: user.age, gender: user.gender, city: user.city, phone: user.phone || "", img: user.img || "", time: new Date().toLocaleString(), verified: false, boosted: false, timestamp: Date.now() });
+  }catch(e){ console.log(e); }
+}
+function loadFirebaseUsers(){
+  if(!db) { document.getElementById('firebaseCount').innerText = "Firebase not connected"; return; }
+  db.ref('users').on('value', (snapshot)=>{
+    let data = snapshot.val() || {};
+    let users = Object.values(data).reverse();
+    document.getElementById('firebaseCount').innerText = "🔥 NEW USERS FROM FIREBASE: " + users.length + " - Onse akuoneka pano!";
+    if(users.length===0){ document.getElementById('firebaseUsersList').innerHTML = "<p style='color:#999'>No new users yet. Akalowa, adzawoneka pano.</p>"; }
+    else { document.getElementById('firebaseUsersList').innerHTML = users.map(u=>{ return `<div class="admin-row"><div><b>${u.name}</b> <span style="font-size:10px;background:#1877F2;color:white;padding:2px 6px;border-radius:10px">REAL - FIREBASE</span><br><small>${u.city} • ${u.age} • ${u.gender}<br>📱 ${u.phone} • 🕒 ${u.time}</small></div><div style="display:flex;gap:5px;flex-direction:column"><button class="unlock" onclick="verifyFirebaseUser('${u.name}')">Verify ✅</button><button class="unlock" onclick="alert('Phone: ${u.phone}')">Call 📞</button></div></div>`; }).join(''); }
+    document.getElementById('adminStats').innerText = "📊 Firebase Users: " + users.length + " • 🟢 Online: 7,800 • Total with Fake: " + (users.length + 16);
+  });
+}
+function verifyFirebaseUser(name){
+  if(!db) return;
+  db.ref('users').once('value', snap=>{ let data = snap.val() || {}; Object.keys(data).forEach(k=>{ if(data[k].name===name) db.ref('users/'+k).update({verified:true}); }); alert(name + " Verified ✅ in Firebase"); });
+}
 let fakeProfiles=[
 {name:"Jessica Miller",age:24,city:"New York, USA",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600",verified:true,boosted:true},
 {name:"Sophia Johnson",age:22,city:"London, UK",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600",verified:true,boosted:false},
@@ -200,12 +234,8 @@ let notifications=[
 {name:"Sophia Johnson",img:fakeProfiles[1].img,text:"sent you a voice note 🎤",time:"12 min ago",type:"voice",unread:true}
 ];
 let current=0,matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'),paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'),currentChat=null,isAdmin=false,mediaRecorder=null,audioChunks=[],isRecording=false,callTimer=null,callSeconds=0,toastChatName="Jessica Miller",deferredPrompt=null,onlineCount=7800;
-// BACK NAVIGATOR - HISTORY STACK
 let navStack=[];
-function pushNav(view){
-navStack.push(view);
-try{history.pushState({view:view},'', '#'+view);}catch(e){}
-}
+function pushNav(view){navStack.push(view);try{history.pushState({view:view},'', '#'+view);}catch(e){}}
 function goBack(){
 if(document.getElementById('callPopup').style.display==='flex'){endCall();return;}
 if(document.getElementById('apkPopup').style.display==='flex'){document.getElementById('apkPopup').style.display='none';return;}
@@ -218,54 +248,27 @@ if(document.getElementById('menuView').style.display==='block'){closeMenu();retu
 if(navStack.length>1){navStack.pop();}
 window.scrollTo({top:0,behavior:'smooth'});
 }
-function goHome(){
-document.getElementById('chatView').style.display='none';
-document.getElementById('menuView').style.display='none';
-document.getElementById('mainView').style.display='block';
-setActiveNav('navHome');
-window.scrollTo({top:0,behavior:'smooth'});
-pushNav('home');
-}
-function goMatches(){
-document.getElementById('chatView').style.display='none';
-document.getElementById('menuView').style.display='none';
-document.getElementById('mainView').style.display='block';
-setActiveNav('navMatches');
-document.querySelector('.matches').scrollIntoView({behavior:'smooth'});
-pushNav('matches');
-}
-function setActiveNav(id){
-document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
-let el=document.getElementById(id);if(el) el.classList.add('active');
-}
-window.addEventListener('popstate',function(e){
-if(document.getElementById('chatView').style.display==='block'){backToMain();return;}
-if(document.getElementById('menuView').style.display==='block'){closeMenu();return;}
-if(document.getElementById('notifPanel').style.display==='flex'){closeNotifs();return;}
-});
-// 7800 ONLINE
-function updateOnline(){
-onlineCount+=Math.floor(Math.random()*20)-10;
-if(onlineCount<7750) onlineCount=7800;
-if(onlineCount>7900) onlineCount=7850;
-let txt=onlineCount.toLocaleString();
-['onlineCountAuth','onlineCountMain','onlineCount2','onlineCountMenu'].forEach(id=>{let el=document.getElementById(id);if(el) el.innerText=txt;});
-let viewers=document.getElementById('liveViewers');if(viewers) viewers.innerText='🔥 '+(1200+Math.floor(Math.random()*100))+' viewing your profile';
-}
+function goHome(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navHome');window.scrollTo({top:0,behavior:'smooth'});pushNav('home');}
+function goMatches(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navMatches');document.querySelector('.matches').scrollIntoView({behavior:'smooth'});pushNav('matches');}
+function setActiveNav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));let el=document.getElementById(id);if(el) el.classList.add('active');}
+window.addEventListener('popstate',function(e){if(document.getElementById('chatView').style.display==='block'){backToMain();return;}if(document.getElementById('menuView').style.display==='block'){closeMenu();return;}if(document.getElementById('notifPanel').style.display==='flex'){closeNotifs();return;}});
+function updateOnline(){onlineCount+=Math.floor(Math.random()*20)-10;if(onlineCount<7750) onlineCount=7800;if(onlineCount>7900) onlineCount=7850;let txt=onlineCount.toLocaleString();['onlineCountAuth','onlineCountMain','onlineCount2','onlineCountMenu'].forEach(id=>{let el=document.getElementById(id);if(el) el.innerText=txt;});let viewers=document.getElementById('liveViewers');if(viewers) viewers.innerText='🔥 '+(1200+Math.floor(Math.random()*100))+' viewing your profile';}
 setInterval(updateOnline,3000);updateOnline();
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 function installApp(){document.getElementById('apkPopup').style.display='flex';}
-function doInstall(){
-if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(choice=>{if(choice.outcome==='accepted'){alert('Thank you! ❤️ Lovelink installed as App!');document.getElementById('apkPopup').style.display='none';document.getElementById('apkBannerMain').style.display='none';}deferredPrompt=null;});}
-else{alert('To install as App:\n\n1. Tap the 3 dots on top of Chrome (⋮)\n2. Tap "Add to Home Screen" or "Install App"\n3. Lovelink will be an App on your phone! 📲\n\nOr send WhatsApp to get APK.');}
-}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>{try{navigator.serviceWorker.register('sw.js').catch(()=>{});}catch(e){}});}
+function doInstall(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(choice=>{if(choice.outcome==='accepted'){alert('Thank you! ❤️ Lovelink installed as App!');document.getElementById('apkPopup').style.display='none';document.getElementById('apkBannerMain').style.display='none';}deferredPrompt=null;});}else{alert('To install as App:\n\n1. Tap the 3 dots on top of Chrome (⋮)\n2. Tap "Add to Home Screen" or "Install App"\n3. Lovelink will be an App on your phone! 📲\n\nOr send WhatsApp to get APK.');}}
 function getAllProfiles(){return [...fakeProfiles,...realProfiles];}
 if(me){document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';document.getElementById('bottomNav').style.display='flex';initApp();}else{document.getElementById('bottomNav').style.display='none';}
 function doSignup(){
 let name=document.getElementById('suName').value.trim(),age=document.getElementById('suAge').value,gender=document.getElementById('suGender').value,city=document.getElementById('suCity').value,phone=document.getElementById('suPhone').value.trim(),file=document.getElementById('suPhoto').files[0];
 if(!name||!age||!gender||!city){alert('Please fill name, age, gender and city');return;}
-function save(photo){me={name,age,gender,city,phone,img:photo||'https://via.placeholder.com/400?text='+encodeURIComponent(name),verified:false,boosted:false};localStorage.setItem('lovelink_me',JSON.stringify(me));if(!realProfiles.find(p=>p.name===name)){realProfiles.push(me);localStorage.setItem('lovelink_all_profiles',JSON.stringify(realProfiles));}document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';document.getElementById('bottomNav').style.display='flex';initApp();pushNav('home');}
+function save(photo){
+me={name,age,gender,city,phone,img:photo||'https://via.placeholder.com/400?text='+encodeURIComponent(name),verified:false,boosted:false};
+localStorage.setItem('lovelink_me',JSON.stringify(me));
+if(!realProfiles.find(p=>p.name===name)){realProfiles.push(me);localStorage.setItem('lovelink_all_profiles',JSON.stringify(realProfiles));}
+saveUserToFirebase(me);
+document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';document.getElementById('bottomNav').style.display='flex';initApp();pushNav('home');
+}
 if(file){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(file);}else{save('');}
 }
 function initApp(){document.getElementById('welcomeText').innerText='Hi, '+me.name+' 👋';document.getElementById('myCityText').innerText=me.city+' • '+me.age+' • '+(me.verified?'✅ Verified':'Get Verified to be trusted');document.getElementById('boostStatus').innerText=me.boosted?'🔥 Your Boost is ACTIVE - 100 people seeing you today!':'💡 Tip: Boost so more people can see you - MK2,000 / Week';document.getElementById('myAvatar').src=me.img;document.getElementById('menuAvatar').src=me.img;document.getElementById('menuName').innerText=me.name;showProfile();renderMatches();renderNotifs();}
@@ -288,7 +291,6 @@ function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{
 function updateMsgLeft(){document.getElementById('msgLeft').innerText='FREE Chat ♾️';}
 function loadMessages(){let msgs=getMsgs();let box=document.getElementById('messages');if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! Chat is FREE on Lovelink. Tell me about yourself ❤️</div>`;}else{box.innerHTML=msgs.map(m=>{if(m.type==='image') return `<div class="msg ${m.who}"><img src="${m.text}"><small>${m.who==='me'?'You':'Them'} • Photo</small></div>`;if(m.type==='voice') return `<div class="msg ${m.who}">🎤 Voice Note<br><audio controls src="${m.text}"></audio><small>${m.who==='me'?'You':'Them'} • Voice Note</small></div>`;if(m.type==='call') return `<div class="msg ${m.who}">📞 ${m.text}<small>Call</small></div>`;return `<div class="msg ${m.who}">${m.text}<small>${m.who==='me'?'You':'Them'}</small></div>`;}).join('');}box.scrollTop=box.scrollHeight;updateMsgLeft();}
 function saveMsg(obj){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all[currentChat]) all[currentChat]=[];all[currentChat].push(obj);localStorage.setItem('lovelink_chats',JSON.stringify(all));loadMessages();}
-// AUTO RESPOND - ALL IN ENGLISH (CHIZUNGU)
 function sendMsg(){
 let inp=document.getElementById('msgInput');let text=inp.value.trim();if(!text) return;
 saveMsg({who:'me',text:text,type:'text'});inp.value='';
@@ -318,13 +320,14 @@ function showToast(name,img,text){toastChatName=name;document.getElementById('to
 function openNotifChat(){document.getElementById('toast').style.display='none';if(toastChatName) openChat(toastChatName);}
 function closePay(){document.getElementById('payPopup').style.display='none';}
 function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
-function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();alert("Welcome Admin! 👑");}else{alert("Wrong password!");}}
+function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();loadFirebaseUsers();alert("Welcome Admin! 👑 Now loading Firebase users...");}else{alert("Wrong password!");}}
 function renderAdmin(){
 let all=[...fakeProfiles.map(p=>({...p,label:'FAKE - USA/UK'})),...realProfiles.map(p=>({...p,label:p.verified?'VERIFIED':'REAL'}))];
 let seen={};all=all.filter(x=>{if(seen[x.name]) return false;seen[x.name]=1;return true;});
 let boostedCount=all.filter(x=>x.boosted).length;
-document.getElementById('adminStats').innerText=`📊 Total: ${all.length} • 🟢 Online: 7,800 • 🔥 Boosted: ${boostedCount} • ✅ Verified: ${all.filter(x=>x.verified).length} • 💰 If all Boosted paid MK2,000 = MK${boostedCount*2000} per week`;
+document.getElementById('adminStats').innerText=`📊 Fake + Local: ${all.length} • 🟢 Online: 7,800 • 🔥 Boosted: ${boostedCount}`;
 document.getElementById('adminList').innerHTML=all.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b> <span style="font-size:10px;background:${m.label.includes('FAKE')?'#ff9800':'#4CAF50'};color:white;padding:2px 6px;border-radius:10px">${m.label}</span><br><small>${m.city} • ${chats.length} msgs • ${m.boosted?'🔥 BOOSTED':'No Boost'} • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div><div style="display:flex;gap:5px"><button class="unlock" onclick="verifyUser('${m.name}')">Verify ✅</button><button class="unlock" onclick="unlockUser('${m.name}')">Boost 🔥</button></div></div>`;}).join('');
+loadFirebaseUsers();
 }
 function verifyUser(name){let p=getAllProfiles().find(x=>x.name===name);if(p) p.verified=true;if(me && me.name===name){me.verified=true;localStorage.setItem('lovelink_me',JSON.stringify(me));}renderAdmin();alert(name+' Verified ✅');}
 function unlockUser(name){if(!paidUsers.includes(name)) paidUsers.push(name);let p=getAllProfiles().find(x=>x.name===name);if(p) p.boosted=true;localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+' Boosted 🔥');}
