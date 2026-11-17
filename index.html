@@ -12,30 +12,27 @@ body{background:#f0f2f5;padding:0;padding-bottom:30px}
 .topbar h1{color:#e91e63;font-size:26px}
 .topbar-icons{display:flex;gap:10px;align-items:center}
 .icon-wrap{position:relative;width:42px;height:42px;background:#f0f2f5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
-.badge{position:absolute;top:-4px;right:-4px;background:#ff1744;color:white;font-size:11px;font-weight:bold;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid white}
-.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #e91e63;cursor:pointer}
-.header{text-align:center;margin:10px;padding:0 15px}
-.header p{color:#666;font-size:14px}
-.top{font-weight:bold;font-size:16px;margin:10px 0;padding:0 15px}
+.badge{position:absolute;top:-4px;right:-4px;background:#ff1744;color:white;font-size:11px;font-weight:bold;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid white;display:none}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #e91e63;cursor:pointer;background:#ddd}
 .card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin:0 15px 20px}
 .card img{width:100%;height:340px;object-fit:cover}
 .card-info{padding:15px}
-.card-info h2{font-size:22px}
-.card-info p{color:#888;margin:5px 0 15px}
 .btns{display:flex;gap:10px}
 .btn{flex:1;padding:13px;border:none;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer}
 .pass{background:#f0f0f0}
 .like{background:#e91e63;color:white}
+.box{background:white;border-radius:20px;padding:20px;margin:15px;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+.box h2{color:#e91e63;margin-bottom:10px}
+.box input,.box select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:8px 0;outline:none;font-size:15px}
+.box button{width:100%;padding:14px;border:none;background:#e91e63;color:white;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:10px}
 .matches{background:white;border-radius:20px;padding:15px;margin:0 15px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
 .match-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer}
-.match-item img{width:55px;height:55px;border-radius:50%;object-fit:cover}
-.match-item b{font-size:16px}
-.match-item small{color:#888}
+.match-item img{width:55px;height:55px;border-radius:50%;object-fit:cover;background:#eee}
 .chat-btn{background:#e91e63;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;margin-left:auto;cursor:pointer}
-#chatView,#menuView{display:none}
+#chatView,#menuView,#authView{display:none}
 .chat-box{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin:10px}
 .chat-head{background:#e91e63;color:white;padding:12px;display:flex;align-items:center;gap:10px}
-.chat-head img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.chat-head img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#fff}
 .chat-head button{background:white;border:none;padding:7px 10px;border-radius:20px;font-weight:bold;cursor:pointer}
 .call-btns{display:flex;gap:5px;margin-left:auto}
 .call-btns button{font-size:18px;padding:7px 10px !important}
@@ -50,115 +47,94 @@ body{background:#f0f2f5;padding:0;padding-bottom:30px}
 .chat-input input{flex:1;padding:12px;border:1px solid #ddd;border-radius:25px;outline:none}
 .icon-btn{background:#f0f0f0;border:none;width:42px;height:42px;border-radius:50%;font-size:19px;cursor:pointer;flex-shrink:0}
 .send-btn{background:#e91e63;color:white;border:none;padding:12px 16px;border-radius:25px;font-weight:bold;cursor:pointer}
-.recording{background:#ff1744 !important;color:white !important;animation:pulse 1s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
-/* FACEBOOK MENU STYLE - NGATI SCREENSHOT YAKO */
+.recording{background:#ff1744 !important;color:white !important}
 .menu-head{background:white;padding:12px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:sticky;top:0;z-index:50}
 .menu-head b{font-size:22px}
-.menu-head span{margin-left:auto;font-size:22px;cursor:pointer}
 .menu-body{padding:12px}
 .menu-profile{background:white;border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.1);cursor:pointer}
-.menu-profile img{width:50px;height:50px;border-radius:50%;object-fit:cover}
-.menu-profile b{font-size:16px}
-.menu-profile small{color:#888}
-.menu-profile .arrow{margin-left:auto;font-size:20px}
-.menu-row{background:white;border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.1);cursor:pointer}
-.menu-row img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.menu-profile img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#eee}
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:5px}
 .menu-tile{background:white;border-radius:12px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.1);cursor:pointer;min-height:70px}
 .menu-tile span{font-size:26px;display:block;margin-bottom:5px}
-.menu-tile b{font-size:14px;font-weight:600}
+.menu-tile b{font-size:14px}
 .menu-section{background:white;border-radius:12px;margin-top:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
 .menu-section-row{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #eee;cursor:pointer}
-.menu-section-row:last-child{border-bottom:none}
-.menu-section-row span{font-size:22px}
 #matchPopup,#payPopup,#adminLogin,#callPopup,#notifPanel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
 #notifPanel{align-items:flex-start;justify-content:flex-end;padding:0;background:rgba(0,0,0,0.4)}
-.notif-box{background:white;color:#333;width:100%;max-width:380px;height:100%;overflow-y:auto;text-align:left;padding:0}
-.notif-box h3{padding:15px;border-bottom:1px solid #eee;font-size:20px}
+.notif-box{background:white;color:#333;width:100%;max-width:380px;height:100%;overflow-y:auto;text-align:left}
+.notif-box h3{padding:15px;border-bottom:1px solid #eee}
 .notif-item{display:flex;gap:12px;padding:12px 15px;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:center}
-.notif-item.unread{background:#e7f3ff}
-.notif-item img{width:50px;height:50px;border-radius:50%;object-fit:cover;flex-shrink:0}
-.notif-item b{font-size:14px}
-.notif-item p{font-size:13px;color:#555}
-#matchPopup h1{font-size:40px;margin-bottom:10px}
-#matchPopup img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;margin:10px}
-#matchPopup button,#payPopup button{display:block;width:100%;max-width:320px;margin:10px auto;padding:14px;border:none;border-radius:25px;font-weight:bold;font-size:16px;cursor:pointer}
+.notif-item img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#eee}
 .pay-box{background:white;color:#333;border-radius:20px;padding:20px;max-width:350px;width:100%}
 .pay-box h2{color:#e91e63;margin-bottom:10px}
 .pay-num{background:#fff3cd;padding:12px;border-radius:12px;font-weight:bold;margin:12px 0}
-.admin-link{text-align:center;margin-top:20px;color:#999;font-size:13px;cursor:pointer;text-decoration:underline}
 #adminPanel{display:none;background:white;border-radius:20px;padding:15px;margin:15px}
 .admin-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;font-size:14px}
 .unlock{background:green;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:bold;cursor:pointer}
 .call-box{text-align:center}
 .call-box img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:5px solid #e91e63;margin:15px}
-.call-box h2{font-size:26px}
 .call-actions{display:flex;gap:20px;justify-content:center;margin-top:25px}
 .call-actions button{width:65px;height:65px;border-radius:50%;border:none;font-size:28px;cursor:pointer}
 .accept{background:#25D366}
 .decline{background:#ff1744}
 #toast{position:fixed;bottom:20px;left:15px;right:15px;background:white;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.25);padding:12px;display:none;align-items:center;gap:12px;z-index:200;cursor:pointer}
 #toast img{width:50px;height:50px;border-radius:50%;object-fit:cover}
-#toast b{font-size:14px;color:#111}
-#toast p{font-size:13px;color:#555}
 </style>
 </head>
 <body>
-<div id="mainView">
-<div class="topbar">
-<h1>❤️ Lovelink</h1>
-<div class="topbar-icons">
-<div class="icon-wrap" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">5</span></div>
-<div class="icon-wrap" onclick="showNotifs()">💬<span class="badge" id="msgBadge">3</span></div>
-<div class="icon-wrap" onclick="openMenu()">☰</div>
-<img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" onclick="openMenu()">
+
+<!-- AUTH - REAL SIGNUP -->
+<div id="authView" style="display:block">
+<div style="text-align:center;padding:30px 15px 10px"><h1 style="color:#e91e63;font-size:38px">❤️ Lovelink</h1><p style="color:#666">Find Love in Malawi - Real People, Real Connections</p></div>
+<div class="box" id="signupBox">
+<h2>Create Your Profile</h2>
+<p style="font-size:13px;color:#666">Pangani profile yanu yeniyeni. Palibe fake.</p>
+<input id="suName" placeholder="Full Name - Dzina lanu lenileni">
+<input id="suAge" type="number" placeholder="Age - Zaka zanu">
+<select id="suGender"><option value="">Select Gender</option><option>Female</option><option>Male</option></select>
+<select id="suCity"><option value="">Select City</option><option>Blantyre</option><option>Lilongwe</option><option>Mzuzu</option><option>Zomba</option><option>Other</option></select>
+<input id="suPhone" placeholder="Phone Number - 088...">
+<label style="font-size:13px;color:#666">Profile Photo - Sankhani chithunzi chanu:</label>
+<input id="suPhoto" type="file" accept="image/*">
+<input id="suBio" placeholder="About you - Ndiuze za iwe...">
+<button onclick="doSignup()">Create Account & Start ❤️</button>
+<p style="font-size:12px;color:#999;text-align:center;margin-top:10px">Mukapanga account, profile yanu idzasungidwa pa foni yanu.</p>
 </div>
-</div>
-<div class="header"><p>Find your match in Malawi & Beyond - 2,400+ members online</p></div>
-<div class="top">Hi, Pre Sher Cee 👋 <span style="color:#4CAF50;font-size:12px">● 1,248 Online Now</span></div>
-<div id="profileCard"></div>
-<div class="matches"><h3>Your Matches 💕</h3><div id="matchesList"></div></div>
-<div id="adminPanel"><h3>👑 ADMIN PANEL - BadRat</h3><div id="adminList"></div><button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Close Admin</button></div>
-<div class="admin-link" onclick="showAdminLogin()">Admin Login 👑</div>
 </div>
 
-<!-- FACEBOOK MENU VIEW - NGATI SCREENSHOT YAKO -->
+<div id="mainView" style="display:none">
+<div class="topbar"><h1>❤️ Lovelink</h1><div class="topbar-icons"><div class="icon-wrap" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">0</span></div><div class="icon-wrap" onclick="showNotifs()">💬<span class="badge" id="msgBadge">0</span></div><div class="icon-wrap" onclick="openMenu()">☰</div><img class="avatar" id="myAvatar" src="" onclick="openMenu()"></div></div>
+<div style="padding:10px 15px"><b id="welcomeText">Hi 👋</b><br><small style="color:#666" id="myCityText"></small></div>
+<div class="box"><h2>Find People Near You</h2><p style="font-size:14px;color:#555" id="peopleInfo">Invite friends to join Lovelink so you can see real people here. Share your link!</p><button onclick="shareApp()" style="background:#25D366">Invite Friends via WhatsApp 📲</button><button onclick="document.getElementById('addPersonBox').style.display='block'" style="background:#111">Add a Person You Know ➕</button><div id="addPersonBox" style="display:none;margin-top:10px"><input id="addName" placeholder="Their Name"><input id="addAge" type="number" placeholder="Their Age"><select id="addCity"><option>Blantyre</option><option>Lilongwe</option><option>Mzuzu</option><option>Zomba</option></select><input id="addPhoto" type="file" accept="image/*"><button onclick="addPerson()">Add Person</button></div></div>
+<div id="profileCard"></div>
+<div class="matches"><h3>Your Matches 💕</h3><div id="matchesList"></div></div>
+<div id="adminPanel"><h3>👑 ADMIN PANEL</h3><div id="adminList"></div><button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Close Admin</button></div>
+<div style="text-align:center;margin-top:20px;color:#999;font-size:13px;cursor:pointer;text-decoration:underline" onclick="showAdminLogin()">Admin Login 👑</div>
+</div>
+
 <div id="menuView">
-<div class="menu-head"><span onclick="closeMenu()">‹</span><b>Menu</b><span onclick="closeMenu()">⇅</span><span>🔍</span></div>
+<div class="menu-head"><span onclick="closeMenu()" style="cursor:pointer;font-size:24px">‹</span><b>Menu</b><span style="margin-left:auto">🔍</span></div>
 <div class="menu-body">
-<div class="menu-profile" onclick="closeMenu()"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200"><div><b>Pre Sher Cee</b><br><small>View your profile</small></div><span class="arrow">⌄</span></div>
-<div class="menu-row" onclick="alert('Switch account - Coming soon!')"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200"><b>Switch account</b><span style="margin-left:auto">⌄</span></div>
-<div class="menu-row" onclick="shareApp()"><span style="font-size:26px">❤️</span><b>Invite friends</b></div>
+<div class="menu-profile" onclick="closeMenu()"><img id="menuAvatar" src=""><div><b id="menuName">Your Name</b><br><small>View your profile</small></div></div>
 <div class="menu-grid">
-<div class="menu-tile" onclick="showAdminLogin()"><span>📊</span><b>Professional das...</b></div>
 <div class="menu-tile" onclick="closeMenu();showNotifs()"><span>💬</span><b>Messages</b></div>
-<div class="menu-tile" onclick="alert('Groups - 128 groups near you!')"><span>👥</span><b>Groups</b></div>
-<div class="menu-tile" onclick="alert('Friends - 1,248 friends online!')"><span>👫</span><b>Friends</b></div>
-<div class="menu-tile" onclick="alert('Reels - Watch Lovelink Reels ❤️')"><span>🎬</span><b>Reels</b></div>
-<div class="menu-tile" onclick="alert('Marketplace - Buy & Sell in Malawi')"><span>🛒</span><b>Marketplace</b></div>
-<div class="menu-tile" onclick="alert('Lovelink AI - Ask me anything!')"><span>✨</span><b>Meta AI</b></div>
-<div class="menu-tile" onclick="alert('Pages - Lovelink Official Page')"><span>🚩</span><b>Pages</b></div>
-<div class="menu-tile" onclick="alert('Saved - Your saved profiles')"><span>🔖</span><b>Saved</b></div>
-<div class="menu-tile" onclick="alert('Birthdays - 5 birthdays today 🎂')"><span>🎁</span><b>Birthdays</b></div>
-<div class="menu-tile" onclick="alert('Events - Lovelink Party in Blantyre!')"><span>📅</span><b>Events</b></div>
-<div class="menu-tile" onclick="alert('TNM Data Settings')"><span>📶</span><b>TNM data settings</b></div>
-<div class="menu-tile" onclick="alert('Feeds - Latest feeds')"><span>📰</span><b>Feeds</b></div>
-<div class="menu-tile" onclick="alert('Instagram Lite')"><span>📸</span><b>Instagram Lite</b></div>
-<div class="menu-tile" onclick="alert('Memories - Your Lovelink memories ❤️')"><span>🕑</span><b>Memories</b></div>
+<div class="menu-tile" onclick="closeMenu()"><span>👫</span><b>Friends</b></div>
+<div class="menu-tile" onclick="closeMenu()"><span>👥</span><b>Groups</b></div>
+<div class="menu-tile" onclick="alert('Saved profiles')"><span>🔖</span><b>Saved</b></div>
+<div class="menu-tile" onclick="alert('Events in Malawi')"><span>📅</span><b>Events</b></div>
+<div class="menu-tile" onclick="shareApp()"><span>❤️</span><b>Invite Friends</b></div>
 </div>
 <div class="menu-section">
-<div class="menu-section-row" onclick="alert('Settings & Privacy')"><span>⚙️</span><b>Settings & privacy</b><span style="margin-left:auto">⌄</span></div>
-<div class="menu-section-row" onclick="alert('Help & Support - WhatsApp 0887222489')"><span>❓</span><b>Help & support</b><span style="margin-left:auto">⌄</span></div>
-<div class="menu-section-row" onclick="alert('Add account')"><span>👤+</span><b>Add account</b></div>
-<div class="menu-section-row" onclick="if(confirm('Log out from Lovelink?')) location.reload()"><span>🚪</span><b>Log out</b></div>
+<div class="menu-section-row" onclick="editProfile()"><span>⚙️</span><b>Settings & Edit Profile</b></div>
+<div class="menu-section-row" onclick="alert('Help: WhatsApp 0887222489')"><span>❓</span><b>Help & support</b></div>
+<div class="menu-section-row" onclick="logout()"><span>🚪</span><b>Log out</b></div>
 </div>
 </div>
 </div>
 
 <div id="chatView">
 <div class="chat-box">
-<div class="chat-head"><img id="chatImg" src=""><div><b id="chatName"></b><br><small style="opacity:0.8">Online now • <span id="msgLeft"></span></small></div><div class="call-btns"><button onclick="startCall('voice')">📞</button><button onclick="startCall('video')">📹</button><button onclick="backToMain()">←</button></div></div>
+<div class="chat-head"><img id="chatImg" src=""><div><b id="chatName"></b><br><small style="opacity:0.8"><span id="msgLeft"></span></small></div><div class="call-btns"><button onclick="startCall('voice')">📞</button><button onclick="startCall('video')">📹</button><button onclick="backToMain()">←</button></div></div>
 <div id="messages"></div>
 <div class="chat-input">
 <button class="icon-btn" onclick="document.getElementById('fileInput').click()">📎</button>
@@ -167,82 +143,138 @@ body{background:#f0f2f5;padding:0;padding-bottom:30px}
 <button class="icon-btn" id="micBtn" onclick="toggleVoice()">🎤</button>
 <button class="send-btn" onclick="sendMsg()">Send ❤️</button>
 </div>
-<div id="recStatus" style="text-align:center;color:red;font-size:13px;font-weight:bold;display:none;padding:5px">🔴 Recording... Tap 🎤 to send VN</div>
+<div id="recStatus" style="text-align:center;color:red;font-size:13px;font-weight:bold;display:none;padding:5px">🔴 Recording... Tap 🎤 to stop & send VN</div>
 </div>
 </div>
 
-<div id="toast" onclick="openNotifChat()"><img id="toastImg" src=""><div><b id="toastTitle"></b><p id="toastText"></p></div><span style="margin-left:auto;font-size:20px">›</span></div>
-<div id="notifPanel" onclick="if(event.target.id==='notifPanel') closeNotifs()"><div class="notif-box"><div style="display:flex;justify-content:space-between;align-items:center;padding:5px 15px 0"><h3>Notifications 🔔</h3><button onclick="closeNotifs()" style="background:#f0f0f0;border:none;width:35px;height:35px;border-radius:50%;font-size:18px;cursor:pointer">✖</button></div><p style="padding:0 15px 10px;color:#888;font-size:13px">New • See all your likes, messages & calls</p><div id="notifList"></div><button onclick="markAllRead()" style="width:90%;margin:15px;padding:12px;border:none;background:#e91e63;color:white;border-radius:12px;font-weight:bold;display:block;margin-left:auto;margin-right:auto;cursor:pointer">Mark All as Read</button></div></div>
+<div id="toast" onclick="openNotifChat()"><img id="toastImg" src=""><div><b id="toastTitle"></b><p id="toastText"></p></div></div>
+<div id="notifPanel" onclick="if(event.target.id==='notifPanel') closeNotifs()"><div class="notif-box"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Notifications 🔔</h3><button onclick="closeNotifs()" style="background:#f0f0f0;border:none;width:35px;height:35px;border-radius:50%;font-size:18px;cursor:pointer">✖</button></div><div id="notifList"></div><button onclick="markAllRead()" style="width:90%;margin:15px;padding:12px;border:none;background:#e91e63;color:white;border-radius:12px;font-weight:bold;display:block;margin-left:auto;margin-right:auto;cursor:pointer">Mark All as Read</button></div></div>
 <div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" src=""><h2 id="popupName"></h2><p>You and <span id="popupName2"></span> liked each other!</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat 💬</button><button style="background:white" onclick="closePopup()">Keep Swiping</button></div></div>
 <div id="callPopup"><div class="call-box"><p id="callType">📞 Voice Call</p><img id="callImg" src=""><h2 id="callName"></h2><p id="callStatus">Calling...</p><div class="call-actions"><button class="accept" onclick="acceptCall()">📞</button><button class="decline" onclick="endCall()">✖</button></div></div></div>
-<div id="payPopup"><div class="pay-box"><h2>🔒 Pay MK1000 to Continue</h2><p>Your 4 free messages are finished! 😢</p><p>To keep chatting with <b id="payName"></b>, pay only <b>MK1000</b>.</p><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: LOVELINK</div><p style="font-size:13px">1. Send MK1000 to TNM Mpamba 0887222489<br>2. Click below to send screenshot on WhatsApp<br>3. Admin will unlock you immediately!</p><button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20I%20paid%20MK1000%20on%20Lovelink.%20Please%20unlock%20me.%20My%20name%20is%3A%20','_blank')">Send Screenshot on WhatsApp 📲</button><button style="background:#eee" onclick="closePay()">Go Back</button></div></div>
+<div id="payPopup"><div class="pay-box"><h2>🔒 Pay MK1000 to Continue</h2><p>Your 4 free messages are finished!</p><p>To keep chatting with <b id="payName"></b>, pay only <b>MK1000</b>.</p><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: LOVELINK</div><p style="font-size:13px">1. Send MK1000 to TNM Mpamba 0887222489<br>2. Click below to send screenshot on WhatsApp<br>3. Admin will unlock you immediately!</p><button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20I%20paid%20MK1000%20on%20Lovelink.%20Please%20unlock%20me.%20My%20name%20is%3A%20','_blank')">Send Screenshot on WhatsApp 📲</button><button style="background:#eee" onclick="closePay()">Go Back</button></div></div>
 <div id="adminLogin"><div class="pay-box"><h2>👑 Admin Login</h2><input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0"><button style="background:#111;color:white" onclick="checkAdmin()">Login</button><button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button></div></div>
 
 <script>
-let profiles=[
-{name:"Loveness Mainga",age:24,city:"Blantyre, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600"},
-{name:"Chisomo Phiri",age:22,city:"Lilongwe, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600"},
-{name:"Tawonga Banda",age:25,city:"Mzuzu, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"},
-{name:"Mercy Mvula",age:23,city:"Zomba, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"},
-{name:"Dalitso Kachere",age:26,city:"Blantyre, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600"},
-{name:"Jessica Miller",age:24,city:"New York, USA",gender:"Female",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600"},
-{name:"Sophia Johnson",age:22,city:"London, UK",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600"},
-{name:"Amara Okafor",age:25,city:"Lagos, Nigeria",gender:"Female",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600"},
-{name:"James Carter",age:27,city:"Texas, USA",gender:"Male",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600"},
-{name:"Wanjiru Kamau",age:23,city:"Nairobi, Kenya",gender:"Female",img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600"},
-{name:"Thandi Nkosi",age:24,city:"Johannesburg, South Africa",gender:"Female",img:"https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=600"},
-{name:"Emma Wilson",age:26,city:"Sydney, Australia",gender:"Female",img:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600"},
-{name:"Chikondi Gondwe",age:21,city:"Blantyre, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?w=600"},
-{name:"Michael Brown",age:28,city:"Toronto, Canada",gender:"Male",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600"},
-{name:"Zoe Adams",age:23,city:"Manchester, UK",gender:"Female",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600"},
-{name:"Limbani Nyirenda",age:24,city:"Lilongwe, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600"}
-];
-let notifications=[
-{name:"Loveness Mainga",img:profiles[0].img,text:"liked your profile ❤️",time:"2 min ago",type:"like",unread:true},
-{name:"Jessica Miller",img:profiles[5].img,text:"sent you a message: 'Hi handsome 😍'",time:"5 min ago",type:"message",unread:true},
-{name:"Amara Okafor",img:profiles[7].img,text:"sent you a voice note 🎤",time:"12 min ago",type:"voice",unread:true},
-{name:"Sophia Johnson",img:profiles[6].img,text:"liked your photo ❤️",time:"25 min ago",type:"like",unread:true},
-{name:"Chisomo Phiri",img:profiles[1].img,text:"tried to call you 📞 Missed call",time:"1 hour ago",type:"call",unread:true}
-];
-let current=0, matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'), paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'), currentChat=null, isAdmin=false, mediaRecorder=null, audioChunks=[], isRecording=false, callTimer=null, callSeconds=0, toastChatName="Loveness Mainga";
+let me = JSON.parse(localStorage.getItem('lovelink_me')||'null');
+let profiles = JSON.parse(localStorage.getItem('lovelink_all_profiles')||'[]');
+let notifications = JSON.parse(localStorage.getItem('lovelink_notifications')||'[]');
+let current=0, matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'), paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'), currentChat=null, isAdmin=false, mediaRecorder=null, audioChunks=[], isRecording=false, callTimer=null, callSeconds=0, toastChatName="", pendingProfile=null;
+
+if(me){document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';initApp();}
+function doSignup(){
+let name=document.getElementById('suName').value.trim();
+let age=document.getElementById('suAge').value;
+let gender=document.getElementById('suGender').value;
+let city=document.getElementById('suCity').value;
+let phone=document.getElementById('suPhone').value.trim();
+let bio=document.getElementById('suBio').value.trim();
+let file=document.getElementById('suPhoto').files[0];
+if(!name||!age||!gender||!city){alert('Chonde lembani dzina, zaka, gender ndi city.');return;}
+function save(photo){
+me={name,age,gender,city,phone,bio,img:photo||'https://via.placeholder.com/400?text='+encodeURIComponent(name)};
+localStorage.setItem('lovelink_me',JSON.stringify(me));
+document.getElementById('authView').style.display='none';
+document.getElementById('mainView').style.display='block';
+initApp();
+}
+if(file){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(file);}else{save('');}
+}
+function initApp(){
+document.getElementById('welcomeText').innerText='Hi, '+me.name+' 👋';
+document.getElementById('myCityText').innerText=me.city+' • '+me.age+' • '+me.gender;
+document.getElementById('myAvatar').src=me.img;
+document.getElementById('menuAvatar').src=me.img;
+document.getElementById('menuName').innerText=me.name;
+updatePeopleInfo();showProfile();renderMatches();renderNotifs();
+}
+function updatePeopleInfo(){
+let others=profiles.filter(p=>p.name!==me.name);
+document.getElementById('peopleInfo').innerText=others.length===0?'No other people yet. Invite friends to join Lovelink so you can see real people here. Share your link!':'There are '+others.length+' real people here. Swipe and like them!';
+}
+function addPerson(){
+let name=document.getElementById('addName').value.trim();
+let age=document.getElementById('addAge').value;
+let city=document.getElementById('addCity').value;
+let file=document.getElementById('addPhoto').files[0];
+if(!name||!age){alert('Lembani dzina ndi zaka');return;}
+function save(photo){
+let p={name,age,city,gender:'',img:photo||'https://via.placeholder.com/400?text='+encodeURIComponent(name)};
+profiles.push(p);localStorage.setItem('lovelink_all_profiles',JSON.stringify(profiles));
+updatePeopleInfo();showProfile();alert(name+' added! Tsopano mutha kumukonda ndi kucheza naye.');
+}
+if(file){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(file);}else{save('');}
+}
+function getVisibleProfiles(){return profiles.filter(p=>p.name!==me.name);}
+function showProfile(){
+let list=getVisibleProfiles();
+let box=document.getElementById('profileCard');
+if(list.length===0){box.innerHTML=`<div class="box"><h2>No people yet 😢</h2><p>Palibe anthu pano. Gawani link kwa anzanu kuti alowe ndipo muwawone pano. Osadandaula, anthu enieni akalowa, adzawoneka pano.</p><button onclick="shareApp()" style="background:#25D366">Invite Friends Now</button></div>`;return;}
+if(current>=list.length) current=0;
+let p=list[current];
+box.innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city}</p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;
+}
+function nextProfile(){current++;showProfile();}
+function likeProfile(){
+let list=getVisibleProfiles();let p=list[current];
+if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}
+document.getElementById('popupImg').src=p.img;document.getElementById('popupName').innerText=p.name+", "+p.age;document.getElementById('popupName2').innerText=p.name;document.getElementById('matchPopup').style.display='flex';renderMatches();
+addNotif(p.name,p.img,"You liked "+p.name+" ❤️","Just now","like");
+}
+function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
+function startChatFromPopup(){let p=getVisibleProfiles()[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
+function renderMatches(){
+let list=document.getElementById('matchesList');
+if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match!</p>';return;}
+list.innerHTML=matches.map(m=>{let paid=paidUsers.includes(m.name);return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free Messages'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');
+}
 function openMenu(){document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='block';}
 function closeMenu(){document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';}
-function shareApp(){let t="❤️ Lovelink - Find Love in Malawi! Join now 👉 https://badrat-stack.github.io/Lovelink/";if(navigator.share){navigator.share({text:t})}else{alert(t)}}
-function showProfile(){let p=profiles[current];document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online</span></p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;}
-function nextProfile(){current=(current+1)%profiles.length;showProfile();}
-function likeProfile(){let p=profiles[current];if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}document.getElementById('popupImg').src=p.img;document.getElementById('popupName').innerText=p.name+", "+p.age;document.getElementById('popupName2').innerText=p.name;document.getElementById('matchPopup').style.display='flex';renderMatches();addNotif(p.name,p.img,"liked you back! It's a Match! ❤️","Just now","like");}
-function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
-function startChatFromPopup(){let p=profiles[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
-function renderMatches(){let list=document.getElementById('matchesList');if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match! Try Loveness, Jessica or Amara - they are online now! 💕</p>';return;}list.innerHTML=matches.map(m=>{let paid=paidUsers.includes(m.name);return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free Messages'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');}
-function openChat(name){let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);currentChat=name;document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('chatView').style.display='block';document.getElementById('chatName').innerText=p.name+", "+p.age;document.getElementById('chatImg').src=p.img;updateMsgLeft();loadMessages();closeNotifs();document.getElementById('toast').style.display='none';}
+function editProfile(){let n=prompt('New name:',me.name);if(n){me.name=n;localStorage.setItem('lovelink_me',JSON.stringify(me));initApp();}}
+function logout(){if(confirm('Log out?')){localStorage.removeItem('lovelink_me');location.reload();}}
+function shareApp(){let t="❤️ Lovelink - Find Love in Malawi! Real people, real love. Join now 👉 https://badrat-stack.github.io/Lovelink/";if(navigator.share){navigator.share({text:t})}else{alert(t)}}
+function openChat(name){
+let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);if(!p) return;
+currentChat=name;document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('chatView').style.display='block';document.getElementById('chatName').innerText=p.name+", "+p.age;document.getElementById('chatImg').src=p.img;updateMsgLeft();loadMessages();closeNotifs();document.getElementById('toast').style.display='none';
+}
 function backToMain(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';}
 function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');return all[currentChat]||[];}
 function getMyCount(){return getMsgs().filter(m=>m.who==='me').length;}
 function updateMsgLeft(){let paid=paidUsers.includes(currentChat)||isAdmin;let left=paid?'Unlimited ♾️':(4-getMyCount())+' Free Left';document.getElementById('msgLeft').innerText=left;}
-function loadMessages(){let msgs=getMsgs();let box=document.getElementById('messages');if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? You have 4 free messages. You can send text, voice notes 🎤, photos 📎 and even call me 📞❤️</div>`;}else{box.innerHTML=msgs.map(m=>{if(m.type==='image') return `<div class="msg ${m.who}"><img src="${m.text}"><small>${m.who==='me'?'You':'Them'} • Photo 📎</small></div>`;if(m.type==='voice') return `<div class="msg ${m.who}">🎤 Voice Note<br><audio controls src="${m.text}"></audio><small>${m.who==='me'?'You':'Them'} • Voice Note</small></div>`;if(m.type==='call') return `<div class="msg ${m.who}">📞 ${m.text}<small>Call</small></div>`;return `<div class="msg ${m.who}">${m.text}<small>${m.who==='me'?'You':'Them'}</small></div>`;}).join('');}box.scrollTop=box.scrollHeight;updateMsgLeft();}
+function loadMessages(){let msgs=getMsgs();let box=document.getElementById('messages');if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for matching with me. How are you? You have 4 free messages.</div>`;}else{box.innerHTML=msgs.map(m=>{if(m.type==='image') return `<div class="msg ${m.who}"><img src="${m.text}"><small>${m.who==='me'?'You':'Them'} • Photo</small></div>`;if(m.type==='voice') return `<div class="msg ${m.who}">🎤 Voice Note<br><audio controls src="${m.text}"></audio><small>${m.who==='me'?'You':'Them'} • Voice Note</small></div>`;if(m.type==='call') return `<div class="msg ${m.who}">📞 ${m.text}<small>Call</small></div>`;return `<div class="msg ${m.who}">${m.text}<small>${m.who==='me'?'You':'Them'}</small></div>`;}).join('');}box.scrollTop=box.scrollHeight;updateMsgLeft();}
 function saveMsg(obj){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all[currentChat]) all[currentChat]=[];all[currentChat].push(obj);localStorage.setItem('lovelink_chats',JSON.stringify(all));loadMessages();}
-function sendMsg(){let inp=document.getElementById('msgInput');let text=inp.value.trim();if(!text) return;let paid=paidUsers.includes(currentChat)||isAdmin;if(!paid && getMyCount()>=4){document.getElementById('payName').innerText=currentChat;document.getElementById('payPopup').style.display='flex';return;}saveMsg({who:'me',text:text,type:'text'});inp.value='';let count=getMyCount();setTimeout(()=>{let reply="";if(count===1) reply="Wow, nice to meet you! 😊 I really like your profile. Where are you from?";else if(count===2) reply="Haha 😂 I love chatting with you. Send me a voice note, I want to hear your voice 🎤";else if(count===3) reply="Mmm... I'm really enjoying this ❤️ You can also send me a photo or call me 📞";else if(count===4) reply="⚠️ Oops! Your 4 free messages are finished! To keep chatting, pay only MK1000 to TNM Mpamba 0887222489 - Name: Yankho Chikwakwa. Admin will unlock you immediately! ❤️";else reply="I'm here! Let's keep talking ❤️ Send me a VN or call me!";let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all2[currentChat]) all2[currentChat]=[];all2[currentChat].push({who:'them',text:reply,type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1000);}
-function sendImage(input){let file=input.files[0];if(!file) return;let reader=new FileReader();reader.onload=function(e){saveMsg({who:'me',text:e.target.result,type:'image'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'Wow! Nice photo 😍🔥 You look amazing!',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};reader.readAsDataURL(file);input.value='';}
-async function toggleVoice(){if(!isRecording){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);saveMsg({who:'me',text:url,type:'voice'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'I loved your voice note! 😍 Your voice is so sweet. Send me another one 🎤',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};mediaRecorder.start();isRecording=true;document.getElementById('micBtn').classList.add('recording');document.getElementById('recStatus').style.display='block';}catch(err){alert('Please allow microphone to send voice notes 🎤');}}else{mediaRecorder.stop();isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('recStatus').style.display='none';}}
-function startCall(type){let p=profiles.find(x=>x.name===currentChat);document.getElementById('callImg').src=p.img;document.getElementById('callName').innerText=p.name;document.getElementById('callType').innerText=type==='video'?'📹 Video Call':'📞 Voice Call';document.getElementById('callStatus').innerText='Calling...';document.getElementById('callPopup').style.display='flex';callSeconds=0;setTimeout(()=>{document.getElementById('callStatus').innerText='Ringing... 📞';},1500);}
-function acceptCall(){document.getElementById('callStatus').innerText='Connected - 00:00';clearInterval(callTimer);callTimer=setInterval(()=>{callSeconds++;let m=Math.floor(callSeconds/60).toString().padStart(2,'0');let s=(callSeconds%60).toString().padStart(2,'0');document.getElementById('callStatus').innerText='Connected - '+m+':'+s+' ❤️';},1000);}
-function endCall(){clearInterval(callTimer);document.getElementById('callPopup').style.display='none';if(callSeconds>0){saveMsg({who:'me',text:'Voice Call - '+Math.floor(callSeconds/60)+':'+(callSeconds%60)+' minutes',type:'call'});}else{saveMsg({who:'me',text:'Missed Call 📞',type:'call'});}}
-function renderNotifs(){let list=document.getElementById('notifList');let unread=notifications.filter(n=>n.unread).length;document.getElementById('notifBadge').innerText=unread>0?unread:'';document.getElementById('notifBadge').style.display=unread>0?'flex':'none';document.getElementById('msgBadge').innerText=notifications.filter(n=>n.type==='message'||n.type==='voice').length;list.innerHTML=notifications.map(n=>`<div class="notif-item ${n.unread?'unread':''}" onclick="openChat('${n.name}')"><img src="${n.img}"><div><b>${n.name}</b><p>${n.text}</p><small>${n.time}</small></div>${n.unread?'<span style="width:10px;height:10px;background:#1877F2;border-radius:50%;flex-shrink:0"></span>':''}</div>`).join('');}
+function sendMsg(){
+let inp=document.getElementById('msgInput');let text=inp.value.trim();if(!text) return;
+let paid=paidUsers.includes(currentChat)||isAdmin;
+if(!paid && getMyCount()>=4){document.getElementById('payName').innerText=currentChat;document.getElementById('payPopup').style.display='flex';return;}
+saveMsg({who:'me',text:text,type:'text'});inp.value='';
+// No fake auto-reply - real person will reply when they are online
+addNotif(currentChat,profiles.find(p=>p.name===currentChat)?.img||'',"You sent a message to "+currentChat,"Just now","message");
+}
+function sendImage(input){let file=input.files[0];if(!file) return;let reader=new FileReader();reader.onload=function(e){saveMsg({who:'me',text:e.target.result,type:'image'});};reader.readAsDataURL(file);input.value='';}
+async function toggleVoice(){
+if(!isRecording){
+try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);saveMsg({who:'me',text:url,type:'voice'});};mediaRecorder.start();isRecording=true;document.getElementById('micBtn').classList.add('recording');document.getElementById('recStatus').style.display='block';}catch(err){alert('Please allow microphone to send voice notes 🎤');}
+}else{mediaRecorder.stop();isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('recStatus').style.display='none';}
+}
+function startCall(type){
+let p=profiles.find(x=>x.name===currentChat);if(!p) return;
+document.getElementById('callImg').src=p.img;document.getElementById('callName').innerText=p.name;document.getElementById('callType').innerText=type==='video'?'📹 Video Call':'📞 Voice Call';document.getElementById('callStatus').innerText='Calling... Waiting for '+p.name+' to answer...';document.getElementById('callPopup').style.display='flex';callSeconds=0;
+}
+function acceptCall(){document.getElementById('callStatus').innerText='Connected - 00:00';clearInterval(callTimer);callTimer=setInterval(()=>{callSeconds++;let m=Math.floor(callSeconds/60).toString().padStart(2,'0');let s=(callSeconds%60).toString().padStart(2,'0');document.getElementById('callStatus').innerText='Connected - '+m+':'+s;},1000);}
+function endCall(){clearInterval(callTimer);document.getElementById('callPopup').style.display='none';if(callSeconds>0){saveMsg({who:'me',text:'Call - '+Math.floor(callSeconds/60)+':'+(callSeconds%60),type:'call'});}else{saveMsg({who:'me',text:'Missed Call 📞',type:'call'});}}
+function renderNotifs(){let list=document.getElementById('notifList');if(!list) return;let unread=notifications.filter(n=>n.unread).length;let badge=document.getElementById('notifBadge');badge.innerText=unread;badge.style.display=unread>0?'flex':'none';document.getElementById('msgBadge').innerText=notifications.filter(n=>n.type==='message').length;document.getElementById('msgBadge').style.display=notifications.filter(n=>n.type==='message').length>0?'flex':'none';if(notifications.length===0){list.innerHTML='<p style="padding:15px;color:#888">No notifications yet. When someone likes you or messages you, you will see it here.</p>';return;}list.innerHTML=notifications.map(n=>`<div class="notif-item" onclick="openChat('${n.name}')"><img src="${n.img}"><div><b>${n.name}</b><p>${n.text}</p><small>${n.time}</small></div></div>`).join('');}
 function showNotifs(){document.getElementById('notifPanel').style.display='flex';renderNotifs();}
 function closeNotifs(){document.getElementById('notifPanel').style.display='none';}
-function markAllRead(){notifications.forEach(n=>n.unread=false);renderNotifs();}
-function addNotif(name,img,text,time,type){notifications.unshift({name,img,text,time,type,unread:true});renderNotifs();showToast(name,img,text);}
+function markAllRead(){notifications.forEach(n=>n.unread=false);localStorage.setItem('lovelink_notifications',JSON.stringify(notifications));renderNotifs();}
+function addNotif(name,img,text,time,type){notifications.unshift({name,img,text,time,type,unread:true});localStorage.setItem('lovelink_notifications',JSON.stringify(notifications));renderNotifs();}
 function showToast(name,img,text){toastChatName=name;document.getElementById('toastImg').src=img;document.getElementById('toastTitle').innerText=name;document.getElementById('toastText').innerText=text;let t=document.getElementById('toast');t.style.display='flex';setTimeout(()=>{t.style.display='none';},4000);}
-function openNotifChat(){document.getElementById('toast').style.display='none';openChat(toastChatName);}
+function openNotifChat(){document.getElementById('toast').style.display='none';if(toastChatName) openChat(toastChatName);}
 function closePay(){document.getElementById('payPopup').style.display='none';}
 function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
-function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();alert("Welcome Admin BadRat! 👑");}else{alert("Wrong password!");}}
+function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();alert("Welcome Admin! 👑");}else{alert("Wrong password!");}}
 function renderAdmin(){let list=document.getElementById('adminList');if(matches.length===0){list.innerHTML='No matches yet.';return;}list.innerHTML=matches.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Unlock ✅</button>'}</div>`;}).join('');}
 function unlockUser(name){paidUsers.push(name);localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+" unlocked! 🎉");}
 function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
-showProfile();renderMatches();renderNotifs();
-setInterval(()=>{let randomP=profiles[Math.floor(Math.random()*profiles.length)];let msgs=["liked your profile ❤️","sent you a message: 'Hey 😍'","is viewing your profile 👀","sent you a voice note 🎤","wants to chat with you 💬"];let msg=msgs[Math.floor(Math.random()*msgs.length)];addNotif(randomP.name,randomP.img,msg,"Just now","like");},25000);
-setTimeout(()=>{showToast("Loveness Mainga",profiles[0].img,"liked your profile ❤️ Tap to see!");},3000);
 </script>
 </body>
 </html>
