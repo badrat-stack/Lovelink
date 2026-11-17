@@ -4,7 +4,7 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovelink - Find your match in Malawi</title>
+<title>Lovelink - Find your match in Malawi & Beyond</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#ffeef5;padding:15px;padding-bottom:30px}
@@ -51,19 +51,20 @@ body{background:#ffeef5;padding:15px;padding-bottom:30px}
 #adminPanel{display:none;background:white;border-radius:20px;padding:15px;margin-top:15px}
 .admin-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;font-size:14px}
 .unlock{background:green;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:bold;cursor:pointer}
+.online{color:#4CAF50;font-weight:bold;font-size:12px}
 </style>
 </head>
 <body>
 <div id="mainView">
-<div class="header"><h1>❤️ Lovelink</h1><p>Find your match in Malawi & Beyond</p></div>
-<div class="top">Hi, BadRat Lyrics 👋</div>
+<div class="header"><h1>❤️ Lovelink</h1><p>Find your match in Malawi & Beyond - 2,400+ members online</p></div>
+<div class="top">Hi, BadRat Lyrics 👋 <span class="online">● 1,248 Online Now</span></div>
 <div id="profileCard"></div>
 <div class="matches"><h3>Your Matches 💕</h3><div id="matchesList"></div></div>
 <div id="adminPanel">
 <h3>👑 ADMIN PANEL - BadRat</h3>
-<p style="font-size:13px;color:#666;margin:5px 0">Mutha kuwona amene alipira ndi kuwatsegulira.</p>
+<p style="font-size:13px;color:#666;margin:5px 0">You can see who paid and unlock them.</p>
 <div id="adminList"></div>
-<button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Tsekani Admin</button>
+<button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Close Admin</button>
 </div>
 <div class="admin-link" onclick="showAdminLogin()">Admin Login 👑</div>
 </div>
@@ -76,28 +77,39 @@ body{background:#ffeef5;padding:15px;padding-bottom:30px}
 </div>
 <div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" src=""><h2 id="popupName"></h2><p>You and <span id="popupName2"></span> liked each other!</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat 💬</button><button style="background:white" onclick="closePopup()">Keep Swiping</button></div></div>
 <div id="payPopup"><div class="pay-box">
-<h2>🔒 Lipira MK1000</h2>
-<p>Ma message 4 aulere atha! 😢</p>
-<p>Ku pitiliza kucheza ndi <b id="payName"></b>, lipira <b>MK1000</b> yokha.</p>
-<div class="pay-num">📱 TNM Mpamba: 0887222489<br>Dzina: Yankho Chikwakwa<br>Ref: LOVELINK</div>
-<p style="font-size:13px">1. Tumiza MK1000 ku TNM Mpamba 0887222489<br>2. Dinani batani pansipa kutumiza screenshot ku WhatsApp<br>3. Admin akakutsegulirani nthawi yomweyo!</p>
-<button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20Ndalipira%20MK1000%20pa%20Lovelink.%20Chonde%20nditsegulireni.%20Dzina%20langa%20ndi%3A%20','_blank')">Tumiza Screenshot pa WhatsApp 📲</button>
-<button style="background:#eee" onclick="closePay()">Bwererani</button>
+<h2>🔒 Pay MK1000 to Continue</h2>
+<p>Your 4 free messages are finished! 😢</p>
+<p>To keep chatting with <b id="payName"></b>, pay only <b>MK1000</b>.</p>
+<div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: LOVELINK</div>
+<p style="font-size:13px">1. Send MK1000 to TNM Mpamba 0887222489<br>2. Click below to send screenshot on WhatsApp<br>3. Admin will unlock you immediately!</p>
+<button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20I%20paid%20MK1000%20on%20Lovelink.%20Please%20unlock%20me.%20My%20name%20is%3A%20','_blank')">Send Screenshot on WhatsApp 📲</button>
+<button style="background:#eee" onclick="closePay()">Go Back</button>
 </div></div>
 <div id="adminLogin"><div class="pay-box">
 <h2>👑 Admin Login</h2>
 <input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0">
-<button style="background:#111;color:white" onclick="checkAdmin()">Lowani</button>
+<button style="background:#111;color:white" onclick="checkAdmin()">Login</button>
 <button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button>
-<p style="font-size:12px;color:#999">Password yanu: badrat123</p>
+<p style="font-size:12px;color:#999">Your password: badrat123</p>
 </div></div>
 <script>
 let profiles=[
-{name:"Loveness mainga",age:24,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600"},
-{name:"Chisomo Phiri",age:22,city:"Lilongwe",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600"},
-{name:"Tawonga Banda",age:25,city:"Mzuzu",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"},
-{name:"Mercy Mvula",age:23,city:"Zomba",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"},
-{name:"Dalitso Kachere",age:26,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600"}
+{name:"Loveness Mainga",age:24,city:"Blantyre, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600"},
+{name:"Chisomo Phiri",age:22,city:"Lilongwe, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600"},
+{name:"Tawonga Banda",age:25,city:"Mzuzu, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"},
+{name:"Mercy Mvula",age:23,city:"Zomba, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"},
+{name:"Dalitso Kachere",age:26,city:"Blantyre, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600"},
+{name:"Jessica Miller",age:24,city:"New York, USA",gender:"Female",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600"},
+{name:"Sophia Johnson",age:22,city:"London, UK",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600"},
+{name:"Amara Okafor",age:25,city:"Lagos, Nigeria",gender:"Female",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600"},
+{name:"James Carter",age:27,city:"Texas, USA",gender:"Male",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600"},
+{name:"Wanjiru Kamau",age:23,city:"Nairobi, Kenya",gender:"Female",img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600"},
+{name:"Thandi Nkosi",age:24,city:"Johannesburg, South Africa",gender:"Female",img:"https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=600"},
+{name:"Emma Wilson",age:26,city:"Sydney, Australia",gender:"Female",img:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600"},
+{name:"Chikondi Gondwe",age:21,city:"Blantyre, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?w=600"},
+{name:"Michael Brown",age:28,city:"Toronto, Canada",gender:"Male",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600"},
+{name:"Zoe Adams",age:23,city:"Manchester, UK",gender:"Female",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600"},
+{name:"Limbani Nyirenda",age:24,city:"Lilongwe, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600"}
 ];
 let current=0;
 let matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]');
@@ -106,7 +118,7 @@ let currentChat=null;
 let isAdmin=false;
 function showProfile(){
 let p=profiles[current];
-document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender}</p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;
+document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online</span></p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;
 }
 function nextProfile(){current=(current+1)%profiles.length;showProfile();}
 function likeProfile(){
@@ -122,10 +134,10 @@ function closePopup(){document.getElementById('matchPopup').style.display='none'
 function startChatFromPopup(){let p=profiles[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
 function renderMatches(){
 let list=document.getElementById('matchesList');
-if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match!</p>';return;}
+if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match! Try Loveness, Jessica or Amara - they are online now! 💕</p>';return;}
 list.innerHTML=matches.map(m=>{
 let paid=paidUsers.includes(m.name);
-return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');
+return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free Messages'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');
 }
 function openChat(name){
 let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);
@@ -147,7 +159,7 @@ document.getElementById('msgLeft').innerText=left;
 function loadMessages(){
 let msgs=getMsgs();
 let box=document.getElementById('messages');
-if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? (Muli ndi ma message 4 aulere, kenako MK1000)</div>`;}
+if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? You have 4 free messages, then MK1000 to continue ❤️</div>`;}
 else{box.innerHTML=msgs.map(m=>`<div class="msg ${m.who}">${m.text}</div>`).join('');}
 box.scrollTop=box.scrollHeight;updateMsgLeft();
 }
@@ -170,11 +182,11 @@ let count=getMyCount();
 setTimeout(()=>{
 let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');
 let reply="";
-if(count===1) reply="Wow nice! 😊 Ndimakukonda! Ukuchokera kuti?";
-else if(count===2) reply="Haha 😂 Ndikusangalala kucheza nawe. Pitilizabe!";
-else if(count===3) reply="Mmm... ndikusangalala ❤️ Koma chats zathu zaulere zatsala pang'ono kutha...";
-else if(count===4) reply="⚠️ Oops! Ma message 4 aulere atha! Kuti tipitilize kucheza, lipira MK1000 yokha ku TNM Mpamba 0887222489 - Dzina: Yankho Chikwakwa. Admin akutsegulirani nthawi yomweyo! ❤️";
-else reply="Tikulankhula! ❤️";
+if(count===1) reply="Wow, nice to meet you! 😊 I really like your profile. Where are you from?";
+else if(count===2) reply="Haha 😂 I love chatting with you. Tell me more about yourself!";
+else if(count===3) reply="Mmm... I'm really enjoying this ❤️ But our free messages are almost finished...";
+else if(count===4) reply="⚠️ Oops! Your 4 free messages are finished! To keep chatting with me, please pay only MK1000 to TNM Mpamba 0887222489 - Name: Yankho Chikwakwa. Admin will unlock you immediately! ❤️";
+else reply="I'm here! Let's keep talking ❤️";
 all2[currentChat].push({who:'them',text:reply});
 localStorage.setItem('lovelink_chats',JSON.stringify(all2));
 loadMessages();
@@ -190,25 +202,25 @@ document.getElementById('adminLogin').style.display='none';
 document.getElementById('adminPanel').style.display='block';
 renderAdmin();
 alert("Welcome Admin BadRat! 👑");
-}else{alert("Password yolakwika!");}
+}else{alert("Wrong password!");}
 }
 function renderAdmin(){
 let list=document.getElementById('adminList');
-if(matches.length===0){list.innerHTML='Palibe match pano.';return;}
+if(matches.length===0){list.innerHTML='No matches yet.';return;}
 list.innerHTML=matches.map(m=>{
 let paid=paidUsers.includes(m.name);
 let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];
-return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Tsegulani ✅</button>'}</div>`;
+return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Unlock ✅</button>'}</div>`;
 }).join('');
 }
 function unlockUser(name){
 paidUsers.push(name);
 localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));
 renderAdmin();renderMatches();
-alert(name+" watsegulidwa! Tsopano akhoza kucheza unlimited! 🎉");
+alert(name+" unlocked! Now they can chat unlimited! 🎉");
 }
 function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
 showProfile();renderMatches();
 </script>
 </body>
-  </html>
+</html>
