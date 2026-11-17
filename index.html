@@ -4,7 +4,12 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovelink - Real Love in Blantyre</title>
+<title>Lovelink - Real Love in Malawi</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e91e63">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f0f2f5;padding-bottom:30px}
@@ -14,9 +19,12 @@ body{background:#f0f2f5;padding-bottom:30px}
 .icon{width:40px;height:40px;background:#f0f2f5;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:18px}
 .badge{position:absolute;top:-4px;right:-4px;background:#ff1744;color:white;font-size:11px;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #e91e63}
-.hero{background:linear-gradient(135deg,#e91e63,#ff6b9d);color:white;padding:20px 15px;text-align:center}
-.hero h2{font-size:24px;margin-bottom:5px}
-.hero p{font-size:13px;opacity:.9}
+.hero{background:linear-gradient(135deg,#e91e63,#ff6b9d);color:white;padding:18px 15px;text-align:center}
+.online-bar{background:#111;color:white;padding:8px 15px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.online-dot{width:9px;height:9px;background:#25D366;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+.apk-banner{background:#25D366;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.apk-banner button{background:white;color:#111;border:none;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer;white-space:nowrap}
 .box{background:white;border-radius:16px;padding:16px;margin:15px;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
 .box h3{margin-bottom:8px}
 .box input,.box select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;outline:none}
@@ -62,7 +70,7 @@ body{background:#f0f2f5;padding-bottom:30px}
 .menu-tile span{font-size:24px;display:block}
 .menu-section{background:white;border-radius:12px;margin-top:10px;overflow:hidden}
 .menu-section-row{display:flex;gap:10px;padding:13px;border-bottom:1px solid #eee;cursor:pointer}
-#matchPopup,#payPopup,#adminLogin,#callPopup,#notifPanel,#boostPopup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
+#matchPopup,#payPopup,#adminLogin,#callPopup,#notifPanel,#boostPopup,#apkPopup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
 #notifPanel{align-items:flex-start;justify-content:flex-end;padding:0;background:rgba(0,0,0,0.4)}
 .notif-box{background:white;color:#333;width:100%;max-width:380px;height:100%;overflow-y:auto;text-align:left}
 .notif-box h3{padding:15px}
@@ -85,10 +93,12 @@ body{background:#f0f2f5;padding-bottom:30px}
 </head>
 <body>
 <div id="authView" style="display:block">
-<div class="hero"><h2>❤️ Lovelink</h2><p>Real Love in Blantyre. No Fake. No Scam. Verified Only.</p></div>
+<div class="hero"><h2>❤️ Lovelink</h2><p>Real Love in Malawi. Anthu Akuda, Anthu Enieni.</p></div>
+<div class="online-bar"><span><span class="online-dot"></span> <b id="onlineCountAuth">7,800</b> Online Now in Malawi</span><span>🇲🇼 Blantyre • Lilongwe • Mzuzu</span></div>
+<div class="apk-banner"><div><b>📲 Lovelink App</b><br><small>Ikani ngati App pa foni yanu - Monga APK</small></div><button onclick="installApp()">Install App 📲</button></div>
 <div class="box">
 <h3>Join Lovelink - FREE</h3>
-<p style="font-size:13px;color:#666">Chat ndi FREE. Mumalipira kokha ngati mukufuna kuti anthu ambiri akuoneni.</p>
+<p style="font-size:13px;color:#666">Chat ndi FREE. 7,800 anthu ali online tsopano.</p>
 <input id="suName" placeholder="Dzina lanu lenileni">
 <input id="suAge" type="number" placeholder="Zaka">
 <select id="suGender"><option value="">Gender</option><option>Female</option><option>Male</option></select>
@@ -96,15 +106,16 @@ body{background:#f0f2f5;padding-bottom:30px}
 <input id="suPhone" placeholder="Phone - 088...">
 <input id="suPhoto" type="file" accept="image/*">
 <button class="btn btn-pink" onclick="doSignup()">Join FREE ❤️</button>
-<p style="font-size:11px;color:#999;text-align:center;margin-top:8px">Mukalowa, mukuvomera kuti ndinu weniweni, osati scammer.</p>
 </div>
-<div class="box" style="background:#FFF8E1"><h3>🔥 Chifukwa chiyani Lovelink ndi yosiyana?</h3><p style="font-size:13px;line-height:1.6">✅ Chat ndi FREE - Osalipira kucheza<br>✅ Verified ✅ - Anthu enieni okha<br>✅ Blantyre First - Anthu omwe ali pafupi nanu<br>✅ No Scam - Admin amachotsa ma scammer nthawi yomweyo</p></div>
+<div class="box" style="background:#FFF8E1"><h3>🔥 Chifukwa chiyani Lovelink?</h3><p style="font-size:13px;line-height:1.6">✅ <b id="onlineCount2">7,800</b> anthu ali online tsopano<br>✅ Chat ndi FREE<br>✅ Verified ✅ - Anthu enieni okha<br>✅ Anthu a ku Malawi okha - Palibe azungu a fake<br>✅ Install ngati App 📲</p></div>
 </div>
 
 <div id="mainView" style="display:none">
 <div class="topbar"><h1>❤️ Lovelink</h1><div class="topbar-icons"><div class="icon" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">3</span></div><div class="icon" onclick="showNotifs()">💬<span class="badge" id="msgBadge">2</span></div><div class="icon" onclick="openMenu()">☰</div><img class="avatar" id="myAvatar" onclick="openMenu()"></div></div>
-<div class="hero" id="heroBox"><h2 id="welcomeText">Hi 👋</h2><p id="myCityText"></p><p id="boostStatus" style="font-size:12px;margin-top:5px"></p></div>
-<div class="box" style="background:#FFF8E1;border:2px solid #FFB300"><h3>🔥 Boost Your Profile - Ndiyo imakutchuka</h3><p style="font-size:13px">Mukalipira Boost, profile yanu iwonekera kwa anthu 100 pa tsiku, osati 5. Ndiyo njira yofulumira kupeza chibwenzi.</p><button class="btn btn-gold" onclick="showBoost()">Boost Now - MK2,000 / Week 🔥</button><button class="btn btn-dark" onclick="showBoost()">Gold - MK5,000 / Month 👑</button></div>
+<div class="online-bar"><span><span class="online-dot"></span> <b id="onlineCountMain">7,800</b> Online Now</span><span id="liveViewers">🔥 1,240 akuona profile yako</span></div>
+<div class="apk-banner" id="apkBannerMain"><div><b>📲 Install Lovelink App</b><br><small>Ikakhale App pa foni yanu</small></div><button onclick="installApp()">Install 📲</button></div>
+<div class="hero"><h2 id="welcomeText">Hi 👋</h2><p id="myCityText"></p><p id="boostStatus" style="font-size:12px;margin-top:5px"></p></div>
+<div class="box" style="background:#FFF8E1;border:2px solid #FFB300"><h3>🔥 Boost Your Profile</h3><p style="font-size:13px">Mukalipira Boost, profile yanu iwonekera kwa anthu 100 pa tsiku, osati 5.</p><button class="btn btn-gold" onclick="showBoost()">Boost Now - MK2,000 / Week 🔥</button><button class="btn btn-dark" onclick="showBoost()">Gold - MK5,000 / Month 👑</button></div>
 <div id="profileCard"></div>
 <div class="matches"><h3>Your Matches 💕 - Chat ndi FREE</h3><div id="matchesList"></div></div>
 <div id="adminPanel"><h3>👑 ADMIN - Ndalama & Ma Account</h3><div style="background:#E8F5E9;padding:12px;border-radius:12px;margin-bottom:10px"><b id="adminStats"></b></div><div id="adminList"></div><button class="btn btn-dark" onclick="closeAdmin()">Close Admin</button></div>
@@ -114,11 +125,11 @@ body{background:#f0f2f5;padding-bottom:30px}
 <div id="menuView">
 <div class="menu-head"><span onclick="closeMenu()" style="cursor:pointer;font-size:24px">‹</span><b>Menu</b></div>
 <div class="menu-body">
-<div class="menu-profile"><img id="menuAvatar"><div><b id="menuName"></b><br><small id="menuEmail">Verified Member</small></div></div>
+<div class="menu-profile"><img id="menuAvatar"><div><b id="menuName"></b><br><small>Verified Member • <span id="onlineCountMenu">7,800</span> Online</small></div></div>
 <div class="menu-grid">
 <div class="menu-tile" onclick="closeMenu();showNotifs()"><span>💬</span><b>Messages</b></div>
 <div class="menu-tile" onclick="closeMenu();showBoost()"><span>🔥</span><b>Boost</b></div>
-<div class="menu-tile" onclick="closeMenu()"><span>👫</span><b>Friends</b></div>
+<div class="menu-tile" onclick="installApp()"><span>📲</span><b>Install App</b></div>
 <div class="menu-tile" onclick="shareApp()"><span>❤️</span><b>Invite Friends</b></div>
 </div>
 <div class="menu-section">
@@ -142,32 +153,58 @@ body{background:#f0f2f5;padding-bottom:30px}
 <div id="toast" onclick="openNotifChat()"><img id="toastImg"><div><b id="toastTitle"></b><p id="toastText"></p></div></div>
 <div id="notifPanel" onclick="if(event.target.id==='notifPanel') closeNotifs()"><div class="notif-box"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Notifications 🔔</h3><button onclick="closeNotifs()" style="background:#f0f0f0;border:none;width:35px;height:35px;border-radius:50%;cursor:pointer">✖</button></div><div id="notifList"></div><button class="btn btn-pink" style="width:90%;margin:15px" onclick="markAllRead()">Mark All as Read</button></div></div>
 <div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;margin:10px"><h2 id="popupName"></h2><p>Chat ndi FREE! Yambani kucheza tsopano.</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat - FREE 💬</button><button style="background:white;color:#111" onclick="closePopup()">Keep Swiping</button></div></div>
+<div id="apkPopup"><div class="pay-box"><h2>📲 Install Lovelink App</h2><p style="font-size:14px">Pangani Lovelink kukhala App pa foni yanu ngati APK!</p><p style="font-size:13px;text-align:left;margin:10px 0">1. Dinani <b>Install</b> pansipa<br>2. Dinani <b>Add to Home Screen</b> kapena <b>Install</b><br>3. Lovelink idzakhala App pa foni yanu! ❤️<br><br>Kapena ngati mukufuna APK file:<br>WhatsApp 0887222489 ndipo ndikutumizirani APK.</p><button style="background:#25D366;color:white" onclick="doInstall()">Install App Now 📲</button><button style="background:#111;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi!%20Ndifuna%20APK%20ya%20Lovelink','_blank')">Get APK via WhatsApp 📲</button><button style="background:#eee" onclick="document.getElementById('apkPopup').style.display='none'">Later</button></div></div>
 <div id="boostPopup"><div class="pay-box"><h2>🔥 Boost Your Profile</h2><p style="font-size:14px">Sankhani Boost kuti anthu ambiri akuoneni:</p><div style="background:#FFF8E1;padding:12px;border-radius:12px;margin:10px 0;text-align:left"><b>🔥 Boost - MK2,000 / Week</b><br><small>Profile yanu iwonekere kwa anthu 100 pa tsiku</small></div><div style="background:#FFF3E0;padding:12px;border-radius:12px;margin:10px 0;text-align:left"><b>👑 Gold - MK5,000 / Month</b><br><small>Iwonekere poyamba + Verified Badge + Unlimited Likes</small></div><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: BOOST + Dzina lanu</div><button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi!%20Ndafuna%20Boost%20ya%20Lovelink.%20Ndatumiza%20MK2000','_blank')">Send Screenshot on WhatsApp 📲</button><button style="background:#eee" onclick="document.getElementById('boostPopup').style.display='none'">Go Back</button></div></div>
 <div id="payPopup"><div class="pay-box"><h2>🔥 Boost Needed?</h2><p>Mukufuna kuti anthu ambiri akuoneni? Lipirani Boost!</p><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa</div><button style="background:#FFB300;color:#111" onclick="document.getElementById('payPopup').style.display='none';showBoost()">See Boost Plans 🔥</button><button style="background:#eee" onclick="closePay()">Go Back - Chat FREE</button></div></div>
 <div id="callPopup"><div class="call-box"><p id="callType">📞 Voice Call</p><img id="callImg"><h2 id="callName"></h2><p id="callStatus">Calling...</p><div class="call-actions"><button class="accept" onclick="acceptCall()">📞</button><button class="decline" onclick="endCall()">✖</button></div></div></div>
 <div id="adminLogin"><div class="pay-box"><h2>👑 Admin Login</h2><input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0"><button style="background:#111;color:white" onclick="checkAdmin()">Login</button><button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button></div></div>
 
 <script>
+// FAKE ACCOUNTS - ONSE NDI ANTHU AKUDA - PALIBE MZUNGU
 let fakeProfiles=[
-{name:"Loveness Mainga",age:24,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600",verified:true,boosted:true},
-{name:"Chisomo Phiri",age:22,city:"Lilongwe",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600",verified:true,boosted:false},
+{name:"Loveness Mainga",age:24,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600",verified:true,boosted:true},
+{name:"Chisomo Phiri",age:22,city:"Lilongwe",gender:"Female",img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600",verified:true,boosted:false},
 {name:"Tawonga Banda",age:25,city:"Mzuzu",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600",verified:false,boosted:false},
-{name:"Mercy Mvula",age:23,city:"Zomba",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600",verified:true,boosted:false},
-{name:"Dalitso Kachere",age:26,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600",verified:false,boosted:false},
-{name:"Jessica Miller",age:24,city:"New York",gender:"Female",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600",verified:true,boosted:true},
-{name:"Sophia Johnson",age:22,city:"London",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600",verified:true,boosted:false},
-{name:"Amara Okafor",age:25,city:"Lagos",gender:"Female",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600",verified:true,boosted:false},
-{name:"Chikondi Gondwe",age:21,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?w=600",verified:false,boosted:false},
-{name:"Limbani Nyirenda",age:24,city:"Lilongwe",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600",verified:false,boosted:false}
+{name:"Mercy Mvula",age:23,city:"Zomba",gender:"Female",img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600",verified:true,boosted:false},
+{name:"Dalitso Kachere",age:26,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600",verified:false,boosted:false},
+{name:"Thandiwe Nkosi",age:24,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600",verified:true,boosted:true},
+{name:"Zikomo Gondwe",age:22,city:"Lilongwe",gender:"Female",img:"https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600",verified:true,boosted:false},
+{name:"Amara Okafor",age:25,city:"Lagos, Nigeria",gender:"Female",img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600",verified:true,boosted:false},
+{name:"Chikondi Gondwe",age:21,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600",verified:false,boosted:false},
+{name:"Limbani Nyirenda",age:24,city:"Lilongwe",gender:"Male",img:"https://images.unsplash.com/photo-1521119989659-a83eee488004?w=600",verified:false,boosted:false},
+{name:"Wanjiru Kamau",age:23,city:"Nairobi, Kenya",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600",verified:true,boosted:false},
+{name:"Tapiwa Moyo",age:27,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=600",verified:false,boosted:false},
+{name:"Naledi Khumalo",age:23,city:"Johannesburg",gender:"Female",img:"https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=600",verified:true,boosted:false},
+{name:"Yamikani Banda",age:26,city:"Mzuzu",gender:"Female",img:"https://images.unsplash.com/photo-1546456073-92b9f0a8d413?w=600",verified:false,boosted:false},
+{name:"Chifundo Phiri",age:24,city:"Zomba",gender:"Female",img:"https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=600",verified:true,boosted:false},
+{name:"Kondwani Mbewe",age:28,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600",verified:false,boosted:false}
 ];
 let me=JSON.parse(localStorage.getItem('lovelink_me')||'null');
 let realProfiles=JSON.parse(localStorage.getItem('lovelink_all_profiles')||'[]');
 let notifications=[
 {name:"Loveness Mainga",img:fakeProfiles[0].img,text:"liked your profile ❤️",time:"2 min ago",type:"like",unread:true},
-{name:"Jessica Miller",img:fakeProfiles[5].img,text:"sent you a message: 'Hi 😍'",time:"5 min ago",type:"message",unread:true},
+{name:"Thandiwe Nkosi",img:fakeProfiles[5].img,text:"sent you a message: 'Hi 😍'",time:"5 min ago",type:"message",unread:true},
 {name:"Amara Okafor",img:fakeProfiles[7].img,text:"sent you a voice note 🎤",time:"12 min ago",type:"voice",unread:true}
 ];
-let current=0,matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'),paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'),currentChat=null,isAdmin=false,mediaRecorder=null,audioChunks=[],isRecording=false,callTimer=null,callSeconds=0,toastChatName="Loveness Mainga";
+let current=0,matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'),paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'),currentChat=null,isAdmin=false,mediaRecorder=null,audioChunks=[],isRecording=false,callTimer=null,callSeconds=0,toastChatName="Loveness Mainga",deferredPrompt=null,onlineCount=7800;
+// 7800 ONLINE - IKUSINTHA YOKHA
+function updateOnline(){
+onlineCount+=Math.floor(Math.random()*20)-10;
+if(onlineCount<7750) onlineCount=7800;
+if(onlineCount>7900) onlineCount=7850;
+let txt=onlineCount.toLocaleString();
+['onlineCountAuth','onlineCountMain','onlineCount2','onlineCountMenu'].forEach(id=>{let el=document.getElementById(id);if(el) el.innerText=txt;});
+let viewers=document.getElementById('liveViewers');if(viewers) viewers.innerText='🔥 '+(1200+Math.floor(Math.random()*100))+' akuona profile yako';
+}
+setInterval(updateOnline,3000);updateOnline();
+// APK / PWA INSTALL
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+function installApp(){document.getElementById('apkPopup').style.display='flex';}
+function doInstall(){
+if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(choice=>{if(choice.outcome==='accepted'){alert('Zikomo! ❤️ Lovelink yayikidwa ngati App!');document.getElementById('apkPopup').style.display='none';document.getElementById('apkBannerMain').style.display='none';}deferredPrompt=null;});}
+else{alert('Kuti muyike ngati App:\n\n1. Dinani madontho 3 pamwamba pa Chrome (⋮)\n2. Dinani "Add to Home Screen" kapena "Install App"\n3. Lovelink idzakhala App pa foni yanu! 📲\n\nKapena tumizani WhatsApp kuti ndikutumizireni APK.');}
+}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{try{navigator.serviceWorker.register('sw.js').catch(()=>{});}catch(e){}});}
 function getAllProfiles(){return [...fakeProfiles,...realProfiles];}
 if(me){document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';initApp();}
 function doSignup(){
@@ -179,17 +216,17 @@ if(file){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataUR
 function initApp(){document.getElementById('welcomeText').innerText='Hi, '+me.name+' 👋';document.getElementById('myCityText').innerText=me.city+' • '+me.age+' • '+(me.verified?'✅ Verified':'Get Verified to be trusted');document.getElementById('boostStatus').innerText=me.boosted?'🔥 Your Boost is ACTIVE - Anthu 100 akukuona lero!':'💡 Tip: Boost kuti anthu ambiri akuoneni - MK2,000 / Week';document.getElementById('myAvatar').src=me.img;document.getElementById('menuAvatar').src=me.img;document.getElementById('menuName').innerText=me.name;showProfile();renderMatches();renderNotifs();}
 function verifyMe(){alert('Kuti mupeze Verified ✅:\n\n1. Tumizani selfie mutagwira pepala lolemba "Lovelink"\n2. Tumizani pa WhatsApp 0887222489\n3. Admin adzakupatsani Verified mkati mwa ola limodzi.');}
 function showBoost(){document.getElementById('boostPopup').style.display='flex';}
-function showProfile(){let list=getAllProfiles().filter(p=>p.name!==me.name);list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));if(current>=list.length) current=0;let p=list[current];document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age} ${p.verified?'<span class="verified">✅ Verified</span>':''} ${p.boosted?'<span class="boost-tag">🔥 BOOSTED</span>':''}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online</span></p><p style="font-size:13px;color:#888">${p.verified?'Anthu amamukhulupirira - Watsimikizidwa':'Profile yatsopano'}</p><div class="btns"><button class="pass" onclick="nextProfile()">✖ Pass</button><button class="like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;}
+function showProfile(){let list=getAllProfiles().filter(p=>p.name!==me.name);list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));if(current>=list.length) current=0;let p=list[current];document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age} ${p.verified?'<span class="verified">✅ Verified</span>':''} ${p.boosted?'<span class="boost-tag">🔥 BOOSTED</span>':''}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online Now</span></p><p style="font-size:13px;color:#888">${p.verified?'Anthu amamukhulupirira - Watsimikizidwa':'Profile yatsopano'}</p><div class="btns"><button class="pass" onclick="nextProfile()">✖ Pass</button><button class="like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;}
 function nextProfile(){current++;showProfile();}
 function likeProfile(){let list=getAllProfiles().filter(p=>p.name!==me.name);list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));let p=list[current];if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}document.getElementById('popupImg').src=p.img;document.getElementById('popupName').innerText=p.name+", "+p.age;document.getElementById('matchPopup').style.display='flex';renderMatches();addNotif(p.name,p.img,"liked you back! It's a Match! ❤️","Just now","like");}
 function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
 function startChatFromPopup(){let p=getAllProfiles().filter(x=>x.name!==me.name)[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
-function renderMatches(){let list=document.getElementById('matchesList');if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone! Chat ndi FREE.</p>';return;}list.innerHTML=matches.map(m=>`<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name} ${m.verified?'✅':''}</b><br><small>${m.city} • Chat FREE 💬</small></div><button class="chat-btn">Chat 💬</button></div>`).join('');}
+function renderMatches(){let list=document.getElementById('matchesList');if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone! Chat ndi FREE. 7,800 anthu ali online!</p>';return;}list.innerHTML=matches.map(m=>`<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name} ${m.verified?'✅':''}</b><br><small>${m.city} • Chat FREE 💬</small></div><button class="chat-btn">Chat 💬</button></div>`).join('');}
 function openMenu(){document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='block';}
 function closeMenu(){document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';}
 function editProfile(){let n=prompt('New name:',me.name);if(n){me.name=n;localStorage.setItem('lovelink_me',JSON.stringify(me));initApp();}}
 function logout(){if(confirm('Log out?')){localStorage.removeItem('lovelink_me');location.reload();}}
-function shareApp(){let t="❤️ Lovelink - Real Love in Blantyre! Chat ndi FREE! Join now 👉 https://badrat-stack.github.io/Lovelink/";if(navigator.share){navigator.share({text:t})}else{alert(t)}}
+function shareApp(){let t="❤️ Lovelink - Real Love in Malawi! 7,800 Online! Chat ndi FREE! Install App! 👉 https://badrat-stack.github.io/Lovelink/";if(navigator.share){navigator.share({text:t})}else{alert(t)}}
 function openChat(name){let p=getAllProfiles().find(x=>x.name===name)||matches.find(x=>x.name===name);if(!p) return;currentChat=name;document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('chatView').style.display='block';document.getElementById('chatName').innerText=p.name+", "+p.age;document.getElementById('chatImg').src=p.img;updateMsgLeft();loadMessages();closeNotifs();document.getElementById('toast').style.display='none';}
 function backToMain(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';}
 function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');return all[currentChat]||[];}
@@ -213,14 +250,14 @@ function closePay(){document.getElementById('payPopup').style.display='none';}
 function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
 function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();alert("Welcome Admin! 👑");}else{alert("Wrong password!");}}
 function renderAdmin(){
-let all=[...fakeProfiles.map(p=>({...p,label:'FAKE'})),...realProfiles.map(p=>({...p,label:p.verified?'VERIFIED':'REAL'}))];
+let all=[...fakeProfiles.map(p=>({...p,label:'FAKE - Black'})),...realProfiles.map(p=>({...p,label:p.verified?'VERIFIED':'REAL'}))];
 let seen={};all=all.filter(x=>{if(seen[x.name]) return false;seen[x.name]=1;return true;});
 let boostedCount=all.filter(x=>x.boosted).length;
-document.getElementById('adminStats').innerText=`📊 Total Profiles: ${all.length} • 🔥 Boosted: ${boostedCount} • ✅ Verified: ${all.filter(x=>x.verified).length} • 💰 Ngati onse a Boosted alipira MK2,000 = MK${boostedCount*2000} pa sabata`;
-document.getElementById('adminList').innerHTML=all.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b> <span style="font-size:10px;background:${m.label==='FAKE'?'#ff9800':'#4CAF50'};color:white;padding:2px 6px;border-radius:10px">${m.label}</span><br><small>${m.city} • ${chats.length} msgs • ${m.boosted?'🔥 BOOSTED':'No Boost'} • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div><div style="display:flex;gap:5px"><button class="unlock" onclick="verifyUser('${m.name}')">Verify ✅</button><button class="unlock" onclick="unlockUser('${m.name}')">Boost 🔥</button></div></div>`;}).join('');
+document.getElementById('adminStats').innerText=`📊 Total: ${all.length} • 🟢 Online: 7,800 • 🔥 Boosted: ${boostedCount} • ✅ Verified: ${all.filter(x=>x.verified).length} • 💰 Ngati onse a Boosted alipira MK2,000 = MK${boostedCount*2000} pa sabata`;
+document.getElementById('adminList').innerHTML=all.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b> <span style="font-size:10px;background:${m.label.includes('FAKE')?'#ff9800':'#4CAF50'};color:white;padding:2px 6px;border-radius:10px">${m.label}</span><br><small>${m.city} • ${chats.length} msgs • ${m.boosted?'🔥 BOOSTED':'No Boost'} • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div><div style="display:flex;gap:5px"><button class="unlock" onclick="verifyUser('${m.name}')">Verify ✅</button><button class="unlock" onclick="unlockUser('${m.name}')">Boost 🔥</button></div></div>`;}).join('');
 }
 function verifyUser(name){let p=getAllProfiles().find(x=>x.name===name);if(p) p.verified=true;if(me && me.name===name){me.verified=true;localStorage.setItem('lovelink_me',JSON.stringify(me));}renderAdmin();alert(name+' Verified ✅');}
-function unlockUser(name){if(!paidUsers.includes(name)) paidUsers.push(name);let p=getAllProfiles().find(x=>x.name===name);if(p) p.boosted=true;localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+' Boosted 🔥 - Tsopano anthu ambiri amumuona!');}
+function unlockUser(name){if(!paidUsers.includes(name)) paidUsers.push(name);let p=getAllProfiles().find(x=>x.name===name);if(p) p.boosted=true;localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+' Boosted 🔥');}
 function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
 </script>
 </body>
