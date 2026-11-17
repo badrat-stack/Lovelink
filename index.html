@@ -4,15 +4,20 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovelink - Find your match in Malawi & Beyond</title>
+<title>Lovelink - Find Love in Malawi</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#ffeef5;padding:15px;padding-bottom:30px}
-.header{text-align:center;margin:10px 0}
-.header h1{color:#e91e63;font-size:32px}
+body{background:#f0f2f5;padding:0;padding-bottom:30px}
+.topbar{background:white;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:sticky;top:0;z-index:50}
+.topbar h1{color:#e91e63;font-size:26px}
+.topbar-icons{display:flex;gap:12px;align-items:center}
+.icon-wrap{position:relative;width:42px;height:42px;background:#f0f2f5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
+.badge{position:absolute;top:-4px;right:-4px;background:#ff1744;color:white;font-size:11px;font-weight:bold;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid white}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #e91e63;cursor:pointer}
+.header{text-align:center;margin:10px;padding:0 15px}
 .header p{color:#666;font-size:14px}
-.top{font-weight:bold;font-size:18px;margin:15px 0 10px}
-.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin-bottom:20px}
+.top{font-weight:bold;font-size:16px;margin:10px 0;padding:0 15px}
+.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin:0 15px 20px}
 .card img{width:100%;height:340px;object-fit:cover}
 .card-info{padding:15px}
 .card-info h2{font-size:22px}
@@ -21,77 +26,120 @@ body{background:#ffeef5;padding:15px;padding-bottom:30px}
 .btn{flex:1;padding:13px;border:none;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer}
 .pass{background:#f0f0f0}
 .like{background:#e91e63;color:white}
-.matches{background:white;border-radius:20px;padding:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
-.match-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer}
+.matches{background:white;border-radius:20px;padding:15px;margin:0 15px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+.match-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer;position:relative}
 .match-item img{width:55px;height:55px;border-radius:50%;object-fit:cover}
 .match-item b{font-size:16px}
 .match-item small{color:#888}
 .chat-btn{background:#e91e63;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;margin-left:auto;cursor:pointer}
+.dot{width:10px;height:10px;background:#ff1744;border-radius:50%;position:absolute;top:12px;left:48px;border:2px solid white}
 #chatView{display:none}
-.chat-box{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
-.chat-head{background:#e91e63;color:white;padding:15px;display:flex;align-items:center;gap:10px}
+.chat-box{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin:10px}
+.chat-head{background:#e91e63;color:white;padding:12px;display:flex;align-items:center;gap:10px}
 .chat-head img{width:40px;height:40px;border-radius:50%;object-fit:cover}
-.chat-head button{background:white;border:none;padding:6px 12px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:auto}
-#messages{height:340px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px;background:#fff5f8}
-.msg{max-width:75%;padding:10px 14px;border-radius:18px;font-size:15px}
+.chat-head button{background:white;border:none;padding:7px 10px;border-radius:20px;font-weight:bold;cursor:pointer}
+.call-btns{display:flex;gap:5px;margin-left:auto}
+.call-btns button{font-size:18px;padding:7px 10px !important}
+#messages{height:380px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px;background:#fff5f8}
+.msg{max-width:80%;padding:10px 14px;border-radius:18px;font-size:15px;word-break:break-word}
 .me{background:#e91e63;color:white;align-self:flex-end;border-bottom-right-radius:5px}
 .them{background:white;align-self:flex-start;border:1px solid #eee;border-bottom-left-radius:5px}
-.chat-input{display:flex;padding:10px;gap:8px;border-top:1px solid #eee}
+.msg img{width:100%;max-width:220px;border-radius:12px;display:block;margin-top:5px}
+.msg audio{width:200px;margin-top:5px}
+.msg small{font-size:11px;opacity:0.7;display:block;margin-top:3px}
+.chat-input{display:flex;padding:10px;gap:6px;border-top:1px solid #eee;align-items:center}
 .chat-input input{flex:1;padding:12px;border:1px solid #ddd;border-radius:25px;outline:none}
-.chat-input button{background:#e91e63;color:white;border:none;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer}
-#matchPopup,#payPopup,#adminLogin{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
+.icon-btn{background:#f0f0f0;border:none;width:42px;height:42px;border-radius:50%;font-size:19px;cursor:pointer;flex-shrink:0}
+.send-btn{background:#e91e63;color:white;border:none;padding:12px 16px;border-radius:25px;font-weight:bold;cursor:pointer}
+.recording{background:#ff1744 !important;color:white !important;animation:pulse 1s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+#matchPopup,#payPopup,#adminLogin,#callPopup,#notifPanel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
+#notifPanel{align-items:flex-start;justify-content:flex-end;padding:0;background:rgba(0,0,0,0.4)}
+.notif-box{background:white;color:#333;width:100%;max-width:380px;height:100%;overflow-y:auto;text-align:left;padding:0}
+.notif-box h3{padding:15px;border-bottom:1px solid #eee;font-size:20px}
+.notif-item{display:flex;gap:12px;padding:12px 15px;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:center}
+.notif-item.unread{background:#e7f3ff}
+.notif-item img{width:50px;height:50px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.notif-item b{font-size:14px}
+.notif-item p{font-size:13px;color:#555}
+.notif-item small{font-size:11px;color:#888}
 #matchPopup h1{font-size:40px;margin-bottom:10px}
 #matchPopup img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;margin:10px}
 #matchPopup button,#payPopup button{display:block;width:100%;max-width:320px;margin:10px auto;padding:14px;border:none;border-radius:25px;font-weight:bold;font-size:16px;cursor:pointer}
 .pay-box{background:white;color:#333;border-radius:20px;padding:20px;max-width:350px;width:100%}
 .pay-box h2{color:#e91e63;margin-bottom:10px}
-.pay-box p{margin:8px 0;font-size:15px}
 .pay-num{background:#fff3cd;padding:12px;border-radius:12px;font-weight:bold;margin:12px 0}
 .admin-link{text-align:center;margin-top:20px;color:#999;font-size:13px;cursor:pointer;text-decoration:underline}
-#adminPanel{display:none;background:white;border-radius:20px;padding:15px;margin-top:15px}
+#adminPanel{display:none;background:white;border-radius:20px;padding:15px;margin:15px}
 .admin-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;font-size:14px}
 .unlock{background:green;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:bold;cursor:pointer}
-.online{color:#4CAF50;font-weight:bold;font-size:12px}
+.call-box{text-align:center}
+.call-box img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:5px solid #e91e63;margin:15px}
+.call-box h2{font-size:26px}
+.call-actions{display:flex;gap:20px;justify-content:center;margin-top:25px}
+.call-actions button{width:65px;height:65px;border-radius:50%;border:none;font-size:28px;cursor:pointer}
+.accept{background:#25D366}
+.decline{background:#ff1744}
+/* FACEBOOK TOAST NOTIFICATION */
+#toast{position:fixed;bottom:20px;left:15px;right:15px;background:white;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.25);padding:12px;display:none;align-items:center;gap:12px;z-index:200;cursor:pointer}
+#toast img{width:50px;height:50px;border-radius:50%;object-fit:cover}
+#toast b{font-size:14px;color:#111}
+#toast p{font-size:13px;color:#555}
 </style>
 </head>
 <body>
 <div id="mainView">
-<div class="header"><h1>❤️ Lovelink</h1><p>Find your match in Malawi & Beyond - 2,400+ members online</p></div>
-<div class="top">Hi, BadRat Lyrics 👋 <span class="online">● 1,248 Online Now</span></div>
+<div class="topbar">
+<h1>❤️ Lovelink</h1>
+<div class="topbar-icons">
+<div class="icon-wrap" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">5</span></div>
+<div class="icon-wrap" onclick="showNotifs()">💬<span class="badge" id="msgBadge">3</span></div>
+<img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" onclick="showNotifs()">
+</div>
+</div>
+<div class="header"><p>Find your match in Malawi & Beyond - 2,400+ members online</p></div>
+<div class="top">Hi, BadRat Lyrics 👋 <span style="color:#4CAF50;font-size:12px">● 1,248 Online Now</span></div>
 <div id="profileCard"></div>
 <div class="matches"><h3>Your Matches 💕</h3><div id="matchesList"></div></div>
-<div id="adminPanel">
-<h3>👑 ADMIN PANEL - BadRat</h3>
-<p style="font-size:13px;color:#666;margin:5px 0">You can see who paid and unlock them.</p>
-<div id="adminList"></div>
-<button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Close Admin</button>
-</div>
+<div id="adminPanel"><h3>👑 ADMIN PANEL - BadRat</h3><div id="adminList"></div><button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Close Admin</button></div>
 <div class="admin-link" onclick="showAdminLogin()">Admin Login 👑</div>
 </div>
+
 <div id="chatView">
 <div class="chat-box">
-<div class="chat-head"><img id="chatImg" src=""><div><b id="chatName"></b><br><small style="opacity:0.8">Online now • <span id="msgLeft"></span></small></div><button onclick="backToMain()">← Back</button></div>
+<div class="chat-head"><img id="chatImg" src=""><div><b id="chatName"></b><br><small style="opacity:0.8">Online now • <span id="msgLeft"></span></small></div><div class="call-btns"><button onclick="startCall('voice')">📞</button><button onclick="startCall('video')">📹</button><button onclick="backToMain()">←</button></div></div>
 <div id="messages"></div>
-<div class="chat-input"><input id="msgInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMsg()"><button onclick="sendMsg()">Send ❤️</button></div>
+<div class="chat-input">
+<button class="icon-btn" onclick="document.getElementById('fileInput').click()">📎</button>
+<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="sendImage(this)">
+<input id="msgInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMsg()">
+<button class="icon-btn" id="micBtn" onclick="toggleVoice()">🎤</button>
+<button class="send-btn" onclick="sendMsg()">Send ❤️</button>
+</div>
+<div id="recStatus" style="text-align:center;color:red;font-size:13px;font-weight:bold;display:none;padding:5px">🔴 Recording... Tap 🎤 to send VN</div>
 </div>
 </div>
+
+<!-- TOAST NOTIFICATION LIKE FACEBOOK -->
+<div id="toast" onclick="openNotifChat()">
+<img id="toastImg" src=""><div><b id="toastTitle"></b><p id="toastText"></p></div><span style="margin-left:auto;font-size:20px">›</span>
+</div>
+
+<!-- NOTIFICATION PANEL LIKE FACEBOOK -->
+<div id="notifPanel" onclick="if(event.target.id==='notifPanel') closeNotifs()">
+<div class="notif-box">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 15px 0"><h3>Notifications 🔔</h3><button onclick="closeNotifs()" style="background:#f0f0f0;border:none;width:35px;height:35px;border-radius:50%;font-size:18px;cursor:pointer">✖</button></div>
+<p style="padding:0 15px 10px;color:#888;font-size:13px">New • See all your likes, messages & calls</p>
+<div id="notifList"></div>
+<button onclick="markAllRead()" style="width:90%;margin:15px;padding:12px;border:none;background:#e91e63;color:white;border-radius:12px;font-weight:bold;display:block;margin-left:auto;margin-right:auto;cursor:pointer">Mark All as Read</button>
+</div>
+</div>
+
 <div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" src=""><h2 id="popupName"></h2><p>You and <span id="popupName2"></span> liked each other!</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat 💬</button><button style="background:white" onclick="closePopup()">Keep Swiping</button></div></div>
-<div id="payPopup"><div class="pay-box">
-<h2>🔒 Pay MK1000 to Continue</h2>
-<p>Your 4 free messages are finished! 😢</p>
-<p>To keep chatting with <b id="payName"></b>, pay only <b>MK1000</b>.</p>
-<div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: LOVELINK</div>
-<p style="font-size:13px">1. Send MK1000 to TNM Mpamba 0887222489<br>2. Click below to send screenshot on WhatsApp<br>3. Admin will unlock you immediately!</p>
-<button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20I%20paid%20MK1000%20on%20Lovelink.%20Please%20unlock%20me.%20My%20name%20is%3A%20','_blank')">Send Screenshot on WhatsApp 📲</button>
-<button style="background:#eee" onclick="closePay()">Go Back</button>
-</div></div>
-<div id="adminLogin"><div class="pay-box">
-<h2>👑 Admin Login</h2>
-<input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0">
-<button style="background:#111;color:white" onclick="checkAdmin()">Login</button>
-<button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button>
-<p style="font-size:12px;color:#999">Your password: badrat123</p>
-</div></div>
+<div id="callPopup"><div class="call-box"><p id="callType">📞 Voice Call</p><img id="callImg" src=""><h2 id="callName"></h2><p id="callStatus">Calling...</p><div class="call-actions"><button class="accept" onclick="acceptCall()">📞</button><button class="decline" onclick="endCall()">✖</button></div></div></div>
+<div id="payPopup"><div class="pay-box"><h2>🔒 Pay MK1000 to Continue</h2><p>Your 4 free messages are finished! 😢</p><p>To keep chatting with <b id="payName"></b>, pay only <b>MK1000</b>.</p><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: LOVELINK</div><p style="font-size:13px">1. Send MK1000 to TNM Mpamba 0887222489<br>2. Click below to send screenshot on WhatsApp<br>3. Admin will unlock you immediately!</p><button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20I%20paid%20MK1000%20on%20Lovelink.%20Please%20unlock%20me.%20My%20name%20is%3A%20','_blank')">Send Screenshot on WhatsApp 📲</button><button style="background:#eee" onclick="closePay()">Go Back</button></div></div>
+<div id="adminLogin"><div class="pay-box"><h2>👑 Admin Login</h2><input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0"><button style="background:#111;color:white" onclick="checkAdmin()">Login</button><button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button></div></div>
+
 <script>
 let profiles=[
 {name:"Loveness Mainga",age:24,city:"Blantyre, Malawi",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600"},
@@ -111,116 +159,60 @@ let profiles=[
 {name:"Zoe Adams",age:23,city:"Manchester, UK",gender:"Female",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600"},
 {name:"Limbani Nyirenda",age:24,city:"Lilongwe, Malawi",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600"}
 ];
-let current=0;
-let matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]');
-let paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]');
-let currentChat=null;
-let isAdmin=false;
-function showProfile(){
-let p=profiles[current];
-document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online</span></p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;
-}
+let notifications=[
+{name:"Loveness Mainga",img:profiles[0].img,text:"liked your profile ❤️",time:"2 min ago",type:"like",unread:true},
+{name:"Jessica Miller",img:profiles[5].img,text:"sent you a message: 'Hi handsome 😍'",time:"5 min ago",type:"message",unread:true},
+{name:"Amara Okafor",img:profiles[7].img,text:"sent you a voice note 🎤",time:"12 min ago",type:"voice",unread:true},
+{name:"Sophia Johnson",img:profiles[6].img,text:"liked your photo ❤️",time:"25 min ago",type:"like",unread:true},
+{name:"Chisomo Phiri",img:profiles[1].img,text:"tried to call you 📞 Missed call",time:"1 hour ago",type:"call",unread:true},
+{name:"Thandi Nkosi",img:profiles[10].img,text:"started following you",time:"2 hours ago",type:"follow",unread:false},
+{name:"Wanjiru Kamau",img:profiles[9].img,text:"sent you a photo 📎",time:"3 hours ago",type:"photo",unread:false}
+];
+let current=0, matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'), paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'), currentChat=null, isAdmin=false, mediaRecorder=null, audioChunks=[], isRecording=false, callTimer=null, callSeconds=0, toastChatName="Loveness Mainga";
+
+function showProfile(){let p=profiles[current];document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online</span></p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;}
 function nextProfile(){current=(current+1)%profiles.length;showProfile();}
-function likeProfile(){
-let p=profiles[current];
-if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}
-document.getElementById('popupImg').src=p.img;
-document.getElementById('popupName').innerText=p.name+", "+p.age;
-document.getElementById('popupName2').innerText=p.name;
-document.getElementById('matchPopup').style.display='flex';
-renderMatches();
-}
+function likeProfile(){let p=profiles[current];if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}document.getElementById('popupImg').src=p.img;document.getElementById('popupName').innerText=p.name+", "+p.age;document.getElementById('popupName2').innerText=p.name;document.getElementById('matchPopup').style.display='flex';renderMatches();addNotif(p.name,p.img,"liked you back! It's a Match! ❤️","Just now","like");}
 function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
 function startChatFromPopup(){let p=profiles[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
-function renderMatches(){
-let list=document.getElementById('matchesList');
-if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match! Try Loveness, Jessica or Amara - they are online now! 💕</p>';return;}
-list.innerHTML=matches.map(m=>{
-let paid=paidUsers.includes(m.name);
-return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free Messages'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');
-}
-function openChat(name){
-let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);
-currentChat=name;
-document.getElementById('mainView').style.display='none';
-document.getElementById('chatView').style.display='block';
-document.getElementById('chatName').innerText=p.name+", "+p.age;
-document.getElementById('chatImg').src=p.img;
-updateMsgLeft();loadMessages();
-}
+function renderMatches(){let list=document.getElementById('matchesList');if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match! Try Loveness, Jessica or Amara - they are online now! 💕</p>';return;}list.innerHTML=matches.map(m=>{let paid=paidUsers.includes(m.name);return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free Messages'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');}
+function openChat(name){let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);currentChat=name;document.getElementById('mainView').style.display='none';document.getElementById('chatView').style.display='block';document.getElementById('chatName').innerText=p.name+", "+p.age;document.getElementById('chatImg').src=p.img;updateMsgLeft();loadMessages();closeNotifs();document.getElementById('toast').style.display='none';}
 function backToMain(){document.getElementById('chatView').style.display='none';document.getElementById('mainView').style.display='block';}
 function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');return all[currentChat]||[];}
 function getMyCount(){return getMsgs().filter(m=>m.who==='me').length;}
-function updateMsgLeft(){
-let paid=paidUsers.includes(currentChat)||isAdmin;
-let left=paid?'Unlimited ♾️':(4-getMyCount())+' Free Left';
-document.getElementById('msgLeft').innerText=left;
-}
-function loadMessages(){
-let msgs=getMsgs();
-let box=document.getElementById('messages');
-if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? You have 4 free messages, then MK1000 to continue ❤️</div>`;}
-else{box.innerHTML=msgs.map(m=>`<div class="msg ${m.who}">${m.text}</div>`).join('');}
-box.scrollTop=box.scrollHeight;updateMsgLeft();
-}
-function sendMsg(){
-let inp=document.getElementById('msgInput');
-let text=inp.value.trim();
-if(!text) return;
-let paid=paidUsers.includes(currentChat)||isAdmin;
-if(!paid && getMyCount()>=4){
-document.getElementById('payName').innerText=currentChat;
-document.getElementById('payPopup').style.display='flex';
-return;
-}
-let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');
-if(!all[currentChat]) all[currentChat]=[];
-all[currentChat].push({who:'me',text:text});
-localStorage.setItem('lovelink_chats',JSON.stringify(all));
-inp.value='';loadMessages();
-let count=getMyCount();
-setTimeout(()=>{
-let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');
-let reply="";
-if(count===1) reply="Wow, nice to meet you! 😊 I really like your profile. Where are you from?";
-else if(count===2) reply="Haha 😂 I love chatting with you. Tell me more about yourself!";
-else if(count===3) reply="Mmm... I'm really enjoying this ❤️ But our free messages are almost finished...";
-else if(count===4) reply="⚠️ Oops! Your 4 free messages are finished! To keep chatting with me, please pay only MK1000 to TNM Mpamba 0887222489 - Name: Yankho Chikwakwa. Admin will unlock you immediately! ❤️";
-else reply="I'm here! Let's keep talking ❤️";
-all2[currentChat].push({who:'them',text:reply});
-localStorage.setItem('lovelink_chats',JSON.stringify(all2));
-loadMessages();
-},1000);
-}
+function updateMsgLeft(){let paid=paidUsers.includes(currentChat)||isAdmin;let left=paid?'Unlimited ♾️':(4-getMyCount())+' Free Left';document.getElementById('msgLeft').innerText=left;}
+function loadMessages(){let msgs=getMsgs();let box=document.getElementById('messages');if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? You have 4 free messages. You can send text, voice notes 🎤, photos 📎 and even call me 📞❤️</div>`;}else{box.innerHTML=msgs.map(m=>{if(m.type==='image') return `<div class="msg ${m.who}"><img src="${m.text}"><small>${m.who==='me'?'You':'Them'} • Photo 📎</small></div>`;if(m.type==='voice') return `<div class="msg ${m.who}">🎤 Voice Note<br><audio controls src="${m.text}"></audio><small>${m.who==='me'?'You':'Them'} • Voice Note</small></div>`;if(m.type==='call') return `<div class="msg ${m.who}">📞 ${m.text}<small>Call</small></div>`;return `<div class="msg ${m.who}">${m.text}<small>${m.who==='me'?'You':'Them'}</small></div>`;}).join('');}box.scrollTop=box.scrollHeight;updateMsgLeft();}
+function saveMsg(obj){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all[currentChat]) all[currentChat]=[];all[currentChat].push(obj);localStorage.setItem('lovelink_chats',JSON.stringify(all));loadMessages();}
+function sendMsg(){let inp=document.getElementById('msgInput');let text=inp.value.trim();if(!text) return;let paid=paidUsers.includes(currentChat)||isAdmin;if(!paid && getMyCount()>=4){document.getElementById('payName').innerText=currentChat;document.getElementById('payPopup').style.display='flex';return;}saveMsg({who:'me',text:text,type:'text'});inp.value='';let count=getMyCount();setTimeout(()=>{let reply="";if(count===1) reply="Wow, nice to meet you! 😊 I really like your profile. Where are you from?";else if(count===2) reply="Haha 😂 I love chatting with you. Send me a voice note, I want to hear your voice 🎤";else if(count===3) reply="Mmm... I'm really enjoying this ❤️ You can also send me a photo or call me 📞";else if(count===4) reply="⚠️ Oops! Your 4 free messages are finished! To keep chatting, pay only MK1000 to TNM Mpamba 0887222489 - Name: Yankho Chikwakwa. Admin will unlock you immediately! ❤️";else reply="I'm here! Let's keep talking ❤️ Send me a VN or call me!";let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all2[currentChat]) all2[currentChat]=[];all2[currentChat].push({who:'them',text:reply,type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1000);}
+function sendImage(input){let file=input.files[0];if(!file) return;let reader=new FileReader();reader.onload=function(e){saveMsg({who:'me',text:e.target.result,type:'image'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'Wow! Nice photo 😍🔥 You look amazing!',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};reader.readAsDataURL(file);input.value='';}
+async function toggleVoice(){if(!isRecording){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);saveMsg({who:'me',text:url,type:'voice'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'I loved your voice note! 😍 Your voice is so sweet. Send me another one 🎤',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};mediaRecorder.start();isRecording=true;document.getElementById('micBtn').classList.add('recording');document.getElementById('recStatus').style.display='block';}catch(err){alert('Please allow microphone to send voice notes 🎤');}}else{mediaRecorder.stop();isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('recStatus').style.display='none';}}
+function startCall(type){let p=profiles.find(x=>x.name===currentChat);document.getElementById('callImg').src=p.img;document.getElementById('callName').innerText=p.name;document.getElementById('callType').innerText=type==='video'?'📹 Video Call':'📞 Voice Call';document.getElementById('callStatus').innerText='Calling...';document.getElementById('callPopup').style.display='flex';callSeconds=0;setTimeout(()=>{document.getElementById('callStatus').innerText='Ringing... 📞';},1500);}
+function acceptCall(){document.getElementById('callStatus').innerText='Connected - 00:00';clearInterval(callTimer);callTimer=setInterval(()=>{callSeconds++;let m=Math.floor(callSeconds/60).toString().padStart(2,'0');let s=(callSeconds%60).toString().padStart(2,'0');document.getElementById('callStatus').innerText='Connected - '+m+':'+s+' ❤️';},1000);}
+function endCall(){clearInterval(callTimer);document.getElementById('callPopup').style.display='none';if(callSeconds>0){saveMsg({who:'me',text:'Voice Call - '+Math.floor(callSeconds/60)+':'+(callSeconds%60)+' minutes',type:'call'});}else{saveMsg({who:'me',text:'Missed Call 📞',type:'call'});}}
+// NOTIFICATIONS LIKE FACEBOOK
+function renderNotifs(){let list=document.getElementById('notifList');let unread=notifications.filter(n=>n.unread).length;document.getElementById('notifBadge').innerText=unread>0?unread:'';document.getElementById('notifBadge').style.display=unread>0?'flex':'none';document.getElementById('msgBadge').innerText=notifications.filter(n=>n.type==='message'||n.type==='voice').length;list.innerHTML=notifications.map(n=>`<div class="notif-item ${n.unread?'unread':''}" onclick="openChat('${n.name}')"><img src="${n.img}"><div><b>${n.name}</b><p>${n.text}</p><small>${n.time}</small></div>${n.unread?'<span style="width:10px;height:10px;background:#1877F2;border-radius:50%;flex-shrink:0"></span>':''}</div>`).join('');}
+function showNotifs(){document.getElementById('notifPanel').style.display='flex';renderNotifs();}
+function closeNotifs(){document.getElementById('notifPanel').style.display='none';}
+function markAllRead(){notifications.forEach(n=>n.unread=false);renderNotifs();}
+function addNotif(name,img,text,time,type){notifications.unshift({name,img,text,time,type,unread:true});renderNotifs();showToast(name,img,text);}
+function showToast(name,img,text){toastChatName=name;document.getElementById('toastImg').src=img;document.getElementById('toastTitle').innerText=name;document.getElementById('toastText').innerText=text;let t=document.getElementById('toast');t.style.display='flex';setTimeout(()=>{t.style.display='none';},4000);}
+function openNotifChat(){document.getElementById('toast').style.display='none';openChat(toastChatName);}
 function closePay(){document.getElementById('payPopup').style.display='none';}
 function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
-function checkAdmin(){
-let p=document.getElementById('adminPass').value;
-if(p==="badrat123"){
-isAdmin=true;
-document.getElementById('adminLogin').style.display='none';
-document.getElementById('adminPanel').style.display='block';
-renderAdmin();
-alert("Welcome Admin BadRat! 👑");
-}else{alert("Wrong password!");}
-}
-function renderAdmin(){
-let list=document.getElementById('adminList');
-if(matches.length===0){list.innerHTML='No matches yet.';return;}
-list.innerHTML=matches.map(m=>{
-let paid=paidUsers.includes(m.name);
-let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];
-return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Unlock ✅</button>'}</div>`;
-}).join('');
-}
-function unlockUser(name){
-paidUsers.push(name);
-localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));
-renderAdmin();renderMatches();
-alert(name+" unlocked! Now they can chat unlimited! 🎉");
-}
+function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();alert("Welcome Admin BadRat! 👑");}else{alert("Wrong password!");}}
+function renderAdmin(){let list=document.getElementById('adminList');if(matches.length===0){list.innerHTML='No matches yet.';return;}list.innerHTML=matches.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Unlock ✅</button>'}</div>`;}).join('');}
+function unlockUser(name){paidUsers.push(name);localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+" unlocked! 🎉");}
 function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
-showProfile();renderMatches();
+showProfile();renderMatches();renderNotifs();
+// Auto fake notifications every 25 seconds like Facebook
+setInterval(()=>{
+let randomP=profiles[Math.floor(Math.random()*profiles.length)];
+let msgs=["liked your profile ❤️","sent you a message: 'Hey 😍'","is viewing your profile 👀","sent you a voice note 🎤","wants to chat with you 💬"];
+let msg=msgs[Math.floor(Math.random()*msgs.length)];
+addNotif(randomP.name,randomP.img,msg,"Just now","like");
+},25000);
+// First toast after 3 seconds
+setTimeout(()=>{showToast("Loveness Mainga",profiles[0].img,"liked your profile ❤️ Tap to see!");},3000);
 </script>
 </body>
 </html>
