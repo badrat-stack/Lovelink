@@ -4,112 +4,211 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovelink - Find Your Match</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>body{font-family:system-ui} .card{box-shadow:0 10px 30px rgba(0,0,0,.15)}</style>
+<title>Lovelink - Find your match in Malawi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#ffeef5;padding:15px;padding-bottom:30px}
+.header{text-align:center;margin:10px 0}
+.header h1{color:#e91e63;font-size:32px}
+.header p{color:#666;font-size:14px}
+.top{font-weight:bold;font-size:18px;margin:15px 0 10px}
+.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin-bottom:20px}
+.card img{width:100%;height:340px;object-fit:cover}
+.card-info{padding:15px}
+.card-info h2{font-size:22px}
+.card-info p{color:#888;margin:5px 0 15px}
+.btns{display:flex;gap:10px}
+.btn{flex:1;padding:13px;border:none;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer}
+.pass{background:#f0f0f0}
+.like{background:#e91e63;color:white}
+.matches{background:white;border-radius:20px;padding:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+.match-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer}
+.match-item img{width:55px;height:55px;border-radius:50%;object-fit:cover}
+.match-item b{font-size:16px}
+.match-item small{color:#888}
+.chat-btn{background:#e91e63;color:white;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;margin-left:auto;cursor:pointer}
+#chatView{display:none}
+.chat-box{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+.chat-head{background:#e91e63;color:white;padding:15px;display:flex;align-items:center;gap:10px}
+.chat-head img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.chat-head button{background:white;border:none;padding:6px 12px;border-radius:20px;font-weight:bold;cursor:pointer;margin-left:auto}
+#messages{height:340px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px;background:#fff5f8}
+.msg{max-width:75%;padding:10px 14px;border-radius:18px;font-size:15px}
+.me{background:#e91e63;color:white;align-self:flex-end;border-bottom-right-radius:5px}
+.them{background:white;align-self:flex-start;border:1px solid #eee;border-bottom-left-radius:5px}
+.chat-input{display:flex;padding:10px;gap:8px;border-top:1px solid #eee}
+.chat-input input{flex:1;padding:12px;border:1px solid #ddd;border-radius:25px;outline:none}
+.chat-input button{background:#e91e63;color:white;border:none;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer}
+#matchPopup,#payPopup,#adminLogin{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
+#matchPopup h1{font-size:40px;margin-bottom:10px}
+#matchPopup img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;margin:10px}
+#matchPopup button,#payPopup button{display:block;width:100%;max-width:320px;margin:10px auto;padding:14px;border:none;border-radius:25px;font-weight:bold;font-size:16px;cursor:pointer}
+.pay-box{background:white;color:#333;border-radius:20px;padding:20px;max-width:350px;width:100%}
+.pay-box h2{color:#e91e63;margin-bottom:10px}
+.pay-box p{margin:8px 0;font-size:15px}
+.pay-num{background:#fff3cd;padding:12px;border-radius:12px;font-weight:bold;margin:12px 0}
+.admin-link{text-align:center;margin-top:20px;color:#999;font-size:13px;cursor:pointer;text-decoration:underline}
+#adminPanel{display:none;background:white;border-radius:20px;padding:15px;margin-top:15px}
+.admin-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;font-size:14px}
+.unlock{background:green;color:white;border:none;padding:7px 12px;border-radius:15px;font-weight:bold;cursor:pointer}
+</style>
 </head>
-<body class="bg-pink-50 min-h-screen">
-<div class="max-w-md mx-auto p-4">
-  <h1 class="text-3xl font-black text-center text-pink-600 py-4">❤️ Lovelink</h1>
-  <p class="text-center text-gray-500 -mt-3 mb-4">Find your match in Malawi & Beyond</p>
-
-  <!-- AUTH -->
-  <div id="authBox" class="bg-white rounded-2xl p-5 card">
-    <h2 class="font-bold text-lg mb-3">Welcome back / Join</h2>
-    <input id="email" placeholder="Email" class="w-full border rounded-xl p-3 mb-2">
-    <input id="password" type="password" placeholder="Password" class="w-full border rounded-xl p-3 mb-3">
-    <button id="loginBtn" class="w-full bg-pink-600 text-white rounded-xl p-3 font-bold mb-2">Login / Sign Up with Email</button>
-    <button id="googleBtn" class="w-full bg-white border rounded-xl p-3 font-bold">Continue with Google</button>
-    <p id="authMsg" class="text-sm text-center text-red-500 mt-2"></p>
-  </div>
-
-  <!-- PROFILE SETUP -->
-  <div id="profileBox" class="hidden bg-white rounded-2xl p-5 card">
-    <h2 class="font-bold text-lg mb-3">Create Your Profile</h2>
-    <input id="pName" placeholder="Your Name" class="w-full border rounded-xl p-3 mb-2">
-    <input id="pAge" type="number" placeholder="Age" class="w-full border rounded-xl p-3 mb-2">
-    <select id="pGender" class="w-full border rounded-xl p-3 mb-2"><option>Male</option><option>Female</option></select>
-    <input id="pCity" placeholder="City - e.g Blantyre, Lilongwe" class="w-full border rounded-xl p-3 mb-2">
-    <input id="pPhoto" placeholder="Photo Link (paste image URL)" class="w-full border rounded-xl p-3 mb-2">
-    <textarea id="pBio" placeholder="About you..." class="w-full border rounded-xl p-3 mb-3"></textarea>
-    <button id="saveProfile" class="w-full bg-pink-600 text-white rounded-xl p-3 font-bold">Save Profile & Start Matching</button>
-  </div>
-
-  <!-- DISCOVER -->
-  <div id="discoverBox" class="hidden">
-    <div class="flex justify-between items-center mb-3"><span id="myName" class="font-bold"></span><button id="logoutBtn" class="text-sm bg-white px-3 py-1 rounded-full border">Logout</button></div>
-    <div id="cards" class="space-y-4"></div>
-    <div id="matchesBox" class="mt-6 bg-white rounded-2xl p-4 card"><h3 class="font-bold mb-2">Your Matches 💘</h3><div id="matchesList" class="text-sm text-gray-500">No matches yet - start liking!</div></div>
-  </div>
+<body>
+<div id="mainView">
+<div class="header"><h1>❤️ Lovelink</h1><p>Find your match in Malawi & Beyond</p></div>
+<div class="top">Hi, BadRat Lyrics 👋</div>
+<div id="profileCard"></div>
+<div class="matches"><h3>Your Matches 💕</h3><div id="matchesList"></div></div>
+<div id="adminPanel">
+<h3>👑 ADMIN PANEL - BadRat</h3>
+<p style="font-size:13px;color:#666;margin:5px 0">Mutha kuwona amene alipira ndi kuwatsegulira.</p>
+<div id="adminList"></div>
+<button onclick="closeAdmin()" style="width:100%;padding:12px;margin-top:10px;border:none;background:#333;color:white;border-radius:12px;font-weight:bold">Tsekani Admin</button>
 </div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCLOmH7GctXo_d7nVAmwWKhx8jWNRsrDds",
-  authDomain: "lovelink-global-45a0d.firebaseapp.com",
-  projectId: "lovelink-global-45a0d",
-  storageBucket: "lovelink-global-45a0d.firebasestorage.app",
-  messagingSenderId: "370199142205",
-  appId: "1:370199142205:web:9ba8060f6a2b9657d2ef54",
-  measurementId: "G-YEX930ME9E"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-
-const $ = id => document.getElementById(id);
-let currentUser = null;
-
-$("loginBtn").onclick = async () => {
-  try { await signInWithEmailAndPassword(auth, $("email").value, $("password").value); }
-  catch(e){ try{ await createUserWithEmailAndPassword(auth, $("email").value, $("password").value); }catch(err){ $("authMsg").innerText = err.message; } }
-};
-$("googleBtn").onclick = () => signInWithPopup(auth, provider);
-$("logoutBtn").onclick = () => signOut(auth);
-
-$("saveProfile").onclick = async () => {
-  await setDoc(doc(db, "users", currentUser.uid), {
-    name: $("pName").value, age: $("pAge").value, gender: $("pGender").value,
-    city: $("pCity").value, photo: $("pPhoto").value || "https://i.pravatar.cc/400?img=12",
-    bio: $("pBio").value, uid: currentUser.uid, createdAt: Date.now()
-  });
-  loadDiscover();
-};
-
-onAuthStateChanged(auth, async (user) => {
-  if(!user){ $("authBox").classList.remove("hidden"); $("profileBox").classList.add("hidden"); $("discoverBox").classList.add("hidden"); return; }
-  currentUser = user;
-  $("authBox").classList.add("hidden");
-  const snap = await getDoc(doc(db, "users", user.uid));
-  if(!snap.exists()){ $("profileBox").classList.remove("hidden"); }
-  else { loadDiscover(); }
-});
-
-async function loadDiscover(){
-  $("profileBox").classList.add("hidden"); $("discoverBox").classList.remove("hidden");
-  const snap = await getDoc(doc(db, "users", currentUser.uid));
-  $("myName").innerText = "Hi, " + snap.data().name + " 👋";
-  const all = await getDocs(collection(db, "users"));
-  const cards = $("cards"); cards.innerHTML = "";
-  all.forEach(d => {
-    const u = d.data(); if(u.uid === currentUser.uid) return;
-    const div = document.createElement("div");
-    div.className = "bg-white rounded-2xl overflow-hidden card";
-    div.innerHTML = `<img src="${u.photo}" class="w-full h-72 object-cover"><div class="p-4"><h3 class="font-bold text-xl">${u.name}, ${u.age}</h3><p class="text-gray-500 text-sm">${u.city} • ${u.gender}</p><p class="mt-2 text-sm">${u.bio||""}</p><div class="flex gap-2 mt-4"><button class="flex-1 bg-gray-100 rounded-xl p-3 font-bold" onclick="this.parentElement.parentElement.parentElement.remove()">✖ Pass</button><button class="flex-1 bg-pink-600 text-white rounded-xl p-3 font-bold likeBtn">❤️ Like</button></div></div>`;
-    div.querySelector(".likeBtn").onclick = async () => {
-      await addDoc(collection(db, "likes"), { from: currentUser.uid, to: u.uid, fromName: snap.data().name, toName: u.name, createdAt: Date.now() });
-      alert("You liked " + u.name + "! If they like you back, it's a Match 💘");
-      div.remove();
-    };
-    cards.appendChild(div);
-  });
-  if(!cards.innerHTML) cards.innerHTML = "<p class='text-center text-gray-500 bg-white p-4 rounded-2xl'>No people yet. Invite friends to join Lovelink!</p>";
+<div class="admin-link" onclick="showAdminLogin()">Admin Login 👑</div>
+</div>
+<div id="chatView">
+<div class="chat-box">
+<div class="chat-head"><img id="chatImg" src=""><div><b id="chatName"></b><br><small style="opacity:0.8">Online now • <span id="msgLeft"></span></small></div><button onclick="backToMain()">← Back</button></div>
+<div id="messages"></div>
+<div class="chat-input"><input id="msgInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMsg()"><button onclick="sendMsg()">Send ❤️</button></div>
+</div>
+</div>
+<div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" src=""><h2 id="popupName"></h2><p>You and <span id="popupName2"></span> liked each other!</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat 💬</button><button style="background:white" onclick="closePopup()">Keep Swiping</button></div></div>
+<div id="payPopup"><div class="pay-box">
+<h2>🔒 Lipira MK1000</h2>
+<p>Ma message 4 aulere atha! 😢</p>
+<p>Ku pitiliza kucheza ndi <b id="payName"></b>, lipira <b>MK1000</b> yokha.</p>
+<div class="pay-num">📱 TNM Mpamba: 0887222489<br>Dzina: Yankho Chikwakwa<br>Ref: LOVELINK</div>
+<p style="font-size:13px">1. Tumiza MK1000 ku TNM Mpamba 0887222489<br>2. Dinani batani pansipa kutumiza screenshot ku WhatsApp<br>3. Admin akakutsegulirani nthawi yomweyo!</p>
+<button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi%20Admin!%20Ndalipira%20MK1000%20pa%20Lovelink.%20Chonde%20nditsegulireni.%20Dzina%20langa%20ndi%3A%20','_blank')">Tumiza Screenshot pa WhatsApp 📲</button>
+<button style="background:#eee" onclick="closePay()">Bwererani</button>
+</div></div>
+<div id="adminLogin"><div class="pay-box">
+<h2>👑 Admin Login</h2>
+<input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0">
+<button style="background:#111;color:white" onclick="checkAdmin()">Lowani</button>
+<button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button>
+<p style="font-size:12px;color:#999">Password yanu: badrat123</p>
+</div></div>
+<script>
+let profiles=[
+{name:"Loveness mainga",age:24,city:"Blantyre",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600"},
+{name:"Chisomo Phiri",age:22,city:"Lilongwe",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600"},
+{name:"Tawonga Banda",age:25,city:"Mzuzu",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"},
+{name:"Mercy Mvula",age:23,city:"Zomba",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"},
+{name:"Dalitso Kachere",age:26,city:"Blantyre",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600"}
+];
+let current=0;
+let matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]');
+let paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]');
+let currentChat=null;
+let isAdmin=false;
+function showProfile(){
+let p=profiles[current];
+document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age}</h2><p>${p.city} • ${p.gender}</p><div class="btns"><button class="btn pass" onclick="nextProfile()">✖ Pass</button><button class="btn like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;
 }
+function nextProfile(){current=(current+1)%profiles.length;showProfile();}
+function likeProfile(){
+let p=profiles[current];
+if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}
+document.getElementById('popupImg').src=p.img;
+document.getElementById('popupName').innerText=p.name+", "+p.age;
+document.getElementById('popupName2').innerText=p.name;
+document.getElementById('matchPopup').style.display='flex';
+renderMatches();
+}
+function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
+function startChatFromPopup(){let p=profiles[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
+function renderMatches(){
+let list=document.getElementById('matchesList');
+if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone to match!</p>';return;}
+list.innerHTML=matches.map(m=>{
+let paid=paidUsers.includes(m.name);
+return `<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name}</b><br><small>${m.city} • ${paid?'✅ Paid - Unlimited':'Tap to chat - 4 Free'}</small></div><button class="chat-btn">Chat 💬</button></div>`}).join('');
+}
+function openChat(name){
+let p=profiles.find(x=>x.name===name)||matches.find(x=>x.name===name);
+currentChat=name;
+document.getElementById('mainView').style.display='none';
+document.getElementById('chatView').style.display='block';
+document.getElementById('chatName').innerText=p.name+", "+p.age;
+document.getElementById('chatImg').src=p.img;
+updateMsgLeft();loadMessages();
+}
+function backToMain(){document.getElementById('chatView').style.display='none';document.getElementById('mainView').style.display='block';}
+function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');return all[currentChat]||[];}
+function getMyCount(){return getMsgs().filter(m=>m.who==='me').length;}
+function updateMsgLeft(){
+let paid=paidUsers.includes(currentChat)||isAdmin;
+let left=paid?'Unlimited ♾️':(4-getMyCount())+' Free Left';
+document.getElementById('msgLeft').innerText=left;
+}
+function loadMessages(){
+let msgs=getMsgs();
+let box=document.getElementById('messages');
+if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! How are you? (Muli ndi ma message 4 aulere, kenako MK1000)</div>`;}
+else{box.innerHTML=msgs.map(m=>`<div class="msg ${m.who}">${m.text}</div>`).join('');}
+box.scrollTop=box.scrollHeight;updateMsgLeft();
+}
+function sendMsg(){
+let inp=document.getElementById('msgInput');
+let text=inp.value.trim();
+if(!text) return;
+let paid=paidUsers.includes(currentChat)||isAdmin;
+if(!paid && getMyCount()>=4){
+document.getElementById('payName').innerText=currentChat;
+document.getElementById('payPopup').style.display='flex';
+return;
+}
+let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');
+if(!all[currentChat]) all[currentChat]=[];
+all[currentChat].push({who:'me',text:text});
+localStorage.setItem('lovelink_chats',JSON.stringify(all));
+inp.value='';loadMessages();
+let count=getMyCount();
+setTimeout(()=>{
+let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');
+let reply="";
+if(count===1) reply="Wow nice! 😊 Ndimakukonda! Ukuchokera kuti?";
+else if(count===2) reply="Haha 😂 Ndikusangalala kucheza nawe. Pitilizabe!";
+else if(count===3) reply="Mmm... ndikusangalala ❤️ Koma chats zathu zaulere zatsala pang'ono kutha...";
+else if(count===4) reply="⚠️ Oops! Ma message 4 aulere atha! Kuti tipitilize kucheza, lipira MK1000 yokha ku TNM Mpamba 0887222489 - Dzina: Yankho Chikwakwa. Admin akutsegulirani nthawi yomweyo! ❤️";
+else reply="Tikulankhula! ❤️";
+all2[currentChat].push({who:'them',text:reply});
+localStorage.setItem('lovelink_chats',JSON.stringify(all2));
+loadMessages();
+},1000);
+}
+function closePay(){document.getElementById('payPopup').style.display='none';}
+function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
+function checkAdmin(){
+let p=document.getElementById('adminPass').value;
+if(p==="badrat123"){
+isAdmin=true;
+document.getElementById('adminLogin').style.display='none';
+document.getElementById('adminPanel').style.display='block';
+renderAdmin();
+alert("Welcome Admin BadRat! 👑");
+}else{alert("Password yolakwika!");}
+}
+function renderAdmin(){
+let list=document.getElementById('adminList');
+if(matches.length===0){list.innerHTML='Palibe match pano.';return;}
+list.innerHTML=matches.map(m=>{
+let paid=paidUsers.includes(m.name);
+let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];
+return `<div class="admin-row"><div><b>${m.name}</b><br><small>${chats.length} messages • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div>${paid?'<span style="color:green;font-weight:bold">PAID ✅</span>':'<button class="unlock" onclick="unlockUser(\''+m.name+'\')">Tsegulani ✅</button>'}</div>`;
+}).join('');
+}
+function unlockUser(name){
+paidUsers.push(name);
+localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));
+renderAdmin();renderMatches();
+alert(name+" watsegulidwa! Tsopano akhoza kucheza unlimited! 🎉");
+}
+function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
+showProfile();renderMatches();
 </script>
 </body>
   </html>
