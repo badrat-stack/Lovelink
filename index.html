@@ -4,334 +4,310 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovelink - Find Love Worldwide</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#e91e63">
-<meta name="mobile-web-app-capable" content="yes">
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<title>Loveelink - Dating Ya Malawi ❤️</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f0f2f5;padding-bottom:80px}
-.topbar{background:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50;box-shadow:0 2px 5px rgba(0,0,0,0.08)}
-.topbar h1{color:#e91e63;font-size:24px}
-.topbar-icons{display:flex;gap:8px;align-items:center}
-.icon{width:40px;height:40px;background:#f0f2f5;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:18px}
-.back-btn{width:40px;height:40px;background:#f0f0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:bold}
-.badge{position:absolute;top:-4px;right:-4px;background:#ff1744;color:white;font-size:11px;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 4px}
-.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #e91e63}
-.hero{background:linear-gradient(135deg,#e91e63,#ff6b9d);color:white;padding:18px 15px;text-align:center}
-.online-bar{background:#111;color:white;padding:8px 15px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
-.online-dot{width:9px;height:9px;background:#25D366;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
-@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
-.apk-banner{background:#25D366;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.apk-banner button{background:white;color:#111;border:none;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer;white-space:nowrap}
-.box{background:white;border-radius:16px;padding:16px;margin:15px;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
-.box h3{margin-bottom:8px}
-.box input,.box select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;outline:none}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:8px}
-.btn-pink{background:#e91e63;color:white}
-.btn-dark{background:#111;color:white}
+body{background:#fff5f6;padding-bottom:90px}
+.header{background:linear-gradient(135deg,#ff4d6d,#ff8fa3);color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
+.header h1{font-size:22px}
+.header p{font-size:12px;opacity:.9}
+.container{max-width:480px;margin:0 auto;padding:10px}
+.card{background:white;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;gap:12px;align-items:center}
+.card img{width:65px;height:65px;border-radius:50%;object-fit:cover}
+.badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:bold}
+.verified{color:#1DA1F2;font-weight:bold}
+.ai-label{background:#e3f2fd;color:#1976d2;padding:2px 8px;border-radius:10px;font-size:11px}
+.btn{border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer}
+.btn-pink{background:#ff4d6d;color:white}
+.btn-white{background:white;color:#ff4d6d;border:1px solid #ff4d6d}
+.btn-dark{background:#333;color:white}
 .btn-green{background:#25D366;color:white}
-.btn-gold{background:#FFB300;color:#111}
-.card{background:white;border-radius:18px;overflow:hidden;margin:0 15px 18px;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
-.card img{width:100%;height:340px;object-fit:cover}
-.card-info{padding:14px}
-.verified{background:#1877F2;color:white;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:bold}
-.boost-tag{background:#FFB300;color:#111;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:bold}
-.btns{display:flex;gap:10px;margin-top:10px}
-.btns button{flex:1;padding:12px;border:none;border-radius:12px;font-weight:bold;cursor:pointer}
-.pass{background:#f0f0f0}
-.like{background:#e91e63;color:white}
-.matches{background:white;border-radius:16px;padding:15px;margin:0 15px}
-.match-item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer}
-.match-item img{width:52px;height:52px;border-radius:50%;object-fit:cover}
-.chat-btn{background:#e91e63;color:white;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;margin-left:auto}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:8px 0 12px;box-shadow:0 -2px 10px rgba(0,0,0,0.1);z-index:100;border-top:1px solid #eee}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:11px;color:#888;flex:1;text-align:center}
-.nav-item.active{color:#e91e63;font-weight:bold}
-.nav-item span{font-size:22px}
-#chatView,#menuView,#authView{display:none}
-.chat-box{background:white;border-radius:16px;overflow:hidden;margin:10px;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
-.chat-head{background:#e91e63;color:white;padding:12px;display:flex;gap:10px;align-items:center}
-.chat-head img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-.chat-head button{background:white;border:none;padding:7px 10px;border-radius:20px;font-weight:bold;cursor:pointer}
-#messages{height:340px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:#fff5f8}
-.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;word-break:break-word}
-.me{background:#e91e63;color:white;align-self:flex-end}
-.them{background:white;border:1px solid #eee;align-self:flex-start}
-.msg img{width:100%;max-width:200px;border-radius:10px;margin-top:5px}
-.msg audio{width:190px;margin-top:5px}
-.chat-input{display:flex;padding:10px;gap:6px;border-top:1px solid #eee;align-items:center}
-.chat-input input{flex:1;padding:11px;border:1px solid #ddd;border-radius:25px;outline:none}
-.icon-btn{background:#f0f0f0;border:none;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer}
-.send-btn{background:#e91e63;color:white;border:none;padding:11px 14px;border-radius:25px;font-weight:bold;cursor:pointer}
-.menu-head{background:white;padding:12px 15px;display:flex;gap:10px;align-items:center}
-.menu-body{padding:12px}
-.menu-profile{background:white;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.menu-profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.menu-tile{background:white;border-radius:12px;padding:14px;cursor:pointer}
-.menu-tile span{font-size:24px;display:block}
-.menu-section{background:white;border-radius:12px;margin-top:10px;overflow:hidden}
-.menu-section-row{display:flex;gap:10px;padding:13px;border-bottom:1px solid #eee;cursor:pointer}
-#matchPopup,#payPopup,#adminLogin,#callPopup,#notifPanel,#boostPopup,#apkPopup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
-#notifPanel{align-items:flex-start;justify-content:flex-end;padding:0;background:rgba(0,0,0,0.4)}
-.notif-box{background:white;color:#333;width:100%;max-width:380px;height:100%;overflow-y:auto;text-align:left}
-.notif-box h3{padding:15px}
-.notif-item{display:flex;gap:10px;padding:12px 15px;border-bottom:1px solid #f0f0f0;cursor:pointer}
-.notif-item img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.pay-box{background:white;color:#333;border-radius:18px;padding:20px;max-width:350px;width:100%}
-.pay-box h2{color:#e91e63;margin-bottom:8px}
-.pay-num{background:#fff3cd;padding:12px;border-radius:12px;font-weight:bold;margin:12px 0;font-size:14px}
-#adminPanel{display:none;background:white;border-radius:16px;padding:15px;margin:15px}
-.admin-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;font-size:13px}
-.unlock{background:green;color:white;border:none;padding:6px 10px;border-radius:12px;font-weight:bold;cursor:pointer}
-.call-box{text-align:center}
-.call-box img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:5px solid #e91e63;margin:15px}
-.call-actions{display:flex;gap:20px;justify-content:center;margin-top:20px}
-.call-actions button{width:60px;height:60px;border-radius:50%;border:none;font-size:26px;cursor:pointer}
-.accept{background:#25D366}.decline{background:#ff1744}
-#toast{position:fixed;bottom:75px;left:15px;right:15px;background:white;border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,0.25);padding:12px;display:none;align-items:center;gap:10px;z-index:200;cursor:pointer}
-#toast img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.input{width:100%;padding:12px;border-radius:25px;border:1px solid #ddd;outline:none;margin-bottom:8px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #eee;max-width:480px;margin:0 auto;z-index:20}
+.nav-item{text-align:center;cursor:pointer;font-size:12px;color:#666}
+.nav-item.active{color:#ff4d6d;font-weight:bold}
+.nav-item span{display:block;font-size:20px}
+.chat-box{height:300px;overflow-y:auto;background:#f9f9f9;padding:10px;border-radius:12px;margin-bottom:10px}
+.msg{padding:8px 12px;border-radius:15px;margin:5px 0;max-width:85%;font-size:14px}
+.msg-me{background:#ff4d6d;color:white;margin-left:auto}
+.msg-other{background:white;border:1px solid #eee}
+.ice{display:flex;gap:5px;overflow-x:auto;padding:5px 0}
+.ice button{white-space:nowrap;padding:6px 12px;border-radius:20px;border:1px solid #ff4d6d;background:white;color:#ff4d6d;cursor:pointer;font-size:12px}
+.admin-card{background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:10px}
+video{max-width:100%}
 </style>
 </head>
 <body>
-<div id="authView" style="display:block">
-<div class="hero"><h2>❤️ Lovelink</h2><p>Find Love Worldwide. Real People, Real Connections.</p></div>
-<div class="online-bar"><span><span class="online-dot"></span> <b id="onlineCountAuth">7,800</b> Online Now Worldwide</span><span>🌍 USA • UK • Malawi • SA</span></div>
-<div class="apk-banner"><div><b>📲 Lovelink App</b><br><small>Install as App on your phone - Like APK</small></div><button onclick="installApp()">Install App 📲</button></div>
-<div class="box">
-<h3>Join Lovelink - FREE</h3>
-<p style="font-size:13px;color:#666">Chat is FREE. 7,800 people online now.</p>
-<input id="suName" placeholder="Your Full Name">
-<input id="suAge" type="number" placeholder="Age">
-<select id="suGender"><option value="">Gender</option><option>Female</option><option>Male</option></select>
-<select id="suCity"><option value="">City / Country</option><option>Blantyre, Malawi</option><option>Lilongwe, Malawi</option><option>Mzuzu, Malawi</option><option>New York, USA</option><option>London, UK</option><option>Johannesburg, SA</option><option>Other</option></select>
-<input id="suPhone" placeholder="Phone - 088...">
-<input id="suPhoto" type="file" accept="image/*">
-<button class="btn btn-pink" onclick="doSignup()">Join FREE ❤️</button>
-</div>
-<div class="box" style="background:#FFF8E1"><h3>🔥 Why Lovelink?</h3><p style="font-size:13px;line-height:1.6">✅ <b id="onlineCount2">7,800</b> people online now<br>✅ Chat is FREE<br>✅ Verified ✅ - Real people only<br>✅ Worldwide - USA, UK, Malawi, South Africa<br>✅ Install as App 📲</p></div>
-</div>
+<div class="header"><h1>Loveelink ❤️</h1><p>Dating Yeniyeni Ya Malawi - Lilongwe • Blantyre • Mzuzu</p></div>
+<div class="container">
 
-<div id="mainView" style="display:none">
-<div class="topbar"><div style="display:flex;gap:10px;align-items:center"><div class="back-btn" onclick="goBack()">‹</div><h1>❤️ Lovelink</h1></div><div class="topbar-icons"><div class="icon" onclick="showNotifs()">🔔<span class="badge" id="notifBadge">3</span></div><div class="icon" onclick="showNotifs()">💬<span class="badge" id="msgBadge">2</span></div><div class="icon" onclick="openMenu()">☰</div><img class="avatar" id="myAvatar" onclick="openMenu()"></div></div>
-<div class="online-bar"><span><span class="online-dot"></span> <b id="onlineCountMain">7,800</b> Online Now</span><span id="liveViewers">🔥 1,240 viewing your profile</span></div>
-<div class="apk-banner" id="apkBannerMain"><div><b>📲 Install Lovelink App</b><br><small>Make it an App on your phone</small></div><button onclick="installApp()">Install 📲</button></div>
-<div class="hero"><h2 id="welcomeText">Hi 👋</h2><p id="myCityText"></p><p id="boostStatus" style="font-size:12px;margin-top:5px"></p></div>
-<div class="box" style="background:#FFF8E1;border:2px solid #FFB300"><h3>🔥 Boost Your Profile</h3><p style="font-size:13px">With Boost, your profile will be seen by 100 people per day, not just 5.</p><button class="btn btn-gold" onclick="showBoost()">Boost Now - MK2,000 / Week 🔥</button><button class="btn btn-dark" onclick="showBoost()">Gold - MK5,000 / Month 👑</button></div>
-<div id="profileCard"></div>
-<div class="matches"><h3>Your Matches 💕 - Chat is FREE</h3><div id="matchesList"></div></div>
-<div id="adminPanel"><h3>👑 ADMIN - All New Users from Firebase</h3><div style="background:#E8F5E9;padding:12px;border-radius:12px;margin-bottom:10px"><b id="adminStats"></b><div id="firebaseCount" style="margin-top:8px;font-size:14px;color:#1877F2;font-weight:bold">Loading Firebase users...</div></div><div id="firebaseUsersList"></div><h4 style="margin-top:15px">Fake + Local Users</h4><div id="adminList"></div><button class="btn btn-dark" onclick="closeAdmin()">Close Admin</button></div>
-<div style="text-align:center;color:#999;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:15px" onclick="showAdminLogin()">Admin Login 👑</div>
-</div>
-
-<div id="menuView">
-<div class="menu-head"><span onclick="goBack()" style="cursor:pointer;font-size:28px">‹ Back</span><b style="margin-left:10px">Menu</b></div>
-<div class="menu-body">
-<div class="menu-profile"><img id="menuAvatar"><div><b id="menuName"></b><br><small>Verified Member • <span id="onlineCountMenu">7,800</span> Online</small></div></div>
-<div class="menu-grid">
-<div class="menu-tile" onclick="closeMenu();showNotifs()"><span>💬</span><b>Messages</b></div>
-<div class="menu-tile" onclick="closeMenu();showBoost()"><span>🔥</span><b>Boost</b></div>
-<div class="menu-tile" onclick="installApp()"><span>📲</span><b>Install App</b></div>
-<div class="menu-tile" onclick="shareApp()"><span>❤️</span><b>Invite Friends</b></div>
-</div>
-<div class="menu-section">
-<div class="menu-section-row" onclick="verifyMe()"><span>✅</span><b>Get Verified ✅</b></div>
-<div class="menu-section-row" onclick="editProfile()"><span>⚙️</span><b>Edit Profile</b></div>
-<div class="menu-section-row" onclick="alert('Help: WhatsApp 0887222489')"><span>❓</span><b>Help & support</b></div>
-<div class="menu-section-row" onclick="logout()"><span>🚪</span><b>Log out</b></div>
-</div>
+<!-- SIGNUP / LOGIN -->
+<div id="authView">
+<div style="background:white;padding:18px;border-radius:15px">
+<h2 style="text-align:center">Takulandirani ku Loveelink ❤️</h2>
+<p style="text-align:center;font-size:13px;color:#666;margin:8px 0">Lowani kapena lembetsani - Ndi zaulere</p>
+<input id="authName" class="input" placeholder="Dzina lanu - Mwachitsanzo: Pre Sher">
+<input id="authAge" class="input" type="number" placeholder="Zaka - Mwachitsanzo: 26">
+<select id="authCity" class="input"><option>Lilongwe</option><option>Blantyre</option><option>Mzuzu</option><option>Zomba</option><option>Kasungu</option><option>Mangochi</option></select>
+<select id="authGender" class="input"><option value="Mnyamata">Mnyamata</option><option value="Mtsikana">Mtsikana</option></select>
+<input id="authBio" class="input" placeholder="Ndiuzeni za inu - Mwachitsanzo: Ndimakonda nyimbo">
+<button class="btn btn-pink" style="width:100%" onclick="doSignup()">Lembetsani - Pezani Founding Badge 🔥</button>
+<p style="font-size:11px;color:#888;text-align:center;margin-top:10px">Mukalembetsa, mukuvomereza kuti simudzatumiza ma meseji achipongwe. Anthu omwe amavutitsa ena adzaletsedwa.</p>
 </div>
 </div>
 
-<div id="chatView">
-<div class="chat-box">
-<div class="chat-head"><button onclick="goBack()" style="background:white;color:#e91e63;border:none;width:36px;height:36px;border-radius:50%;font-size:20px;font-weight:bold;cursor:pointer">‹</button><img id="chatImg"><div><b id="chatName"></b><br><small>FREE Chat • <span id="msgLeft"></span></small></div><div style="display:flex;gap:5px;margin-left:auto"><button onclick="startCall('voice')">📞</button><button onclick="startCall('video')">📹</button><button onclick="backToMain()">←</button></div></div>
-<div id="messages"></div>
-<div class="chat-input"><button class="icon-btn" onclick="document.getElementById('fileInput').click()">📎</button><input type="file" id="fileInput" accept="image/*" style="display:none" onchange="sendImage(this)"><input id="msgInput" placeholder="Type a message... FREE" onkeypress="if(event.key==='Enter') sendMsg()"><button class="icon-btn" id="micBtn" onclick="toggleVoice()">🎤</button><button class="send-btn" onclick="sendMsg()">Send ❤️</button></div>
-<div id="recStatus" style="text-align:center;color:red;font-size:13px;font-weight:bold;display:none;padding:5px">🔴 Recording... Tap 🎤 to send VN</div>
+<!-- HOME -->
+<div id="homeView" style="display:none">
+<div id="dailyMatchBox"></div>
+<div style="background:white;padding:15px;border-radius:15px;margin-bottom:12px">
+<h3>🔥 Be Among The First 100!</h3><p style="font-size:13px;color:#555;margin:5px 0">Anthu 100 oyamba amapeza <b>FOUNDING MEMBER</b> badge.</p>
+<button class="btn btn-pink" onclick="showView('matches')">Onani Anthu →</button>
+<button class="btn btn-white" onclick="showView('ai')">Cheza ndi AI 🤖</button>
+</div>
+<h3 style="margin:10px 0">Anthu Enieni Aku Malawi</h3>
+<div id="homeUsers"></div>
+</div>
+
+<!-- MATCHES -->
+<div id="matchesView" style="display:none">
+<h3>💘 Matches</h3><p style="font-size:12px;color:#666;margin:5px 0">Awa ndi anthu enieni omwe alembetsa ku Loveelink.</p>
+<div id="matchesList"></div>
+</div>
+
+<!-- AI - NGATI TALKIE -->
+<div id="aiView" style="display:none">
+<div style="background:#e3f2fd;padding:12px;border-radius:12px;margin-bottom:12px">
+<h3>🤖 AI Characters - Ngati Talkie</h3><p style="font-size:12px">Awa ndi <b>AI, si anthu enieni</b>. Ali ndi umunthu wawo. Amakumbukira dzina lanu. Sangokupemphani ndalama.</p>
+</div>
+<div id="aiList"></div>
+
+<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;border-radius:15px;margin:15px 0">
+<h3>🎥 AI Videos - Opangidwa ndi AI</h3><p style="font-size:12px;opacity:.9">Awa ndi ma video a AI, <b>si anthu enieni, si video call yeniyeni</b>.</p>
+</div>
+
+<div style="background:#f0f0f0;padding:12px;border-radius:12px;margin:10px 0;text-align:center">
+<p style="font-size:12px"><b>🤖 Sophia AI - Video Yopangidwa ndi AI</b></p>
+<video controls poster="https://i.pravatar.cc/300?img=44" style="width:100%;border-radius:12px;max-height:220px"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+<p style="font-size:11px;color:#666;margin-top:5px">⚠️ Iyi ndi AI Video. Si munthu weniweni. Osatumiza ndalama.</p>
+<button class="btn btn-pink" onclick="openChat('Sophia AI', true)">Cheza ndi Sophia AI 🤖</button>
+</div>
+
+<div style="background:#f0f0f0;padding:12px;border-radius:12px;margin:10px 0;text-align:center">
+<p style="font-size:12px"><b>🤖 Badrat AI - Video Yopangidwa ndi AI</b></p>
+<video controls poster="https://i.pravatar.cc/300?img=59" style="width:100%;border-radius:12px;max-height:220px"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+<p style="font-size:11px;color:#666;margin-top:5px">⚠️ Iyi ndi AI Video. Si munthu weniweni.</p>
+<button class="btn btn-dark" onclick="openChat('Badrat AI', true)">Cheza ndi Badrat AI 🤖</button>
+</div>
+
+<div style="background:white;padding:15px;border-radius:15px;margin-top:12px">
+<h3>✨ Pangani AI Wanu</h3>
+<input id="myAiName" class="input" placeholder="Dzina la AI wanu - Mwachitsanzo: Chimwemwe">
+<input id="myAiPersonality" class="input" placeholder="Umunthu wake - Mwachitsanzo: Amakonda mpira, amaseka">
+<button class="btn btn-pink" onclick="createMyAI()">Pangani AI Wanga 🤖</button>
+<div id="myAiList"></div>
 </div>
 </div>
 
-<div class="bottom-nav" id="bottomNav">
-<div class="nav-item" onclick="goBack()"><span>‹</span>Back</div>
-<div class="nav-item active" id="navHome" onclick="goHome()"><span>🏠</span>Home</div>
-<div class="nav-item" id="navMatches" onclick="goMatches()"><span>💕</span>Matches</div>
-<div class="nav-item" id="navChat" onclick="showNotifs()"><span>💬</span>Chat</div>
-<div class="nav-item" id="navMenu" onclick="openMenu()"><span>☰</span>Menu</div>
+<!-- CHAT -->
+<div id="chatView" style="display:none">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+<button onclick="showView('home')" style="border:none;background:none;font-size:20px">←</button>
+<h3 id="chatName">Chat</h3><span id="chatBadge"></span>
+<button onclick="reportUser()" style="margin-left:auto;border:1px solid red;color:red;background:white;padding:5px 10px;border-radius:10px;font-size:12px">Report 🚨</button>
+</div>
+<div class="chat-box" id="messages"></div>
+<div class="ice">
+<button onclick="sendIcebreaker('Ndiuzeni chinthu chosangalatsa chokhudza inu? 😊')">Ndiuzeni chokhudza inu? 😊</button>
+<button onclick="sendIcebreaker('Nyimbo yomwe mumakonda kwambiri ndi iti? 🎵')">Nyimbo yomwe mumakonda? 🎵</button>
+<button onclick="sendIcebreaker('Mumakonda chani ku Lilongwe?')">Mumakonda chani ku Lilongwe?</button>
+<button onclick="sendIcebreaker('Weekend mumachita chani?')">Weekend mumachita chani?</button>
+</div>
+<div style="display:flex;gap:8px"><input id="msgInput" class="input" placeholder="Lembani meseji..."><button class="btn btn-pink" onclick="sendMsg()">Tumiza</button></div>
+
+<!-- VIDEO CALL YENIYENI -->
+<div id="videoCallBox" style="display:none;background:#000;color:white;padding:15px;border-radius:15px;margin-top:10px;text-align:center">
+<h3>📞 Video Call Yeniyeni</h3><p style="font-size:12px">Mukuonana ndi <span id="videoCallName"></span> - Munthu weniweni</p>
+<video id="myVideo" autoplay muted playsinline style="width:45%;border-radius:10px;background:#333"></video>
+<video id="theirVideo" autoplay playsinline style="width:45%;border-radius:10px;background:#333"></video>
+<p style="font-size:11px;color:#aaa;margin:8px 0">Ngati simukuona munthu winayo, sanayambitse kamera yake. Osatumiza ndalama kwa aliyense pa video call.</p>
+<button onclick="endVideoCall()" style="background:red;color:white;border:none;padding:8px 20px;border-radius:20px">Tsiriza Call ❌</button>
+</div>
+<button id="startVideoBtn" onclick="startVideoCall()" class="btn btn-green" style="width:100%;margin-top:10px">📞 Yambitsani Video Call Yeniyeni</button>
 </div>
 
-<div id="toast" onclick="openNotifChat()"><img id="toastImg"><div><b id="toastTitle"></b><p id="toastText"></p></div></div>
-<div id="notifPanel" onclick="if(event.target.id==='notifPanel') closeNotifs()"><div class="notif-box"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Notifications 🔔</h3><button onclick="closeNotifs()" style="background:#f0f0f0;border:none;width:35px;height:35px;border-radius:50%;cursor:pointer">✖</button></div><div id="notifList"></div><button class="btn btn-pink" style="width:90%;margin:15px" onclick="markAllRead()">Mark All as Read</button></div></div>
-<div id="matchPopup"><div><h1>It's a Match! ❤️</h1><img id="popupImg" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;margin:10px"><h2 id="popupName"></h2><p>Chat is FREE! Start chatting now.</p><button style="background:#e91e63;color:white" onclick="startChatFromPopup()">Start Chat - FREE 💬</button><button style="background:white;color:#111" onclick="closePopup()">Keep Swiping</button></div></div>
-<div id="apkPopup"><div class="pay-box"><h2>📲 Install Lovelink App</h2><p style="font-size:14px">Make Lovelink an App on your phone like APK!</p><p style="font-size:13px;text-align:left;margin:10px 0">1. Tap <b>Install</b> below<br>2. Tap <b>Add to Home Screen</b> or <b>Install</b><br>3. Lovelink will be an App on your phone! ❤️<br><br>Or if you want APK file:<br>WhatsApp 0887222489 and we will send you APK.</p><button style="background:#25D366;color:white" onclick="doInstall()">Install App Now 📲</button><button style="background:#111;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi!%20I%20want%20APK%20for%20Lovelink','_blank')">Get APK via WhatsApp 📲</button><button style="background:#eee" onclick="document.getElementById('apkPopup').style.display='none'">Later</button></div></div>
-<div id="boostPopup"><div class="pay-box"><h2>🔥 Boost Your Profile</h2><p style="font-size:14px">Choose Boost so more people can see you:</p><div style="background:#FFF8E1;padding:12px;border-radius:12px;margin:10px 0;text-align:left"><b>🔥 Boost - MK2,000 / Week</b><br><small>Your profile will be seen by 100 people per day</small></div><div style="background:#FFF3E0;padding:12px;border-radius:12px;margin:10px 0;text-align:left"><b>👑 Gold - MK5,000 / Month</b><br><small>Show first + Verified Badge + Unlimited Likes</small></div><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa<br>Ref: BOOST + Your Name</div><button style="background:#25D366;color:white" onclick="window.open('https://wa.me/265887222489?text=Hi!%20I%20want%20Boost%20for%20Lovelink.%20I%20sent%20MK2000','_blank')">Send Screenshot on WhatsApp 📲</button><button style="background:#eee" onclick="document.getElementById('boostPopup').style.display='none'">Go Back</button></div></div>
-<div id="payPopup"><div class="pay-box"><h2>🔥 Boost Needed?</h2><p>Do you want more people to see you? Pay for Boost!</p><div class="pay-num">📱 TNM Mpamba: 0887222489<br>Name: Yankho Chikwakwa</div><button style="background:#FFB300;color:#111" onclick="document.getElementById('payPopup').style.display='none';showBoost()">See Boost Plans 🔥</button><button style="background:#eee" onclick="closePay()">Go Back - Chat FREE</button></div></div>
-<div id="callPopup"><div class="call-box"><p id="callType">📞 Voice Call</p><img id="callImg"><h2 id="callName"></h2><p id="callStatus">Calling...</p><div class="call-actions"><button class="accept" onclick="acceptCall()">📞</button><button class="decline" onclick="endCall()">✖</button></div></div></div>
-<div id="adminLogin"><div class="pay-box"><h2>👑 Admin Login</h2><input id="adminPass" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:10px 0"><button style="background:#111;color:white" onclick="checkAdmin()">Login</button><button style="background:#eee" onclick="document.getElementById('adminLogin').style.display='none'">Cancel</button></div></div>
+<!-- ADMIN -->
+<div id="adminView" style="display:none"><div id="adminPanel"></div></div>
+
+<!-- MENU / BOOST -->
+<div id="menuView" style="display:none">
+<div style="background:white;padding:15px;border-radius:15px">
+<h3>⭐ Boost ndi Airtel Money</h3>
+<p style="font-size:13px;margin:8px 0">Limbikitsani profile yanu kuti anthu ambiri akuwoneni.</p>
+<p><b>Boost 7 Masiku - MK2,000</b></p>
+<p style="font-size:13px;background:#fff3e0;padding:10px;border-radius:10px">Tumizani <b>MK2,000</b> ku Airtel Money:<br><b style="font-size:18px;color:#ff4d6d">0983523722 - Loveelink</b><br><small>Mukatumiza, tumizani receipt ku WhatsApp pa nambala yomweyi.</small></p>
+<button class="btn btn-pink" onclick="alert('Tumizani MK2,000 ku 0983523722 - Loveelink, kenako tumizani receipt. Zikomo!')">Gula Boost ndi Airtel Money</button>
+<hr style="margin:15px 0">
+<h3>✅ Get Verified</h3><p style="font-size:13px">Tumizani chithunzi chanu mukugwira pepala lolembedwa "Loveelink".</p>
+<button class="btn btn-dark" onclick="requestVerify()">Pemphani Verification</button>
+<hr style="margin:15px 0">
+<button class="btn btn-white" onclick="showView('admin')">Tsegulani Admin 👑</button>
+<button class="btn btn-white" onclick="logout()" style="margin-top:10px">Tulukani</button>
+</div>
+</div>
+
+</div>
+
+<div class="bottom-nav">
+<div class="nav-item active" onclick="showView('home')"><span>🏠</span>Home</div>
+<div class="nav-item" onclick="showView('matches')"><span>💘</span>Matches</div>
+<div class="nav-item" onclick="showView('ai')"><span>🤖</span>AI Chat</div>
+<div class="nav-item" onclick="showView('chat')"><span>💬</span>Chat</div>
+<div class="nav-item" onclick="showView('menu')"><span>☰</span>Menu</div>
+</div>
 
 <script>
-// FIREBASE YANU - LOVELINK-52EC0
-const firebaseConfig = {
-  apiKey: "AIzaSyC4P2geQB0ffo1okwk_oSKhXjA5ljiCN0Y",
-  authDomain: "lovelink-52ec0.firebaseapp.com",
-  databaseURL: "https://lovelink-52ec0-default-rtdb.firebaseio.com",
-  projectId: "lovelink-52ec0",
-  storageBucket: "lovelink-52ec0.firebasestorage.app",
-  messagingSenderId: "1060407416462",
-  appId: "1:1060407416462:web:980f42e2dba66b44fb5bdf",
-  measurementId: "G-B28HK5BXW6"
-};
-let db=null;
-try{ firebase.initializeApp(firebaseConfig); db = firebase.database(); }catch(e){ console.log("Firebase error", e); }
-function saveUserToFirebase(user){
-  if(!db) return;
-  try{
-    let key = user.name.replace(/[^a-zA-Z0-9]/g,'_') + "_" + Date.now();
-    db.ref('users/' + key).set({ name: user.name, age: user.age, gender: user.gender, city: user.city, phone: user.phone || "", img: user.img || "", time: new Date().toLocaleString(), verified: false, boosted: false, timestamp: Date.now() });
-  }catch(e){ console.log(e); }
+let users = JSON.parse(localStorage.getItem("loveelink_users") || "[]");
+if(users.length===0){
+  users=[
+    {id:"1", name:"Chikondi", age:24, city:"Lilongwe", img:"https://i.pravatar.cc/150?img=32", bio:"Ndimakonda nyimbo ndi kuphika.", isVerified:true, isPaid:false, verifyStatus:"approved", createdAt:new Date().toISOString(), interests:"Nyimbo, Kuphika"},
+    {id:"2", name:"Blessings", age:26, city:"Blantyre", img:"https://i.pravatar.cc/150?img=12", bio:"Wokonda mpira ndi mabuku.", isVerified:false, isPaid:true, verifyStatus:"pending", createdAt:new Date().toISOString(), interests:"Mpira, Mabuku"},
+    {id:"3", name:"Tadala", age:23, city:"Mzuzu", img:"https://i.pravatar.cc/150?img=47", bio:"Ndimakonda kucheza.", isVerified:true, isPaid:false, verifyStatus:"approved", createdAt:new Date().toISOString(), interests:"Kucheza"}
+  ];
+  localStorage.setItem("loveelink_users", JSON.stringify(users));
 }
-function loadFirebaseUsers(){
-  if(!db) { document.getElementById('firebaseCount').innerText = "Firebase not connected"; return; }
-  db.ref('users').on('value', (snapshot)=>{
-    let data = snapshot.val() || {};
-    let users = Object.values(data).reverse();
-    document.getElementById('firebaseCount').innerText = "🔥 NEW USERS FROM FIREBASE: " + users.length + " - Onse akuoneka pano!";
-    if(users.length===0){ document.getElementById('firebaseUsersList').innerHTML = "<p style='color:#999'>No new users yet. Akalowa, adzawoneka pano.</p>"; }
-    else { document.getElementById('firebaseUsersList').innerHTML = users.map(u=>{ return `<div class="admin-row"><div><b>${u.name}</b> <span style="font-size:10px;background:#1877F2;color:white;padding:2px 6px;border-radius:10px">REAL - FIREBASE</span><br><small>${u.city} • ${u.age} • ${u.gender}<br>📱 ${u.phone} • 🕒 ${u.time}</small></div><div style="display:flex;gap:5px;flex-direction:column"><button class="unlock" onclick="verifyFirebaseUser('${u.name}')">Verify ✅</button><button class="unlock" onclick="alert('Phone: ${u.phone}')">Call 📞</button></div></div>`; }).join(''); }
-    document.getElementById('adminStats').innerText = "📊 Firebase Users: " + users.length + " • 🟢 Online: 7,800 • Total with Fake: " + (users.length + 16);
-  });
-}
-function verifyFirebaseUser(name){
-  if(!db) return;
-  db.ref('users').once('value', snap=>{ let data = snap.val() || {}; Object.keys(data).forEach(k=>{ if(data[k].name===name) db.ref('users/'+k).update({verified:true}); }); alert(name + " Verified ✅ in Firebase"); });
-}
-let fakeProfiles=[
-{name:"Jessica Miller",age:24,city:"New York, USA",gender:"Female",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600",verified:true,boosted:true},
-{name:"Sophia Johnson",age:22,city:"London, UK",gender:"Female",img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600",verified:true,boosted:false},
-{name:"Emma Wilson",age:26,city:"Sydney, Australia",gender:"Female",img:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600",verified:true,boosted:false},
-{name:"Olivia Brown",age:23,city:"Toronto, Canada",gender:"Female",img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600",verified:true,boosted:false},
-{name:"Ava Davis",age:21,city:"California, USA",gender:"Female",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600",verified:false,boosted:false},
-{name:"Mia Garcia",age:24,city:"Texas, USA",gender:"Female",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600",verified:true,boosted:true},
-{name:"Isabella Martinez",age:25,city:"Miami, USA",gender:"Female",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600",verified:true,boosted:false},
-{name:"Amelia Anderson",age:22,city:"Manchester, UK",gender:"Female",img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600",verified:true,boosted:false},
-{name:"James Carter",age:27,city:"Texas, USA",gender:"Male",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600",verified:false,boosted:false},
-{name:"Michael Brown",age:28,city:"Toronto, Canada",gender:"Male",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600",verified:false,boosted:false},
-{name:"Daniel Smith",age:26,city:"London, UK",gender:"Male",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600",verified:false,boosted:false},
-{name:"David Wilson",age:29,city:"New York, USA",gender:"Male",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600",verified:false,boosted:false},
-{name:"Sarah Thompson",age:23,city:"Sydney, Australia",gender:"Female",img:"https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?w=600",verified:true,boosted:false},
-{name:"Emily Clark",age:24,city:"London, UK",gender:"Female",img:"https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=600",verified:true,boosted:false},
-{name:"Liam Johnson",age:25,city:"California, USA",gender:"Male",img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600",verified:false,boosted:false},
-{name:"Zoe Adams",age:23,city:"Manchester, UK",gender:"Female",img:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600",verified:true,boosted:false}
+let myAIs = JSON.parse(localStorage.getItem("loveelink_myais") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("loveelink_me") || "null");
+
+const aiCharacters = [
+  {name:"Sophia AI", img:"https://i.pravatar.cc/150?img=44", desc:"AI - Wokondana, amafunsa za chikondi", personality:"wokondana", replies:["Zokondweretsa! Ndiuzeni zambiri za chikondi chanu 😊","Ndine Sophia, AI wokondana. Kodi mumakhulupirira chikondi chowona?","Mawu anu andikhudza mtima. Pitirizani kundiuza."]},
+  {name:"Badrat AI", img:"https://i.pravatar.cc/150?img=59", desc:"AI - Woseketsa, amalankhula Chichewa", personality:"woseketsa", replies:["Hahaha! Wanva? Ndiwe woseketsa kwambiri 😂","Eeeh, ku Lilongwe kuli moto! Ukuchita chani lero?","Ndine Badrat, mnzanu wa ku Lilongwe. Tiyeni tiseke pang'ono!"]},
+  {name:"Chikondi AI", img:"https://i.pravatar.cc/150?img=5", desc:"AI - Wanzeru, amakuphunzitsani", personality:"wanzeru", replies:["Funso labwino. Ndiuzeni maganizo anu, ndikuuzeni anga.","Ndiphunzitseni china chatsopano lero?","Ndine Chikondi AI. Ndimakonda kuphunzira za anthu."]}
 ];
-let me=JSON.parse(localStorage.getItem('lovelink_me')||'null');
-let realProfiles=JSON.parse(localStorage.getItem('lovelink_all_profiles')||'[]');
-let notifications=[
-{name:"Jessica Miller",img:fakeProfiles[0].img,text:"liked your profile ❤️",time:"2 min ago",type:"like",unread:true},
-{name:"Mia Garcia",img:fakeProfiles[5].img,text:"sent you a message: 'Hi 😍'",time:"5 min ago",type:"message",unread:true},
-{name:"Sophia Johnson",img:fakeProfiles[1].img,text:"sent you a voice note 🎤",time:"12 min ago",type:"voice",unread:true}
-];
-let current=0,matches=JSON.parse(localStorage.getItem('lovelink_matches')||'[]'),paidUsers=JSON.parse(localStorage.getItem('lovelink_paid')||'[]'),currentChat=null,isAdmin=false,mediaRecorder=null,audioChunks=[],isRecording=false,callTimer=null,callSeconds=0,toastChatName="Jessica Miller",deferredPrompt=null,onlineCount=7800;
-let navStack=[];
-function pushNav(view){navStack.push(view);try{history.pushState({view:view},'', '#'+view);}catch(e){}}
-function goBack(){
-if(document.getElementById('callPopup').style.display==='flex'){endCall();return;}
-if(document.getElementById('apkPopup').style.display==='flex'){document.getElementById('apkPopup').style.display='none';return;}
-if(document.getElementById('boostPopup').style.display==='flex'){document.getElementById('boostPopup').style.display='none';return;}
-if(document.getElementById('payPopup').style.display==='flex'){document.getElementById('payPopup').style.display='none';return;}
-if(document.getElementById('matchPopup').style.display==='flex'){closePopup();return;}
-if(document.getElementById('notifPanel').style.display==='flex'){closeNotifs();return;}
-if(document.getElementById('chatView').style.display==='block'){backToMain();return;}
-if(document.getElementById('menuView').style.display==='block'){closeMenu();return;}
-if(navStack.length>1){navStack.pop();}
-window.scrollTo({top:0,behavior:'smooth'});
-}
-function goHome(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navHome');window.scrollTo({top:0,behavior:'smooth'});pushNav('home');}
-function goMatches(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navMatches');document.querySelector('.matches').scrollIntoView({behavior:'smooth'});pushNav('matches');}
-function setActiveNav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));let el=document.getElementById(id);if(el) el.classList.add('active');}
-window.addEventListener('popstate',function(e){if(document.getElementById('chatView').style.display==='block'){backToMain();return;}if(document.getElementById('menuView').style.display==='block'){closeMenu();return;}if(document.getElementById('notifPanel').style.display==='flex'){closeNotifs();return;}});
-function updateOnline(){onlineCount+=Math.floor(Math.random()*20)-10;if(onlineCount<7750) onlineCount=7800;if(onlineCount>7900) onlineCount=7850;let txt=onlineCount.toLocaleString();['onlineCountAuth','onlineCountMain','onlineCount2','onlineCountMenu'].forEach(id=>{let el=document.getElementById(id);if(el) el.innerText=txt;});let viewers=document.getElementById('liveViewers');if(viewers) viewers.innerText='🔥 '+(1200+Math.floor(Math.random()*100))+' viewing your profile';}
-setInterval(updateOnline,3000);updateOnline();
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
-function installApp(){document.getElementById('apkPopup').style.display='flex';}
-function doInstall(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(choice=>{if(choice.outcome==='accepted'){alert('Thank you! ❤️ Lovelink installed as App!');document.getElementById('apkPopup').style.display='none';document.getElementById('apkBannerMain').style.display='none';}deferredPrompt=null;});}else{alert('To install as App:\n\n1. Tap the 3 dots on top of Chrome (⋮)\n2. Tap "Add to Home Screen" or "Install App"\n3. Lovelink will be an App on your phone! 📲\n\nOr send WhatsApp to get APK.');}}
-function getAllProfiles(){return [...fakeProfiles,...realProfiles];}
-if(me){document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';document.getElementById('bottomNav').style.display='flex';initApp();}else{document.getElementById('bottomNav').style.display='none';}
+
+let currentChat=null, currentChatIsAI=false;
+function getFounderBadge(i){ if(i<100) return `<span class="badge">🔥 FOUNDING MEMBER</span>`; return ""; }
+
 function doSignup(){
-let name=document.getElementById('suName').value.trim(),age=document.getElementById('suAge').value,gender=document.getElementById('suGender').value,city=document.getElementById('suCity').value,phone=document.getElementById('suPhone').value.trim(),file=document.getElementById('suPhoto').files[0];
-if(!name||!age||!gender||!city){alert('Please fill name, age, gender and city');return;}
-function save(photo){
-me={name,age,gender,city,phone,img:photo||'https://via.placeholder.com/400?text='+encodeURIComponent(name),verified:false,boosted:false};
-localStorage.setItem('lovelink_me',JSON.stringify(me));
-if(!realProfiles.find(p=>p.name===name)){realProfiles.push(me);localStorage.setItem('lovelink_all_profiles',JSON.stringify(realProfiles));}
-saveUserToFirebase(me);
-document.getElementById('authView').style.display='none';document.getElementById('mainView').style.display='block';document.getElementById('bottomNav').style.display='flex';initApp();pushNav('home');
+  const name=document.getElementById("authName").value.trim();
+  const age=document.getElementById("authAge").value;
+  const city=document.getElementById("authCity").value;
+  const bio=document.getElementById("authBio").value || "Ndine watsopano ku Loveelink.";
+  if(!name || !age){ alert("Lembani dzina ndi zaka."); return; }
+  const newUser={id:Date.now().toString(), name, age:parseInt(age), city, img:"https://i.pravatar.cc/150?u="+name, bio, isVerified:false, isPaid:false, verifyStatus:"none", createdAt:new Date().toISOString(), interests:"Kucheza"};
+  users.push(newUser); localStorage.setItem("loveelink_users", JSON.stringify(users));
+  currentUser=newUser; localStorage.setItem("loveelink_me", JSON.stringify(newUser));
+  alert("Takulandirani "+name+"! Mwapeza 🔥 FOUNDING MEMBER badge!");
+  showView("home");
 }
-if(file){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(file);}else{save('');}
+function logout(){ localStorage.removeItem("loveelink_me"); currentUser=null; showView("auth"); }
+
+function showView(view){
+  ["authView","homeView","matchesView","aiView","chatView","adminView","menuView"].forEach(v=>document.getElementById(v).style.display="none");
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  if(view==="auth") document.getElementById("authView").style.display="block";
+  if(view==="home") document.getElementById("homeView").style.display="block";
+  if(view==="matches") document.getElementById("matchesView").style.display="block";
+  if(view==="ai") document.getElementById("aiView").style.display="block";
+  if(view==="chat") document.getElementById("chatView").style.display="block";
+  if(view==="admin"){ document.getElementById("adminView").style.display="block"; renderAdmin(); }
+  if(view==="menu") document.getElementById("menuView").style.display="block";
+  renderAll();
 }
-function initApp(){document.getElementById('welcomeText').innerText='Hi, '+me.name+' 👋';document.getElementById('myCityText').innerText=me.city+' • '+me.age+' • '+(me.verified?'✅ Verified':'Get Verified to be trusted');document.getElementById('boostStatus').innerText=me.boosted?'🔥 Your Boost is ACTIVE - 100 people seeing you today!':'💡 Tip: Boost so more people can see you - MK2,000 / Week';document.getElementById('myAvatar').src=me.img;document.getElementById('menuAvatar').src=me.img;document.getElementById('menuName').innerText=me.name;showProfile();renderMatches();renderNotifs();}
-function verifyMe(){alert('To get Verified ✅:\n\n1. Send a selfie holding a paper written "Lovelink"\n2. Send to WhatsApp 0887222489\n3. Admin will give you Verified within 1 hour.');}
-function showBoost(){document.getElementById('boostPopup').style.display='flex';}
-function showProfile(){let list=getAllProfiles().filter(p=>p.name!==me.name);list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));if(current>=list.length) current=0;let p=list[current];document.getElementById('profileCard').innerHTML=`<div class="card"><img src="${p.img}"><div class="card-info"><h2>${p.name}, ${p.age} ${p.verified?'<span class="verified">✅ Verified</span>':''} ${p.boosted?'<span class="boost-tag">🔥 BOOSTED</span>':''}</h2><p>${p.city} • ${p.gender} • <span style="color:#4CAF50">● Online Now</span></p><p style="font-size:13px;color:#888">${p.verified?'Trusted - Verified':'New Profile'}</p><div class="btns"><button class="pass" onclick="nextProfile()">✖ Pass</button><button class="like" onclick="likeProfile()">❤️ Like</button></div></div></div>`;}
-function nextProfile(){current++;showProfile();}
-function likeProfile(){let list=getAllProfiles().filter(p=>p.name!==me.name);list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));let p=list[current];if(!matches.find(m=>m.name===p.name)){matches.push(p);localStorage.setItem('lovelink_matches',JSON.stringify(matches));}document.getElementById('popupImg').src=p.img;document.getElementById('popupName').innerText=p.name+", "+p.age;document.getElementById('matchPopup').style.display='flex';renderMatches();addNotif(p.name,p.img,"liked you back! It's a Match! ❤️","Just now","like");}
-function closePopup(){document.getElementById('matchPopup').style.display='none';nextProfile();}
-function startChatFromPopup(){let p=getAllProfiles().filter(x=>x.name!==me.name)[current];document.getElementById('matchPopup').style.display='none';openChat(p.name);nextProfile();}
-function renderMatches(){let list=document.getElementById('matchesList');if(matches.length===0){list.innerHTML='<p style="color:#999;padding:10px 0">No matches yet. Like someone! Chat is FREE. 7,800 people online!</p>';return;}list.innerHTML=matches.map(m=>`<div class="match-item" onclick="openChat('${m.name}')"><img src="${m.img}"><div><b>${m.name} ${m.verified?'✅':''}</b><br><small>${m.city} • Chat FREE 💬</small></div><button class="chat-btn">Chat 💬</button></div>`).join('');}
-function openMenu(){document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='block';setActiveNav('navMenu');pushNav('menu');}
-function closeMenu(){document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navHome');}
-function editProfile(){let n=prompt('New name:',me.name);if(n){me.name=n;localStorage.setItem('lovelink_me',JSON.stringify(me));initApp();}}
-function logout(){if(confirm('Log out?')){localStorage.removeItem('lovelink_me');location.reload();}}
-function shareApp(){let t="❤️ Lovelink - Find Love Worldwide! 7,800 Online! Chat FREE! Install App! 👉 https://badrat-stack.github.io/Lovelink/";if(navigator.share){navigator.share({text:t})}else{alert(t)}}
-function openChat(name){let p=getAllProfiles().find(x=>x.name===name)||matches.find(x=>x.name===name);if(!p) return;currentChat=name;document.getElementById('mainView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('chatView').style.display='block';document.getElementById('chatName').innerText=p.name+", "+p.age;document.getElementById('chatImg').src=p.img;updateMsgLeft();loadMessages();closeNotifs();document.getElementById('toast').style.display='none';setActiveNav('navChat');pushNav('chat');}
-function backToMain(){document.getElementById('chatView').style.display='none';document.getElementById('menuView').style.display='none';document.getElementById('mainView').style.display='block';setActiveNav('navHome');}
-function getMsgs(){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');return all[currentChat]||[];}
-function updateMsgLeft(){document.getElementById('msgLeft').innerText='FREE Chat ♾️';}
-function loadMessages(){let msgs=getMsgs();let box=document.getElementById('messages');if(msgs.length===0){box.innerHTML=`<div class="msg them">Hi! 👋 Thanks for liking me! Chat is FREE on Lovelink. Tell me about yourself ❤️</div>`;}else{box.innerHTML=msgs.map(m=>{if(m.type==='image') return `<div class="msg ${m.who}"><img src="${m.text}"><small>${m.who==='me'?'You':'Them'} • Photo</small></div>`;if(m.type==='voice') return `<div class="msg ${m.who}">🎤 Voice Note<br><audio controls src="${m.text}"></audio><small>${m.who==='me'?'You':'Them'} • Voice Note</small></div>`;if(m.type==='call') return `<div class="msg ${m.who}">📞 ${m.text}<small>Call</small></div>`;return `<div class="msg ${m.who}">${m.text}<small>${m.who==='me'?'You':'Them'}</small></div>`;}).join('');}box.scrollTop=box.scrollHeight;updateMsgLeft();}
-function saveMsg(obj){let all=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all[currentChat]) all[currentChat]=[];all[currentChat].push(obj);localStorage.setItem('lovelink_chats',JSON.stringify(all));loadMessages();}
+function getDailyMatch(){ if(users.length===0) return null; const today=new Date().toDateString(); let h=0; for(let i=0;i<today.length;i++) h+=today.charCodeAt(i); return users[h%users.length]; }
+function showDailyMatch(){
+  const m=getDailyMatch(); if(!m) return;
+  document.getElementById("dailyMatchBox").innerHTML=`<div style="background:linear-gradient(135deg,#ff4d6d,#ff8fa3);color:white;padding:15px;border-radius:15px;text-align:center"><h3>💘 Match Yako Ya Lero</h3><img src="${m.img}" style="width:80px;height:80px;border-radius:50%;border:3px solid white;object-fit:cover"><p><b>${m.name}, ${m.age}</b> ${m.isVerified?'✅':''}</p><p style="font-size:13px">${m.city} • ${m.bio}</p><button onclick="openChat('${m.id}', false)" style="background:white;color:#ff4d6d;border:none;padding:8px 20px;border-radius:20px;font-weight:bold;margin-top:8px">Yamba Kucheza ➡️</button></div>`;
+}
+function renderAll(){
+  showDailyMatch();
+  const homeEl=document.getElementById("homeUsers"), matchEl=document.getElementById("matchesList");
+  homeEl.innerHTML=""; matchEl.innerHTML="";
+  users.forEach((u,idx)=>{
+    const html=`<div class="card"><img src="${u.img}"><div style="flex:1"><b>${u.name}, ${u.age}</b> ${u.isVerified?'<span class="verified">✅</span>':''} ${u.isPaid?'⭐':''}<br><small>${u.city} • ${u.bio}</small><br><small style="color:#888">Amakonda: ${u.interests||''}</small><br>${getFounderBadge(idx)}</div><button class="btn btn-pink" onclick="openChat('${u.id}', false)">Chat</button></div>`;
+    homeEl.innerHTML+=html; matchEl.innerHTML+=html;
+  });
+  const aiEl=document.getElementById("aiList"); aiEl.innerHTML="";
+  [...aiCharacters, ...myAIs].forEach(ai=>{
+    aiEl.innerHTML+=`<div class="card"><img src="${ai.img}"><div style="flex:1"><b>${ai.name} 🤖</b> <span class="ai-label">AI - Si munthu weniweni</span><br><small>${ai.desc}</small></div><button class="btn btn-dark" onclick="openChat('${ai.name}', true)">Cheza</button></div>`;
+  });
+  const myAiEl=document.getElementById("myAiList"); if(myAiEl) myAiEl.innerHTML = myAIs.length? "<p style='font-size:12px;margin-top:8px'>AI anu: "+myAIs.map(a=>a.name).join(", ")+"</p>" : "";
+}
+function createMyAI(){
+  const n=document.getElementById("myAiName").value.trim();
+  const p=document.getElementById("myAiPersonality").value.trim();
+  if(!n){ alert("Lembani dzina la AI wanu"); return; }
+  const newAi={name:n+" AI", img:"https://i.pravatar.cc/150?u="+n, desc:"AI Wanu - "+(p||"Wopangidwa ndi inu"), personality:p||"waubwenzi", replies:["Ndine "+n+", AI wanu! Ndakusowani 😊","Zosangalatsa! Ndiuzeni zambiri.","Ndine AI wanu, wokupangirani inu. Pitirizani kucheza nane!"]};
+  myAIs.push(newAi); localStorage.setItem("loveelink_myais", JSON.stringify(myAIs)); renderAll(); alert("AI wanu "+n+" wapangidwa! 🎉");
+}
+function openChat(id, isAI){
+  currentChatIsAI=isAI;
+  if(isAI){
+    const ai=[...aiCharacters, ...myAIs].find(a=>a.name===id); currentChat=ai;
+    document.getElementById("chatName").innerText=ai.name+" 🤖";
+    document.getElementById("chatBadge").innerHTML=`<span class="ai-label">AI Character</span>`;
+    showView("chat");
+    const myName = currentUser ? currentUser.name : "mnzanga";
+    document.getElementById("messages").innerHTML=`<div class="msg msg-other"><b>${ai.name}:</b> Hi ${myName}! Ndine ${ai.name}. Ndine AI, osati munthu weniweni. Ndakumbukira dzina lanu. Tiyeni ticheze!</div>`;
+  } else {
+    const u=users.find(x=>x.id===id); currentChat=u;
+    document.getElementById("chatName").innerText=u.name;
+    document.getElementById("chatBadge").innerHTML=u.isVerified?`<span style="color:#1DA1F2">✅ Verified</span>`:"";
+    showView("chat");
+    document.getElementById("messages").innerHTML=`<div class="msg msg-other"><b>${u.name}:</b> Hi! Ndine ${u.name} waku ${u.city}. ${u.bio}</div>`;
+  }
+}
 function sendMsg(){
-let inp=document.getElementById('msgInput');let text=inp.value.trim();if(!text) return;
-saveMsg({who:'me',text:text,type:'text'});inp.value='';
-let count=getMsgs().filter(m=>m.who==='me').length;
-setTimeout(()=>{
-let reply="";
-if(count===1) reply="Wow, nice to meet you! 😊 I really like your profile. Where are you from?";
-else if(count===2) reply="Haha 😂 I love chatting with you. Send me a voice note, I want to hear your voice 🎤";
-else if(count===3) reply="Mmm... I am really enjoying this ❤️ You can also send me a photo or call me 📞";
-else if(count===4) reply="You are so sweet! 😍 What do you like to do in your free time?";
-else if(count===5) reply="I feel like we have a real connection! ❤️ Do you want to keep talking here or call me?";
-else reply="I am here! Let's keep talking ❤️ Send me a VN or call me! I really enjoy talking to you.";
-let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');if(!all2[currentChat]) all2[currentChat]=[];all2[currentChat].push({who:'them',text:reply,type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();
-},1000);
+  const inp=document.getElementById("msgInput"); const txt=inp.value.trim(); if(!txt) return;
+  document.getElementById("messages").innerHTML+=`<div class="msg msg-me">${txt}</div>`; inp.value="";
+  if(currentChatIsAI){
+    setTimeout(()=>{
+      const list=currentChat.replies||["Zosangalatsa! Ndiuzeni zambiri 😊"];
+      const r=list[Math.floor(Math.random()*list.length)];
+      document.getElementById("messages").innerHTML+=`<div class="msg msg-other"><b>${currentChat.name} 🤖:</b> ${r}</div>`;
+    },800);
+  }
 }
-function sendImage(input){let file=input.files[0];if(!file) return;let reader=new FileReader();reader.onload=function(e){saveMsg({who:'me',text:e.target.result,type:'image'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'Wow! Nice photo 😍🔥 You look amazing!',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};reader.readAsDataURL(file);input.value='';}
-async function toggleVoice(){if(!isRecording){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);saveMsg({who:'me',text:url,type:'voice'});setTimeout(()=>{let all2=JSON.parse(localStorage.getItem('lovelink_chats')||'{}');all2[currentChat].push({who:'them',text:'I loved your voice note! 😍 Your voice is so sweet. Send me another one 🎤',type:'text'});localStorage.setItem('lovelink_chats',JSON.stringify(all2));loadMessages();},1200);};mediaRecorder.start();isRecording=true;document.getElementById('micBtn').classList.add('recording');document.getElementById('recStatus').style.display='block';}catch(err){alert('Please allow microphone to send voice notes 🎤');}}else{mediaRecorder.stop();isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('recStatus').style.display='none';}}
-function startCall(type){let p=getAllProfiles().find(x=>x.name===currentChat);if(!p) return;document.getElementById('callImg').src=p.img;document.getElementById('callName').innerText=p.name;document.getElementById('callType').innerText=type==='video'?'📹 Video Call':'📞 Voice Call';document.getElementById('callStatus').innerText='Calling...';document.getElementById('callPopup').style.display='flex';callSeconds=0;setTimeout(()=>{document.getElementById('callStatus').innerText='Ringing... 📞';},1500);}
-function acceptCall(){document.getElementById('callStatus').innerText='Connected - 00:00';clearInterval(callTimer);callTimer=setInterval(()=>{callSeconds++;let m=Math.floor(callSeconds/60).toString().padStart(2,'0');let s=(callSeconds%60).toString().padStart(2,'0');document.getElementById('callStatus').innerText='Connected - '+m+':'+s+' ❤️';},1000);}
-function endCall(){clearInterval(callTimer);document.getElementById('callPopup').style.display='none';if(callSeconds>0){saveMsg({who:'me',text:'Voice Call - '+Math.floor(callSeconds/60)+':'+(callSeconds%60)+' minutes',type:'call'});}else{saveMsg({who:'me',text:'Missed Call 📞',type:'call'});}}
-function renderNotifs(){let list=document.getElementById('notifList');let unread=notifications.filter(n=>n.unread).length;document.getElementById('notifBadge').innerText=unread>0?unread:'';document.getElementById('notifBadge').style.display=unread>0?'flex':'none';document.getElementById('msgBadge').innerText=notifications.filter(n=>n.type==='message'||n.type==='voice').length;list.innerHTML=notifications.map(n=>`<div class="notif-item" onclick="openChat('${n.name}')"><img src="${n.img}"><div><b>${n.name}</b><p>${n.text}</p><small>${n.time}</small></div></div>`).join('');}
-function showNotifs(){document.getElementById('notifPanel').style.display='flex';renderNotifs();}
-function closeNotifs(){document.getElementById('notifPanel').style.display='none';}
-function markAllRead(){notifications.forEach(n=>n.unread=false);renderNotifs();}
-function addNotif(name,img,text,time,type){notifications.unshift({name,img,text,time,type,unread:true});renderNotifs();showToast(name,img,text);}
-function showToast(name,img,text){toastChatName=name;document.getElementById('toastImg').src=img;document.getElementById('toastTitle').innerText=name;document.getElementById('toastText').innerText=text;let t=document.getElementById('toast');t.style.display='flex';setTimeout(()=>{t.style.display='none';},4000);}
-function openNotifChat(){document.getElementById('toast').style.display='none';if(toastChatName) openChat(toastChatName);}
-function closePay(){document.getElementById('payPopup').style.display='none';}
-function showAdminLogin(){document.getElementById('adminLogin').style.display='flex';}
-function checkAdmin(){let p=document.getElementById('adminPass').value;if(p==="badrat123"){isAdmin=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();loadFirebaseUsers();alert("Welcome Admin! 👑 Now loading Firebase users...");}else{alert("Wrong password!");}}
+function sendIcebreaker(t){ document.getElementById("msgInput").value=t; sendMsg(); }
+function reportUser(){ alert("Zikomo. Admin adzawona lipoti lanu."); }
+function requestVerify(){ alert("Tumizani chithunzi chanu mukugwira pepala lolembedwa 'Loveelink' ku Admin pa 0983523722."); }
+
+// VIDEO CALL YENIYENI
+let myStream=null;
+async function startVideoCall(){
+  if(!currentChat || currentChatIsAI){ alert("Video Call yeniyeni imagwira ntchito ndi anthu enieni okha. Simungathe kuyimba ndi AI."); return; }
+  if(!confirm("Mukufuna kuyambitsa Video Call yeniyeni ndi "+currentChat.name+"?")) return;
+  try{
+    myStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+    document.getElementById("myVideo").srcObject=myStream;
+    document.getElementById("videoCallBox").style.display="block";
+    document.getElementById("videoCallName").innerText=currentChat.name;
+    document.getElementById("startVideoBtn").style.display="none";
+    alert("Video Call yayamba. Dikirani "+currentChat.name+" kuti avomereze.");
+  }catch(e){ alert("Lolani kamera kuti muyambe video call."); }
+}
+function endVideoCall(){ if(myStream) myStream.getTracks().forEach(t=>t.stop()); document.getElementById("videoCallBox").style.display="none"; document.getElementById("startVideoBtn").style.display="block"; }
+
+// ADMIN
 function renderAdmin(){
-let all=[...fakeProfiles.map(p=>({...p,label:'FAKE - USA/UK'})),...realProfiles.map(p=>({...p,label:p.verified?'VERIFIED':'REAL'}))];
-let seen={};all=all.filter(x=>{if(seen[x.name]) return false;seen[x.name]=1;return true;});
-let boostedCount=all.filter(x=>x.boosted).length;
-document.getElementById('adminStats').innerText=`📊 Fake + Local: ${all.length} • 🟢 Online: 7,800 • 🔥 Boosted: ${boostedCount}`;
-document.getElementById('adminList').innerHTML=all.map(m=>{let paid=paidUsers.includes(m.name);let chats=JSON.parse(localStorage.getItem('lovelink_chats')||'{}')[m.name]||[];return `<div class="admin-row"><div><b>${m.name}</b> <span style="font-size:10px;background:${m.label.includes('FAKE')?'#ff9800':'#4CAF50'};color:white;padding:2px 6px;border-radius:10px">${m.label}</span><br><small>${m.city} • ${chats.length} msgs • ${m.boosted?'🔥 BOOSTED':'No Boost'} • ${paid?'✅ PAID':'🔒 NOT PAID'}</small></div><div style="display:flex;gap:5px"><button class="unlock" onclick="verifyUser('${m.name}')">Verify ✅</button><button class="unlock" onclick="unlockUser('${m.name}')">Boost 🔥</button></div></div>`;}).join('');
-loadFirebaseUsers();
+  const today=new Date().toDateString();
+  const todayUsers=users.filter(u=>u.createdAt && new Date(u.createdAt).toDateString()===today).length;
+  const paidCount=users.filter(u=>u.isPaid).length;
+  const pending=users.filter(u=>u.verifyStatus==="pending").length;
+  document.getElementById("adminPanel").innerHTML=`<h2>👑 Admin Dashboard</h2><p style="color:#666;font-size:13px">Ziwerengero Zenizeni - Osati Zabodza</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0"><div style="background:#ffeef1;padding:15px;border-radius:12px;text-align:center"><h2>${users.length}</h2><small>Anthu Onse Enieni</small></div><div style="background:#e8f5e9;padding:15px;border-radius:12px;text-align:center"><h2>${todayUsers}</h2><small>Alembetsa Lero</small></div><div style="background:#fff3e0;padding:15px;border-radius:12px;text-align:center"><h2>${paidCount}</h2><small>Alipira Boost ⭐</small></div><div style="background:#e3f2fd;padding:15px;border-radius:12px;text-align:center"><h2>${pending}</h2><small>Akudikirira ✅</small></div></div><h3>⏳ Akudikirira Verification</h3><div id="verifyList"></div><h3 style="margin-top:15px">👥 Anthu Onse</h3><div id="allUsersList"></div>`;
+  const vList=document.getElementById("verifyList");
+  const pendUsers=users.filter(u=>u.verifyStatus==="pending");
+  if(pendUsers.length===0) vList.innerHTML="<p style='color:green'>Palibe amene akudikirira ✅</p>";
+  pendUsers.forEach(u=>{ vList.innerHTML+=`<div class="admin-card" style="display:flex;gap:10px;align-items:center"><img src="${u.img}" style="width:50px;height:50px;border-radius:50%"><div style="flex:1"><b>${u.name}</b><br><small>${u.city}</small></div><button onclick="approveVerify('${u.id}')" style="background:green;color:white;border:none;padding:6px 12px;border-radius:8px">Approve ✅</button><button onclick="rejectVerify('${u.id}')" style="background:red;color:white;border:none;padding:6px 12px;border-radius:8px">Reject ❌</button></div>`; });
+  const allList=document.getElementById("allUsersList");
+  users.forEach(u=>{ allList.innerHTML+=`<div class="admin-card" style="display:flex;gap:10px;align-items:center"><img src="${u.img}" style="width:40px;height:40px;border-radius:50%"><div style="flex:1"><b>${u.name}</b> ${u.isVerified?'✅':''} ${u.isPaid?'⭐ Boosted':''}<br><small>${u.city} • ${u.age}</small></div><button onclick="unlockUser('${u.id}')" style="background:#333;color:white;border:none;padding:5px 10px;border-radius:8px">Boost</button><button onclick="banUser('${u.id}')" style="background:#ff4d6d;color:white;border:none;padding:5px 10px;border-radius:8px">Ban</button></div>`; });
 }
-function verifyUser(name){let p=getAllProfiles().find(x=>x.name===name);if(p) p.verified=true;if(me && me.name===name){me.verified=true;localStorage.setItem('lovelink_me',JSON.stringify(me));}renderAdmin();alert(name+' Verified ✅');}
-function unlockUser(name){if(!paidUsers.includes(name)) paidUsers.push(name);let p=getAllProfiles().find(x=>x.name===name);if(p) p.boosted=true;localStorage.setItem('lovelink_paid',JSON.stringify(paidUsers));renderAdmin();renderMatches();alert(name+' Boosted 🔥');}
-function closeAdmin(){document.getElementById('adminPanel').style.display='none';isAdmin=false;}
+function approveVerify(id){ users=users.map(u=>u.id===id?{...u,isVerified:true,verifyStatus:"approved"}:u); localStorage.setItem("loveelink_users", JSON.stringify(users)); renderAdmin(); alert("Wavomerezedwa ✅"); }
+function rejectVerify(id){ users=users.map(u=>u.id===id?{...u,verifyStatus:"rejected"}:u); localStorage.setItem("loveelink_users", JSON.stringify(users)); renderAdmin(); }
+function unlockUser(id){ users=users.map(u=>u.id===id?{...u,isPaid:true}:u); localStorage.setItem("loveelink_users", JSON.stringify(users)); renderAdmin(); alert("Wapatsidwa Boost ⭐"); }
+function banUser(id){ if(!confirm("Mukufuna kumuletsa munthu uyu?")) return; users=users.filter(u=>u.id!==id); localStorage.setItem("loveelink_users", JSON.stringify(users)); renderAdmin(); }
+
+if(currentUser){ showView("home"); } else { showView("auth"); }
+renderAll();
 </script>
 </body>
 </html>
