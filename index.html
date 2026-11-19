@@ -14,7 +14,7 @@ body{background:#FFF8F0;color:#1A0A0A;padding-bottom:85px}
 .lang-bar{background:#FFF8F0;padding:8px 12px;display:flex;justify-content:center;gap:8px;border-bottom:1px solid #eee;position:sticky;top:52px;z-index:90}
 .lang-btn{padding:7px 16px;border-radius:20px;border:1px solid #ddd;background:#fff;font-weight:bold;cursor:pointer}
 .lang-btn.active{background:#D90429;color:#fff;border:none}
-.hero{padding:20px 16px 10px}.hero h1{font-size:34px;line-height:1.05}.hero h1 em{color:#D90429;font-style:normal}
+.hero{padding:20px 16px 10px}.hero h1{font-size:34px;line-height:1.05}
 .line{width:90px;height:5px;background:#FFD166;border-radius:10px;margin:12px 0}.hero p{font-size:14px;line-height:1.6;color:#555}
 .btn-red{background:#D90429;color:#fff;border:none;padding:15px;border-radius:28px;width:100%;font-weight:800;font-size:15px;cursor:pointer}
 .btn-white{background:#fff;color:#111;border:1.5px solid #111;padding:15px;border-radius:28px;width:100%;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
@@ -35,7 +35,7 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 </style>
 </head>
 <body>
-<div class="topbar"><div style="display:flex;gap:8px;align-items:center"><span>☰</span><div class="logo">Lovee<span>link.</span></div></div><div style="display:flex;gap:10px;align-items:center"><button class="icon-btn" onclick="toggleDrawer()">☰</button><span style="font-size:13px" id="loginTxt">Login</span></div></div>
+<div class="topbar"><div style="display:flex;gap:8px;align-items:center"><div class="logo">Lovee<span>link.</span></div></div><div style="display:flex;gap:10px;align-items:center"><button class="icon-btn" onclick="toggleDrawer()">☰</button><span style="font-size:13px">Login</span></div></div>
 <div class="lang-bar">
 <button class="lang-btn active" id="btn-ny" onclick="setLang('ny')">🇲🇼 Chichewa</button>
 <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
@@ -43,12 +43,12 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 </div>
 <div class="drawer" id="drawer"><div class="drawer-inner">
 <div style="display:flex;justify-content:space-between"><b style="font-size:22px">Loveelink.</b><button onclick="toggleDrawer()" style="border:none;background:#fff;width:34px;height:34px;border-radius:50%">✕</button></div>
-<div class="drawer-item" onclick="showView('how')" id="menuHow">How it works</div>
-<div class="drawer-item" onclick="showView('features')" id="menuFeat">Features</div>
-<div class="drawer-item" onclick="showView('safety')" id="menuSafe">Safety</div>
+<div class="drawer-item" onclick="showView('how')">Momwe Zimagwirira Ntchito</div>
+<div class="drawer-item" onclick="showView('features')">Zomwe Tili Nazo</div>
+<div class="drawer-item" onclick="showView('safety')">Chitetezo</div>
 <div class="drawer-item" onclick="askMoreInfo('General')">💬 Dziwani Zambiri - WhatsApp</div>
-<hr style="margin:14px 0"><button class="btn-white" onclick="showView('auth')" id="menuLogin">Log in</button>
-<button class="btn-red" style="margin-top:10px" onclick="showView('auth')" id="menuSignup">Sign up free</button>
+<hr style="margin:14px 0"><button class="btn-white" onclick="showView('auth')">Log in</button>
+<button class="btn-red" style="margin-top:10px" onclick="showView('auth')">Lembetsani Kwaulere</button>
 </div></div>
 
 <div id="authView">
@@ -61,8 +61,8 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 <button onclick="askMoreInfo('General')" class="btn-green" style="margin-top:10px">💬 Ndimafuna Kudziwa Zambiri - WhatsApp</button>
 <p style="text-align:center;font-size:12px;color:#666;margin-top:6px">Muli ndi funso? Tumizani ku WhatsApp <b>0887222489</b> - Tikuyankhani mwachangu</p>
 <div style="display:flex;gap:10px;align-items:center;margin-top:16px">
-<div style="display:flex"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&h=80&fit=crop&crop=face" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;object-fit:cover"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-8px;object-fit:cover"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-8px;object-fit:cover"></div>
-<div><b><span id="memberCount">6</span> <span id="happyTxt">anthu okondwa</span></b><br><small style="color:#888" id="alreadyTxt">akulumikizana kale ku Malawi</small></div>
+<div style="display:flex"><img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=80&h=80&fit=crop" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;object-fit:cover"><img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=80&h=80&fit=crop" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-8px;object-fit:cover"><img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?w=80&h=80&fit=crop" style="width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-8px;object-fit:cover"></div>
+<div><b><span id="memberCount">8</span> <span id="happyTxt">anthu okondwa</span></b><br><small style="color:#888" id="alreadyTxt">akulumikizana kale ku Malawi</small></div>
 </div>
 </div>
 <div class="search-box"><h3 id="searchTitle">Pezani Anthu Osakwatiwa Ku Malawi</h3><p style="text-align:center;font-size:13px;margin-bottom:12px" id="lookingFor">Ndikufuna</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><select><option>Black</option><option>All</option></select><select><option>Woman</option><option>Man</option></select><select><option>18-25</option><option>26-35</option><option>36-45</option></select></div><button class="btn-gold" style="margin-top:14px" id="showMeBtn" onclick="showView('home')">Ndiwonetseni →</button></div>
@@ -104,17 +104,17 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 
 <div id="homeView" style="display:none">
 <div style="padding:8px 16px"><p style="font-size:11px;color:#999">African Dating > Women > Dating > Malawian</p><h2 style="text-align:center;margin:8px 0" id="meetTitle">Kumanani ndi Anthu Osakwatiwa aku Malawi</h2></div>
-<div class="search-box"><h3 id="searchTitle2">Ndikufuna</h3><div style="display:flex;gap:8px;justify-content:center"><select><option>Black</option></select><select><option>Woman</option></select><select><option>18-25</option></select></div><button class="btn-gold" style="margin-top:12px" onclick="renderAll()" id="showMeBtn2">Ndiwonetseni</button></div>
+<div class="search-box"><h3>Ndikufuna</h3><div style="display:flex;gap:8px;justify-content:center"><select><option>Black</option></select><select><option>Woman</option></select><select><option>18-25</option></select></div><button class="btn-gold" style="margin-top:12px" onclick="renderAll()">Ndiwonetseni</button></div>
 <div id="homeGrid" class="card-grid"></div><div id="homeList"></div>
 </div>
 
-<div id="matchesView" style="display:none"><h2 style="padding:12px 16px">💘 <span id="matchesTxt">Matches</span></h2><div id="matchesList"></div></div>
+<div id="matchesView" style="display:none"><h2 style="padding:12px 16px">💘 Matches</h2><div id="matchesList"></div></div>
 
 <div id="aiView" style="display:none;padding:10px">
 <div style="background:#e3f2fd;padding:14px;border-radius:14px"><h3>🤖 AI Characters - Ngati Talkie</h3><p style="font-size:12px">Awa ndi <b>AI, si anthu enieni</b>. Amakumbukira dzina lanu.</p></div>
 <div id="aiList"></div>
 <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:14px;border-radius:14px;margin-top:12px"><h3>🎥 AI Videos - Opangidwa ndi AI</h3><p style="font-size:12px">Awa ndi ma video a AI, <b>si anthu enieni, si video call yeniyeni</b>.</p></div>
-<div style="background:#f0f0f0;padding:12px;border-radius:12px;margin-top:10px;text-align:center"><p><b>🤖 Sophia AI - Video Yopangidwa ndi AI</b></p><video controls poster="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=300&fit=crop" style="width:100%;border-radius:12px;max-height:220px"><source src="https://www.w3schools.com/html/mov_bbb.mp4"></video><p style="font-size:11px;color:#666">⚠️ Iyi ndi AI Video. Si munthu weniweni.</p><button class="btn-red" onclick="openChat('Sophia AI', true)">Cheza ndi Sophia AI</button></div>
+<div style="background:#f0f0f0;padding:12px;border-radius:12px;margin-top:10px;text-align:center"><p><b>🤖 Sophia AI - Video Yopangidwa ndi AI</b></p><video controls poster="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=400&h=300&fit=crop" style="width:100%;border-radius:12px;max-height:220px"><source src="https://www.w3schools.com/html/mov_bbb.mp4"></video><p style="font-size:11px;color:#666">⚠️ Iyi ndi AI Video. Si munthu weniweni.</p><button class="btn-red" onclick="openChat('Sophia AI', true)">Cheza ndi Sophia AI</button></div>
 </div>
 
 <div id="chatView" style="display:none;padding:12px">
@@ -127,11 +127,10 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 </div>
 
 <div id="menuView" style="display:none;padding:12px">
-<div style="background:#fff;padding:20px;border-radius:16px;text-align:center"><img id="menuImg" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" style="width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid #D90429"><h3 id="menuName">Pre Sher Cee</h3><p style="font-size:12px;color:#888">Lilongwe • 26</p><span class="badge-gold">🔥 FOUNDING MEMBER</span></div>
-
+<div style="background:#fff;padding:20px;border-radius:16px;text-align:center"><img id="menuImg" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=200&h=200&fit=crop" style="width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid #D90429"><h3 id="menuName">Pre Sher Cee</h3><p style="font-size:12px;color:#888">Lilongwe • 26</p><span class="badge-gold">🔥 FOUNDING MEMBER</span></div>
 <div style="background:linear-gradient(135deg,#D90429,#FF6B6B);color:#fff;padding:16px;border-radius:16px;margin:12px 0">
-<h3 id="boostTitle">⭐ Limbikitsani Profile Yanu</h3>
-<p style="font-size:13px" id="boostDesc">Boost Masiku 7 - MK2,000 • Anthu ambiri akuwoneni</p>
+<h3>⭐ Limbikitsani Profile Yanu</h3>
+<p style="font-size:13px">Boost Masiku 7 - MK2,000 • Anthu ambiri akuwoneni</p>
 <div style="background:#fff;color:#333;padding:12px;border-radius:10px;margin:10px 0">
 <p style="font-size:13px"><b>GAWO 1: Tumizani Ndalama</b></p>
 <p>Tumizani <b>MK2,000</b> ku Airtel Money:</p>
@@ -145,7 +144,6 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 <button onclick="sendWhatsAppScreenshot('Boost')" style="background:#25D366;color:#fff;border:none;padding:13px;border-radius:22px;width:100%;font-weight:800;font-size:15px;margin-bottom:8px">📸 Tumizani Screenshot pa WhatsApp</button>
 <button onclick="askMoreInfo('Boost')" style="background:#fff;color:#111;border:1px solid #ddd;padding:11px;border-radius:22px;width:100%;font-weight:700">❓ Ndimafuna Kudziwa Zambiri Za Boost</button>
 </div>
-
 <div style="background:#111;color:#fff;padding:16px;border-radius:16px;margin:12px 0">
 <h3>👑 VIP - MK5,000 Pa Mwezi</h3>
 <p style="font-size:12px;margin:8px 0">Onani omwe adakukondani, Tumizani meseji zopanda malire, Badge ya VIP</p>
@@ -153,7 +151,6 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 <button onclick="sendWhatsAppScreenshot('VIP')" style="background:#25D366;color:#fff;border:none;padding:12px;border-radius:22px;width:100%;font-weight:800;margin-top:10px">📸 Tumizani Screenshot pa WhatsApp</button>
 <button onclick="askMoreInfo('VIP')" style="background:transparent;color:#fff;border:1px solid #fff;padding:11px;border-radius:22px;width:100%;font-weight:700;margin-top:8px">❓ Ndimafuna Kudziwa Zambiri Za VIP</button>
 </div>
-
 <div style="background:#e8f5e9;padding:15px;border-radius:14px;margin-top:12px;text-align:center">
 <h3 style="font-size:15px">💬 Mukufuna Thandizo?</h3>
 <p style="font-size:12px;color:#666;margin:6px 0">Ngati muli ndi funso lililonse - za Boost, VIP, Safety, kapena Loveelink - tumizani ku WhatsApp yathu.</p>
@@ -163,7 +160,6 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 <button onclick="askMoreInfo('Safety')" style="flex:1;background:#fff;border:1px solid #ddd;padding:9px;border-radius:18px;font-size:12px;font-weight:700">🛡️ Za Safety</button>
 </div>
 </div>
-
 <div style="background:#fff;padding:15px;border-radius:14px;margin-top:12px">
 <h3 style="font-size:15px;text-align:center">❓ Mafunso Omwe Anthu Amafunsa</h3>
 <details style="padding:10px 0;border-bottom:1px solid #eee"><summary style="font-weight:700;cursor:pointer">Boost ndi chiyani? MK2,000 imandipatsa chiyani?</summary><p style="font-size:13px;color:#666;margin-top:6px">Boost imayika profile yanu pamwamba kwa masiku 7. Anthu ambiri akuwoneni, mutha kupeza Match mwachangu. Tumizani MK2,000 ku 0983523722 - Amos William, tumizani screenshot ku WhatsApp 0887222489.</p></details>
@@ -172,87 +168,99 @@ select{padding:10px 12px;border-radius:22px;border:none;background:#fff;font-wei
 <details style="padding:10px 0"><summary style="font-weight:700;cursor:pointer">Kodi ndimalipira bwanji?</summary><p style="font-size:13px;color:#666;margin-top:6px">Tumizani ku Airtel Money <b>0983523722</b>, dzina <b>Amos William</b> ✅. Mukatumiza, muwona dzina la Amos William - ndilo lolondola. Kenako tumizani screenshot ku WhatsApp <b>0887222489</b>. Admin adzakupatsani Boost.</p></details>
 <button onclick="askMoreInfo('General')" style="background:#25D366;color:#fff;border:none;padding:11px;border-radius:22px;width:100%;font-weight:800;margin-top:10px">💬 Ndimafuna Kudziwa Zambiri - WhatsApp</button>
 </div>
-
-<div style="background:#f8f8f8;padding:15px;border-radius:14px;margin-top:12px"><h3 style="text-align:center;font-size:14px" id="adminTitle">👑 Admin Yokha</h3><input id="adminPass" type="password" class="input" placeholder="Admin Password"><button class="btn-red" style="background:#111" onclick="checkAdmin()" id="adminBtn">Lowani Monga Admin</button><p id="adminError" style="color:red;font-size:12px;text-align:center;display:none;margin-top:6px">❌ Password yolakwika</p></div>
-<button style="width:100%;padding:12px;border-radius:22px;border:1px solid #ddd;background:#fff;margin-top:12px;font-weight:700" onclick="logout()" id="logoutBtn">Tulukani</button>
+<div style="background:#f8f8f8;padding:15px;border-radius:14px;margin-top:12px"><h3 style="text-align:center;font-size:14px">👑 Admin Yokha</h3><input id="adminPass" type="password" class="input" placeholder="Admin Password"><button class="btn-red" style="background:#111" onclick="checkAdmin()">Lowani Monga Admin</button><p id="adminError" style="color:red;font-size:12px;text-align:center;display:none;margin-top:6px">❌ Password yolakwika</p></div>
+<button style="width:100%;padding:12px;border-radius:22px;border:1px solid #ddd;background:#fff;margin-top:12px;font-weight:700" onclick="logout()">Tulukani</button>
 <p style="text-align:center;font-size:11px;color:#aaa;margin:14px 0">Loveelink • Made in Malawi ❤️<br>Lilongwe • Blantyre • Mzuzu</p>
 </div>
-
 <div id="adminView" style="display:none;padding:12px"><div id="adminPanel"></div></div>
-<div id="howView" style="display:none;padding:16px;background:#fff;margin:10px;border-radius:16px"><h2 id="howTitle">Momwe Zimagwirira Ntchito</h2><p style="line-height:1.7;margin:10px 0">1. Lembetsani kwaulere ndi nambala yanu<br>2. Onani anthu enieni aku Lilongwe, Blantyre, Mzuzu<br>3. Chezani, pezani Match, yambitsani Video Call yeniyeni<br>4. Osatumiza ndalama kwa aliyense - Lipirani ku 0983523722 - Amos William okha</p><button class="btn-red" onclick="showView('auth')">Yambani - Ndi Kwaulere</button></div>
+<div id="howView" style="display:none;padding:16px;background:#fff;margin:10px;border-radius:16px"><h2>Momwe Zimagwirira Ntchito</h2><p style="line-height:1.7;margin:10px 0">1. Lembetsani kwaulere ndi nambala yanu<br>2. Onani anthu enieni aku Lilongwe, Blantyre, Mzuzu<br>3. Chezani, pezani Match, yambitsani Video Call yeniyeni<br>4. Osatumiza ndalama kwa aliyense - Lipirani ku 0983523722 - Amos William okha</p><button class="btn-red" onclick="showView('auth')">Yambani - Ndi Kwaulere</button></div>
 <div id="featuresView" style="display:none;padding:16px;background:#fff;margin:10px;border-radius:16px"><h2>Features</h2><p style="line-height:1.9">💘 Daily Match<br>🤖 AI Chat ngati Talkie<br>🎥 AI Video<br>📞 Video Call Yeniyeni<br>🔥 Founders Badge<br>⭐ Boost ndi Airtel Money<br>💼 Profile ndi Ntchito<br>🌍 Chichewa / English / Tumbuka</p></div>
 <div id="safetyView" style="display:none;padding:16px;background:#fff;margin:10px;border-radius:16px"><h2>Safety</h2><p style="line-height:1.9">- Report & Block<br>- Osatumiza ndalama kwa aliyense<br>- Lipirani ku 0983523722 - Amos William okha<br>- AI alembedwa kuti ndi AI<br>- Admin amawona malipoti</p></div>
-
 <div class="bottom-nav">
-<div class="nav-item active" onclick="showView('home')">🏠<br><span id="navHome">Home</span></div>
-<div class="nav-item" onclick="showView('matches')">💘<br><span id="navMatches">Matches</span></div>
-<div class="nav-item" onclick="showView('ai')">🤖<br><span id="navAI">AI Chat</span></div>
-<div class="nav-item" onclick="showView('chat')">💬<br><span id="navChat">Chat</span></div>
-<div class="nav-item" onclick="showView('menu')">☰<br><span id="navMenu">Menu</span></div>
+<div class="nav-item active" onclick="showView('home')">🏠<br>Home</div>
+<div class="nav-item" onclick="showView('matches')">💘<br>Matches</div>
+<div class="nav-item" onclick="showView('ai')">🤖<br>AI Chat</div>
+<div class="nav-item" onclick="showView('chat')">💬<br>Chat</div>
+<div class="nav-item" onclick="showView('menu')">☰<br>Menu</div>
 </div>
-
 <script>
 let currentLang = localStorage.getItem("loveelink_lang") || "ny";
 const LANGS = {
-ny: {heroTitle:"Pezani chikondi chomwe chili pafupi ndi kwanu.",heroSub:"Kumanani ndi anthu enieni, pangani ubale weniyeni, ndipo yambitsani kucheza ndi anthu omwe amakonda zomwe mumakonda - pano ku Malawi.",getStarted:"Yambani - Ndi Kwaulere →",explore:"Onani Anthu",searchTitle:"Pezani Anthu Osakwatiwa Ku Malawi",lookingFor:"Ndikufuna",showMe:"Ndiwonetseni →",meet:"Kumanani ndi Anthu Osakwatiwa aku Malawi",joinNow:"Lowani Tsopano",joinDesc:"Lowani nawo anthu omwe akufuna chikondi chenicheni... Lowani Tsopano.",joinTitle2:"Lowani ku Loveelink",joinSub:"Pangani akaunti yanu ndikuyamba kukumana ndi anthu omwe akufuna chinthu chenicheni.",phoneTitle:"Pitirizani ndi nambala yanu ya foni",continueBtn:"Pitirizani →",popular:"Anthu Otchuka",happy:"anthu okondwa",already:"akulumikizana kale ku Malawi",matches:"Matches",boostTitle:"⭐ Limbikitsani Profile Yanu",boostDesc:"Boost Masiku 7 - MK2,000 • Anthu ambiri akuwoneni",adminTitle:"👑 Admin Yokha",adminBtn:"Lowani Monga Admin",logout:"Tulukani",login:"Login",how:"Momwe Zimagwirira Ntchito",feat:"Zomwe Tili Nazo",safe:"Chitetezo",signup:"Lembetsani Kwaulere",home:"Home",ai:"AI Chat",chat:"Cheza",menu:"Menu",howTitle:"Momwe Zimagwirira Ntchito"},
-en: {heroTitle:"Find love that feels close to home.",heroSub:"Meet genuine singles, build real connections, and start conversations with people who share your interests — right here in Malawi.",getStarted:"Get started — it's free →",explore:"Explore matches",searchTitle:"Discover Hot Singles In Malawi",lookingFor:"I am looking for a",showMe:"Show me →",meet:"Meet Malawian Singles",joinNow:"Join Now",joinDesc:"Join the members looking for love online... Join Now",joinTitle2:"Join Loveelink",joinSub:"Create your account and start meeting people who want something real.",phoneTitle:"Continue with your phone number",continueBtn:"Continue →",popular:"Popular Singles",happy:"happy members",already:"already making connections in Malawi",matches:"Matches",boostTitle:"⭐ Boost Your Profile",boostDesc:"Boost 7 Days - MK2,000 • More people will see you",adminTitle:"👑 Admin Only",adminBtn:"Login as Admin",logout:"Logout",login:"Login",how:"How it works",feat:"Features",safe:"Safety",signup:"Sign up free",home:"Home",ai:"AI Chat",chat:"Chat",menu:"Menu",howTitle:"How it works"},
-tum: {heroTitle:"Sangani chitemwa icho chili pafupi na kwanu.",heroSub:"Kumanani na ŵanthu ŵaunenesko, pangani ubwezi waunenesko, ndipo yambani kucheza na ŵanthu awo ŵakutemwa ivyo mukutemwa - apa mu Malawi.",getStarted:"Yambani - Ndi Kwaulere →",explore:"Wonani Ŵanthu",searchTitle:"Sangani Ŵanthu Ŵambura Kutora Ku Malawi",lookingFor:"Nkhupenja",showMe:"Ninilangizgeni →",meet:"Kumanani na Ŵanthu Ŵambura Kutora ŵa ku Malawi",joinNow:"Join Now",joinDesc:"Join the members looking for love online... Join Now",joinTitle2:"Join Loveelink",joinSub:"Pangani akaunti yanu ndikuyamba kukumana na ŵanthu awo ŵakukhumba chinthu chaunenesko.",phoneTitle:"Lutililani na nambala yinu ya foni",continueBtn:"Lutililani →",popular:"Ŵanthu Ŵakutchuka",happy:"ŵanthu ŵakukondwa",already:"ŵakulumikizana kale ku Malawi",matches:"Matches",boostTitle:"⭐ Kwezgani Profile Yanu",boostDesc:"Boost Mazuŵa 7 - MK2,000 • Ŵanthu ŵanandi ŵakuwonani",adminTitle:"👑 Admin Yekha",adminBtn:"Lowani Monga Admin",logout:"Fumani",login:"Login",how:"Umoyo Ukugwira Ntchito",feat:"Vinthu Tili Navo",safe:"Chitetezo",signup:"Lembetsani Kwaulere",home:"Home",ai:"AI Chat",chat:"Cheza",menu:"Menu",howTitle:"Umoyo Ukugwira Ntchito"}
+ny: {heroTitle:"Pezani chikondi chomwe chili pafupi ndi kwanu.",heroSub:"Kumanani ndi anthu enieni, pangani ubale weniyeni, ndipo yambitsani kucheza ndi anthu omwe amakonda zomwe mumakonda - pano ku Malawi.",getStarted:"Yambani - Ndi Kwaulere →",explore:"Onani Anthu",searchTitle:"Pezani Anthu Osakwatiwa Ku Malawi",lookingFor:"Ndikufuna",showMe:"Ndiwonetseni →",meet:"Kumanani ndi Anthu Osakwatiwa aku Malawi",joinNow:"Lowani Tsopano",joinDesc:"Lowani nawo anthu omwe akufuna chikondi chenicheni... Lowani Tsopano.",joinTitle2:"Lowani ku Loveelink",joinSub:"Pangani akaunti yanu ndikuyamba kukumana ndi anthu omwe akufuna chinthu chenicheni.",phoneTitle:"Pitirizani ndi nambala yanu ya foni",continueBtn:"Pitirizani →",popular:"Anthu Otchuka",happy:"anthu okondwa",already:"akulumikizana kale ku Malawi"},
+en: {heroTitle:"Find love that feels close to home.",heroSub:"Meet genuine singles, build real connections, and start conversations with people who share your interests — right here in Malawi.",getStarted:"Get started — it's free →",explore:"Explore matches",searchTitle:"Discover Hot Singles In Malawi",lookingFor:"I am looking for a",showMe:"Show me →",meet:"Meet Malawian Singles",joinNow:"Join Now",joinDesc:"Join the members looking for love online... Join Now",joinTitle2:"Join Loveelink",joinSub:"Create your account and start meeting people who want something real.",phoneTitle:"Continue with your phone number",continueBtn:"Continue →",popular:"Popular Singles",happy:"happy members",already:"already making connections in Malawi"},
+tum: {heroTitle:"Sangani chitemwa icho chili pafupi na kwanu.",heroSub:"Kumanani na ŵanthu ŵaunenesko, pangani ubwezi waunenesko, ndipo yambani kucheza na ŵanthu awo ŵakutemwa ivyo mukutemwa - apa mu Malawi.",getStarted:"Yambani - Ndi Kwaulere →",explore:"Wonani Ŵanthu",searchTitle:"Sangani Ŵanthu Ŵambura Kutora Ku Malawi",lookingFor:"Nkhupenja",showMe:"Ninilangizgeni →",meet:"Kumanani na Ŵanthu Ŵambura Kutora ŵa ku Malawi",joinNow:"Join Now",joinDesc:"Join the members looking for love online... Join Now",joinTitle2:"Join Loveelink",joinSub:"Pangani akaunti yanu ndikuyamba kukumana na ŵanthu awo ŵakukhumba chinthu chaunenesko.",phoneTitle:"Lutililani na nambala yinu ya foni",continueBtn:"Lutililani →",popular:"Ŵanthu Ŵakutchuka",happy:"ŵanthu ŵakukondwa",already:"ŵakulumikizana kale ku Malawi"}
 };
 function setLang(lang){
-currentLang=lang; localStorage.setItem("loveelink_lang",lang);
-["ny","en","tum"].forEach(l=>{document.getElementById("btn-"+l).classList.toggle("active", l===lang);});
-const t=LANGS; const set=(id,txt)=>{const el=document.getElementById(id); if(el) el.innerText=txt;};
-set("heroTitle",t.heroTitle); set("heroSub",t.heroSub); set("btnGetStarted",t.getStarted); set("btnExplore",t.explore);
-set("searchTitle",t.searchTitle); set("lookingFor",t.lookingFor); set("showMeBtn",t.showMe); set("meetTitle",t.meet);
-set("joinNowTitle",t.joinNow); set("joinNowDesc",t.joinDesc); set("joinTitle2",t.joinTitle2); set("joinSub",t.joinSub);
-set("phoneTitle",t.phoneTitle); set("continueBtn",t.continueBtn); set("popularTxt",t.popular); set("happyTxt",t.happy); set("alreadyTxt",t.already);
-set("matchesTxt",t.matches); set("boostTitle",t.boostTitle); set("boostDesc",t.boostDesc);
-set("adminTitle",t.adminTitle); set("adminBtn",t.adminBtn); set("logoutBtn",t.logout); set("loginTxt",t.login);
-set("menuHow",t.how); set("menuFeat",t.feat); set("menuSafe",t.safe); set("menuLogin",t.login); set("menuSignup",t.signup);
-set("navHome",t.home); set("navMatches",t.matches); set("navAI",t.ai); set("navChat",t.chat); set("navMenu",t.menu); set("howTitle",t.howTitle);
+  currentLang=lang; localStorage.setItem("loveelink_lang",lang);
+  document.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("active"));
+  const btn=document.getElementById("btn-"+lang);
+  if(btn) btn.classList.add("active");
+  const t=LANGS;
+  if(!t) return;
+  const set=(id,txt)=>{
+    const el=document.getElementById(id);
+    if(el && txt && txt!=="undefined") el.innerText=txt;
+  };
+  set("heroTitle",t.heroTitle);
+  set("heroSub",t.heroSub);
+  set("btnGetStarted",t.getStarted);
+  set("btnExplore",t.explore);
+  set("searchTitle",t.searchTitle);
+  set("lookingFor",t.lookingFor);
+  set("showMeBtn",t.showMe);
+  set("meetTitle",t.meet);
+  set("joinNowTitle",t.joinNow);
+  set("joinNowDesc",t.joinDesc);
+  set("joinTitle2",t.joinTitle2);
+  set("joinSub",t.joinSub);
+  set("phoneTitle",t.phoneTitle);
+  set("continueBtn",t.continueBtn);
+  set("popularTxt",t.popular);
+  set("happyTxt",t.happy);
+  set("alreadyTxt",t.already);
 }
 const WHATSAPP_NUMBER = "265887222489";
-const AIRTEL_NUMBER = "0983523722";
-const AIRTEL_NAME = "Amos William";
 function sendWhatsAppScreenshot(type){
-let name = currentUser ? currentUser.name : "Mnzanga";
-let city = currentUser ? currentUser.city : "Lilongwe";
-let age = currentUser ? currentUser.age : "";
-let message = "";
-if(type === "Boost"){
-message = `Hi Loveelink! Ndine ${name}, ${age}, waku ${city}. Ndilipira Boost MK2,000 ku Airtel Money 0983523722 - Amos William. Ndikutumiza screenshot ya Airtel Money. Chonde ndipatseni Boost ⭐`;
-} else {
-message = `Hi Loveelink! Ndine ${name}, ${age}, waku ${city}. Ndilipira VIP MK5,000 ku Airtel Money 0983523722 - Amos William. Ndikutumiza screenshot ya Airtel Money. Chonde ndipatseni VIP 👑`;
-}
-window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
-alert("Tsopano tumizani screenshot ya Airtel Money mu WhatsApp yomwe yatseguka. Onetsetsani kuti dzina ndi Amos William. Admin adzakupatsani Boost posachedwa!");
+  let name = currentUser ? currentUser.name : "Mnzanga";
+  let city = currentUser ? currentUser.city : "Lilongwe";
+  let age = currentUser ? currentUser.age : "";
+  let message = "";
+  if(type === "Boost"){
+    message = `Hi Loveelink! Ndine ${name}, ${age}, waku ${city}. Ndilipira Boost MK2,000 ku Airtel Money 0983523722 - Amos William. Ndikutumiza screenshot ya Airtel Money. Chonde ndipatseni Boost ⭐`;
+  } else {
+    message = `Hi Loveelink! Ndine ${name}, ${age}, waku ${city}. Ndilipira VIP MK5,000 ku Airtel Money 0983523722 - Amos William. Ndikutumiza screenshot ya Airtel Money. Chonde ndipatseni VIP 👑`;
+  }
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  alert("Tsopano tumizani screenshot ya Airtel Money mu WhatsApp yomwe yatseguka. Onetsetsani kuti dzina ndi Amos William. Admin adzakupatsani Boost posachedwa!");
 }
 function askMoreInfo(topic){
-let name = currentUser ? currentUser.name : "Mnzanga";
-let msg = "";
-if(topic === "Boost"){ msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za Boost. Kodi ndimalipira bwanji ku 0983523722 - Amos William?`; }
-else if(topic === "VIP"){ msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za VIP MK5,000. Kodi ndimalipira bwanji ku Amos William?`; }
-else if(topic === "Safety"){ msg = `Hi Loveelink! Ndimafuna kudziwa zambiri za chitetezo. Kodi Loveelink ndi yotetezeka bwanji?`; }
-else { msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za Loveelink. Kodi Loveelink imagwira ntchito bwanji?`; }
-window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  let name = currentUser ? currentUser.name : "Mnzanga";
+  let msg = "";
+  if(topic === "Boost"){ msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za Boost. Kodi ndimalipira bwanji ku 0983523722 - Amos William?`; }
+  else if(topic === "VIP"){ msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za VIP MK5,000. Kodi ndimalipira bwanji ku Amos William?`; }
+  else if(topic === "Safety"){ msg = `Hi Loveelink! Ndimafuna kudziwa zambiri za chitetezo. Kodi Loveelink ndi yotetezeka bwanji?`; }
+  else { msg = `Hi Loveelink! Ndine ${name}. Ndimafuna kudziwa zambiri za Loveelink. Kodi Loveelink imagwira ntchito bwanji?`; }
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
-let users=JSON.parse(localStorage.getItem("loveelink_users")||"[]");
+let users=JSON.parse(localStorage.getItem("loveelink_users_v2")||"[]");
 if(users.length===0){
 users=[
-{id:"1",name:"Chikondi",age:24,city:"Lilongwe",job:"Teacher - Mphunzitsi",jobDetail:"Ndimaphunzitsa ku Lilongwe Primary, ndimakonda ana.",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop",bio:"Big hearted, kind.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Nyimbo"},
-{id:"2",name:"Blessings",age:26,city:"Blantyre",job:"Business - Bizinesi",jobDetail:"Ndili ndi shop ku Limbe, ndimagulitsa mafoni.",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",bio:"Music, introvert, athletic.",isVerified:false,isPaid:true,verifyStatus:"pending",createdAt:new Date().toISOString(),interests:"Mpira"},
-{id:"3",name:"Tadala",age:23,city:"Mzuzu",job:"Nurse - Namwino",jobDetail:"Ndimagwira ntchito ku Mzuzu Central Hospital.",img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",bio:"Romantic at heart.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Kucheza"},
-{id:"4",name:"Chisomo",age:26,city:"Blantyre",job:"Student - Wophunzira",jobDetail:"Ndili ku Polytechnic, ndimaphunzira Accounting.",img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop",bio:"Kind, honest, family-oriented.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Family"},
-{id:"5",name:"Thodi",age:24,city:"Lilongwe",job:"Driver - Dalaivala",jobDetail:"Ndimayendetsa taxi ku Lilongwe.",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",bio:"Music, introvert, athletic.",isVerified:false,isPaid:false,verifyStatus:"none",createdAt:new Date().toISOString(),interests:"Music"},
-{id:"6",name:"Mphatso",age:25,city:"Zomba",job:"Hair Dresser - Salon",jobDetail:"Ndili ndi salon ku Zomba town.",img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",bio:"Looking for something real.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Mabuku"}
-]; localStorage.setItem("loveelink_users",JSON.stringify(users));
+{id:"1",name:"Chikondi",age:24,city:"Lilongwe",job:"Teacher - Mphunzitsi",jobDetail:"Ndimaphunzitsa ku Lilongwe Primary, ndimakonda ana.",img:"https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=400&h=400&fit=crop",bio:"Big hearted, kind.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Nyimbo"},
+{id:"2",name:"Blessings",age:26,city:"Blantyre",job:"Business - Bizinesi",jobDetail:"Ndili ndi shop ku Limbe, ndimagulitsa mafoni.",img:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=400&h=400&fit=crop",bio:"Music, introvert, athletic.",isVerified:false,isPaid:true,verifyStatus:"pending",createdAt:new Date().toISOString(),interests:"Mpira"},
+{id:"3",name:"Tadala",age:23,city:"Mzuzu",job:"Nurse - Namwino",jobDetail:"Ndimagwira ntchito ku Mzuzu Central Hospital.",img:"https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?w=400&h=400&fit=crop",bio:"Romantic at heart.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Kucheza"},
+{id:"4",name:"Chisomo",age:26,city:"Blantyre",job:"Student - Wophunzira",jobDetail:"Ndili ku Polytechnic, ndimaphunzira Accounting.",img:"https://images.pexels.com/photos/1729931/pexels-photo-1729931.jpeg?w=400&h=400&fit=crop",bio:"Kind, honest, family-oriented.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Family"},
+{id:"5",name:"Thodi",age:24,city:"Lilongwe",job:"Driver - Dalaivala",jobDetail:"Ndimayendetsa taxi ku Lilongwe.",img:"https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?w=400&h=400&fit=crop",bio:"Music, introvert, athletic.",isVerified:false,isPaid:false,verifyStatus:"none",createdAt:new Date().toISOString(),interests:"Music"},
+{id:"6",name:"Mphatso",age:25,city:"Zomba",job:"Hair Dresser - Salon",jobDetail:"Ndili ndi salon ku Zomba town.",img:"https://images.pexels.com/photos/1821095/pexels-photo-1821095.jpeg?w=400&h=400&fit=crop",bio:"Looking for something real.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Mabuku"},
+{id:"7",name:"Wanangwa",age:22,city:"Mzuzu",job:"Student - Wophunzira",jobDetail:"Ndili ku Mzuzu University.",img:"https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?w=400&h=400&fit=crop",bio:"Ndimakonda nyimbo ndi mpira.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Nyimbo"},
+{id:"8",name:"Yamikani",age:27,city:"Lilongwe",job:"Engineer - Engineer",jobDetail:"Ndimagwira ntchito ku Lilongwe Water Board.",img:"https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg?w=400&h=400&fit=crop",bio:"Serious, looking for real love.",isVerified:true,isPaid:false,verifyStatus:"approved",createdAt:new Date().toISOString(),interests:"Bizinesi"}
+]; localStorage.setItem("loveelink_users_v2",JSON.stringify(users));
 }
 let currentUser=JSON.parse(localStorage.getItem("loveelink_me")||"null");
 const ADMIN_PASSWORD="Loveelink2026";
-const aiCharacters=[{name:"Sophia AI",img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop",desc:"AI - Wokondana",replies:["Zokondweretsa! Ndiuzeni zambiri 😊","Ndine Sophia, AI wokondana."]},{name:"Badrat AI",img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop",desc:"AI - Woseketsa, Chichewa",replies:["Hahaha! 😂","Eeeh, ku Lilongwe kuli moto!"]}];
+const aiCharacters=[{name:"Sophia AI",img:"https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=150&h=150&fit=crop",desc:"AI - Wokondana",replies:["Zokondweretsa! Ndiuzeni zambiri 😊","Ndine Sophia, AI wokondana."]},{name:"Badrat AI",img:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=150&h=150&fit=crop",desc:"AI - Woseketsa, Chichewa",replies:["Hahaha! 😂","Eeeh, ku Lilongwe kuli moto!"]}];
 let currentChat=null,currentChatIsAI=false;
 function toggleDrawer(){const d=document.getElementById("drawer");d.style.display=d.style.display==="none"?"block":"none";}
-function doSignup(){const name=document.getElementById("authName").value.trim();const age=document.getElementById("authAge").value;const city=document.getElementById("authCity").value;const job=document.getElementById("authJob").value || "Student - Wophunzira";const jobDetail=document.getElementById("authJobDetail").value || "";if(!name||!age){alert("Lembani dzina ndi zaka");return;}const avatars=["https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop","https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop","https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"];const newUser={id:Date.now().toString(),name,age:parseInt(age),city,job,jobDetail,img:avatars[Math.floor(Math.random()*avatars.length)],bio:"Ndine watsopano ku Loveelink.",isVerified:false,isPaid:false,verifyStatus:"none",createdAt:new Date().toISOString(),interests:"Kucheza"};users.push(newUser);localStorage.setItem("loveelink_users",JSON.stringify(users));currentUser=newUser;localStorage.setItem("loveelink_me",JSON.stringify(newUser));alert("Takulandirani "+name+"! Mwapeza 🔥 FOUNDING MEMBER");showView("home");}
+function doSignup(){const name=document.getElementById("authName").value.trim();const age=document.getElementById("authAge").value;const city=document.getElementById("authCity").value;const job=document.getElementById("authJob").value || "Student - Wophunzira";const jobDetail=document.getElementById("authJobDetail").value || "";if(!name||!age){alert("Lembani dzina ndi zaka");return;}const avatars=["https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=400&h=400&fit=crop","https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=400&h=400&fit=crop","https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?w=400&h=400&fit=crop","https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?w=400&h=400&fit=crop"];const newUser={id:Date.now().toString(),name,age:parseInt(age),city,job,jobDetail,img:avatars[Math.floor(Math.random()*avatars.length)],bio:"Ndine watsopano ku Loveelink.",isVerified:false,isPaid:false,verifyStatus:"none",createdAt:new Date().toISOString(),interests:"Kucheza"};users.push(newUser);localStorage.setItem("loveelink_users_v2",JSON.stringify(users));currentUser=newUser;localStorage.setItem("loveelink_me",JSON.stringify(newUser));alert("Takulandirani "+name+"! Mwapeza 🔥 FOUNDING MEMBER");showView("home");}
 function logout(){localStorage.removeItem("loveelink_me");sessionStorage.removeItem("loveelink_admin");currentUser=null;showView("auth");}
 function showView(view){if(view==="admin"&&sessionStorage.getItem("loveelink_admin")!=="yes"){alert("Lowetsani Admin Password mu Menu kaye.");view="menu";}["authView","homeView","matchesView","aiView","chatView","menuView","adminView","howView","featuresView","safetyView"].forEach(v=>document.getElementById(v).style.display="none");if(view==="auth")document.getElementById("authView").style.display="block";if(view==="home")document.getElementById("homeView").style.display="block";if(view==="matches")document.getElementById("matchesView").style.display="block";if(view==="ai")document.getElementById("aiView").style.display="block";if(view==="chat")document.getElementById("chatView").style.display="block";if(view==="menu")document.getElementById("menuView").style.display="block";if(view==="admin"){document.getElementById("adminView").style.display="block";renderAdmin();}if(view==="how")document.getElementById("howView").style.display="block";if(view==="features")document.getElementById("featuresView").style.display="block";if(view==="safety")document.getElementById("safetyView").style.display="block";document.getElementById("drawer").style.display="none";renderAll();}
 function renderAll(){document.getElementById("memberCount").innerText=users.length;const grid=document.getElementById("homeGrid");grid.innerHTML="";users.forEach(u=>{grid.innerHTML+=`<div class="card"><img src="${u.img}"><div class="card-info"><b>${u.name}, ${u.age}</b> ${u.isVerified?'✅':''}<br><small style="color:#D90429;font-weight:bold">💼 ${u.job || 'Student'}</small><br><small>${u.city}, Malawi</small><br><small>${u.jobDetail || u.bio}</small><br><button class="btn-red" style="margin-top:7px;padding:9px" onclick="openChat('${u.id}',false)">Chat →</button></div></div>`;});const authGrid=document.getElementById("authGrid");if(authGrid){authGrid.innerHTML="";users.slice(0,4).forEach(u=>{authGrid.innerHTML+=`<div class="card"><img src="${u.img}"><div class="card-info"><b>${u.name}, ${u.age}</b><br><small style="color:#D90429;font-weight:bold">💼 ${u.job || 'Student'}</small><br><small>${u.city}</small></div></div>`;});}const list=document.getElementById("homeList");list.innerHTML="";users.forEach(u=>{list.innerHTML+=`<div class="list-card"><img src="${u.img}"><div style="flex:1"><b style="color:#1E6FD9">${u.name}</b><br><small>${u.age}, Malawi, ${u.city}</small><br><small style="color:#D90429;font-weight:bold">💼 ${u.job || 'Student'}</small><br><small>${u.jobDetail || u.bio}</small><br><small style="color:#666">${u.interests}... <b>more</b></small></div></div>`;});const mList=document.getElementById("matchesList");mList.innerHTML="";users.forEach(u=>{mList.innerHTML+=`<div class="list-card"><img src="${u.img}"><div style="flex:1"><b>${u.name}, ${u.age}</b> ${u.isVerified?'✅':''}<br><small>💼 ${u.job || 'Student'} • ${u.city}</small><br><small>${u.jobDetail || u.bio}</small></div><button class="btn-red" style="width:70px;padding:8px" onclick="openChat('${u.id}',false)">Chat</button></div>`;});const aiEl=document.getElementById("aiList");aiEl.innerHTML="";aiCharacters.forEach(ai=>{aiEl.innerHTML+=`<div class="list-card"><img src="${ai.img}"><div style="flex:1"><b>${ai.name} 🤖</b><br><small>AI - Si munthu weniweni</small><br><small>${ai.desc}</small></div><button class="btn-red" style="width:70px;padding:8px;background:#111" onclick="openChat('${ai.name}',true)">Cheza</button></div>`;});if(currentUser){document.getElementById("menuName").innerText=currentUser.name;document.getElementById("menuImg").src=currentUser.img;}}
@@ -264,8 +272,8 @@ async function startVideoCall(){if(!currentChat||currentChatIsAI){alert("Video C
 function endVideoCall(){if(myStream)myStream.getTracks().forEach(t=>t.stop());document.getElementById("videoCallBox").style.display="none";document.getElementById("startVideoBtn").style.display="block";}
 function checkAdmin(){const p=document.getElementById("adminPass").value;if(p===ADMIN_PASSWORD){sessionStorage.setItem("loveelink_admin","yes");document.getElementById("adminPass").value="";document.getElementById("adminError").style.display="none";showView("admin");}else{document.getElementById("adminError").style.display="block";}}
 function renderAdmin(){const paid=users.filter(u=>u.isPaid).length;const pend=users.filter(u=>u.verifyStatus==="pending").length;document.getElementById("adminPanel").innerHTML=`<h2>👑 Admin Dashboard</h2><p style="font-size:13px;color:#666">Ziwerengero Zenizeni</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0"><div style="background:#ffeef1;padding:15px;border-radius:12px;text-align:center"><h2>${users.length}</h2><small>Anthu Onse</small></div><div style="background:#e8f5e9;padding:15px;border-radius:12px;text-align:center"><h2>${paid}</h2><small>Alipira Boost ⭐</small></div><div style="background:#fff3e0;padding:15px;border-radius:12px;text-align:center"><h2>${pend}</h2><small>Akudikirira ✅</small></div><div style="background:#e3f2fd;padding:15px;border-radius:12px;text-align:center"><h2>${users.length}</h2><small>Members</small></div></div><h3>Anthu Onse</h3><div id="allList"></div>`;const all=document.getElementById("allList");users.forEach(u=>{all.innerHTML+=`<div style="background:#fff;padding:10px;border-radius:12px;margin:8px 0;display:flex;gap:10px;align-items:center"><img src="${u.img}" style="width:45px;height:45px;border-radius:50%;object-fit:cover"><div style="flex:1"><b>${u.name}</b> ${u.isVerified?'✅':''} ${u.isPaid?'⭐':''}<br><small>${u.city} • ${u.age} • 💼 ${u.job||''}</small></div><button onclick="unlockUser('${u.id}')" style="background:#111;color:#fff;border:none;padding:6px 10px;border-radius:8px">Boost</button><button onclick="banUser('${u.id}')" style="background:#D90429;color:#fff;border:none;padding:6px 10px;border-radius:8px">Ban</button></div>`;});}
-function unlockUser(id){users=users.map(u=>u.id===id?{...u,isPaid:true}:u);localStorage.setItem("loveelink_users",JSON.stringify(users));renderAdmin();}
-function banUser(id){if(!confirm("Muletsa munthu uyu?"))return;users=users.filter(u=>u.id!==id);localStorage.setItem("loveelink_users",JSON.stringify(users));renderAdmin();}
+function unlockUser(id){users=users.map(u=>u.id===id?{...u,isPaid:true}:u);localStorage.setItem("loveelink_users_v2",JSON.stringify(users));renderAdmin();}
+function banUser(id){if(!confirm("Muletsa munthu uyu?"))return;users=users.filter(u=>u.id!==id);localStorage.setItem("loveelink_users_v2",JSON.stringify(users));renderAdmin();}
 if(currentUser)showView("home");else showView("auth");
 setLang(currentLang); renderAll();
 </script>
